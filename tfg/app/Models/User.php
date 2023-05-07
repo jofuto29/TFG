@@ -62,6 +62,7 @@ class User extends Authenticatable
 
     public function employee()
     {
-        return $this->belongsTo('App\Models\employee', "id_user", "id_user");
+        //return $this->belongsTo('App\Models\employee', "id_user", "id_user"); -->da igual uno que otro
+        return $this->hasOne('App\Models\employee', "id_user", "id_user");
     }
 }

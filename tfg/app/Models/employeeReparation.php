@@ -10,4 +10,14 @@ class employeeReparation extends Model
     use HasFactory;
 
     protected $table = "employeereparation";
+
+    public function employee()
+    {
+        return $this->belongsTo('App\Models\employee', "id_employee", "id_employee");
+    }
+
+    public function reparation()
+    {
+        return $this->belongsTo('App\Models\reparation', "id_reparation", "id_reparation");
+    }
 }

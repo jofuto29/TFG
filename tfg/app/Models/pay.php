@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class pay extends Model
 {
     use HasFactory;
+
+    protected $table = "pays";
+
+    public function paymentMethods()
+    {
+        return $this->hasMany('App\Models\paymentMethod', 'id_card', 'id_card');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany('App\Models\invoice', 'id_invoice', 'id_invoice');
+    }
 }

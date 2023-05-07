@@ -10,12 +10,22 @@ inicial en el controlador pruebasController.php*/
 use App\Models\supplier;
 use App\Models\category;
 use App\Models\product;
-use App\Models\reparation;
 use App\Models\serviceProduct;
 use App\Models\service;
 use App\Models\serviceReparation;
-use App\Models\User;
+use App\Models\reparation;
 use App\Models\vehicle;
+use App\Models\User;
+use App\Models\employee;
+use App\Models\paysheet;
+use App\Models\usedVehicle;
+use App\Models\booking;
+use App\Models\employeeReparation;
+use App\Models\paymentMethod;
+use App\Models\invoice;
+use App\Models\pay;
+
+
 
 class testORM extends Controller
 {
@@ -152,7 +162,7 @@ class testORM extends Controller
         foreach ($users as $user) {
             echo "<h4> id user: $user->id_user, cuyo nombre es: $user->userName </h4>";
             if (!empty($user->employee->id_employee)) {
-                echo "<p>  si es empleado tiene id: " . $user->employee->id_employee . "</p>";
+                echo "<p>  si es empleado tiene id: " . $user->employee->id_employee . "</p>"; //cuidado porque al ser belong to y no existir no devolvera un error, hay que hacer la comparacion
             }
 
             foreach ($user->vehicles as $vehicle) {
@@ -170,7 +180,90 @@ class testORM extends Controller
         echo "</div>";
 
 
-        echo "</body>";
-        die();
+        echo "<div style='margin: 5% 0;'><h2> Employee </h2>";
+        $employees = employee::all();
+        foreach ($employees as $employee) {
+            echo "<h4> id user: $employee->id_employee, cuyo nombre es " . $employee->user->userName . " </h4>";
+            foreach ($employee->paysheets as $paysheet) {
+                echo "<p> Nominas empleado: $paysheet->id_paysheet, cuyo salario neto es " . $paysheet->salaryNet . "</p>";
+            }
+
+            foreach ($employee->employeeReparations as $er) {
+                echo "<p> reparaciones del empleado: $er->id_employeeReparation, de la reparacion con id: " . $er->id_reparation . "</p>";
+            }
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> Paysheets </h2>";
+        $paysheets = paysheet::all();
+        foreach ($paysheets as $paysheet) {
+            echo "<h4> id paysheet: $paysheet->id_paysheet, cuyo nombre de usuario a traves de empleado: es " . $paysheet->employee->user->userName . " </h4>";
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> Bookings </h2>";
+        $bookings = booking::all();
+        foreach ($bookings as $booking) {
+            echo "<h4> id booking: $booking->id_booking, cuyo nombre usuario es " . $booking->user->userName . " y cuyo vehiculo tiene matricula: " . $booking->vehicle->registration . "</h4>";
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> UsedVechile </h2>";
+        $usedVechiles = usedVehicle::all();
+        foreach ($usedVechiles as $uv) {
+            echo "<h4> id usedVehicle: $uv->id_vehicle_used , cuya matricuka de vehiclulo es:  " . $uv->vehicle->registration . " </h4>";
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> EmployeedReparations </h2>";
+        $employeereparations = employeeReparation::all();
+        foreach ($employeereparations as $er) {
+            echo "<h4> conjuntoreparacionEmpleado $er->id_employeeReparation</h4>";
+            echo "<p> empleado con id: " . $er->employee->id_employee . " cuya reparacion es: " . $er->reparation->id_reparation . " </p>";
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> PaymentMethods </h2>";
+        $paymentMethods = paymentMethod::all();
+        foreach ($paymentMethods as $pm) {
+            echo "<h4> metodo de pago con numero: $pm->id_card, cuyo  usuario es " . $pm->user->userName . "</h4>";
+            foreach ($pm->pays as $pay) {
+                echo "<p>pagos realizados: " . $pay->id_pay . "</p>";
+            }
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> Pays </h2>";
+        $pays = pay::all();
+        foreach ($pays as $pay) {
+            echo "<h4> id pago: $pay->id_pay</h4>";
+            foreach ($pay->invoices as $invoice) {
+                echo "<p> facturas pagadas: $invoice->id_invoice, coste total: " . $invoice->totalPrice . "</p>";
+            }
+
+            foreach ($pay->paymentMethods as $pm) {
+                echo "<p> con tarjeta: $pm->id_card </p>";
+            }
+        }
+        echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> Invoices </h2>";
+        $invoices = invoice::all();
+        foreach ($invoices as $invoice) {
+            echo "<h4> id factura: $invoice->id_invoice, asociada a la reparacion: " . $invoice->reparation->id_reparation . "</h4>";
+            foreach ($invoice->pays as $pay) {
+                echo "<p> pago asociado: $pay->id_pay, coste total: " . $invoice->totalPrice . "</p>";
+            }
+        }
+        echo "</div>";
+
+        echo "<h1 style=' text-align: center; color: green;'>TEST COMPLETADO CORRECTAMENTE</h1></body>";
     }
 }

@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class booking extends Model
 {
     use HasFactory;
+
+    protected $table = "bookings";
+
+    public function vehicle()
+    {
+        return $this->belongsTo('App\Models\vehicle', "id_vehicle", "id_vehicle");
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', "id_user", "id_user");
+    }
 }

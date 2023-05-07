@@ -10,4 +10,14 @@ class invoice extends Model
     use HasFactory;
 
     protected $table = "invoices";
+
+    public function pays()
+    {
+        return $this->hasMany('App\Models\pay', 'id_invoice', 'id_invoice');
+    }
+
+    public function reparation()
+    {
+        return $this->belongsTo('App\Models\reparation', "id_reparation", "id_reparation");
+    }
 }
