@@ -1,0 +1,11 @@
+#
+127.0.0.1 localhost
+127.0.0.1 tfg.com.devel
+
+::1 localhost
+
+# MAMP PRO hosts section START----------
+127.0.0.1	localhost
+127.0.0.1 tfg.com.devel
+
+# MAMP PRO hosts section END ----------
