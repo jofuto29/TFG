@@ -45,10 +45,28 @@ class UserController extends Controller
                     'error' => $validate->errors()
                 );
             } else {
+                //cigrar contraseña
+                //$psw = password_hash($atributos['pass'], PASSWORD_BCRYPT, ['cost' => 4]); --> no genera el mismo hash
+                $psw = hash('sha256', $atributos['pass']);
+
+                //crear usuario
+                $user = new User();
+                $user->user = $atributos['user'];
+                $user->userName = $atributos['userName'];
+                $user->lastName = $atributos['lastName'];
+                $user->email = $atributos['email'];
+                $user->rol = 'user';
+                $user->phoneNumber = $atributos['phoneNumber'];
+                $user->pass = $psw;
+                $user->dni = $atributos['dni'];
+
+                //guardar en la BD
+                $user->save();
                 $response = array(
                     'status' => 'success',
                     'code'   => 200,
-                    'message' => 'El usuario se ha creado correctamente'
+                    'message' => 'El usuario se ha creado correctamente',
+                    'user'  => $user
                 );
             }
         } else {
@@ -60,23 +78,6 @@ class UserController extends Controller
             );
         }
 
-        //cigrar contraseña
-        $psw = password_hash($atributos['pass'], PASSWORD_BCRYPT, ['cost' => 4]);
-
-        //crear usuario
-        $user = new User();
-        $user->user = $atributos['user'];
-        $user->userName = $atributos['userName'];
-        $user->lastName = $atributos['lastName'];
-        $user->email = $atributos['email'];
-        $user->rol = 'user';
-        $user->phoneNumber = $atributos['phoneNumber'];
-        $user->pass = $psw;
-        $user->dni = $atributos['dni'];
-
-        //guardar en la BD
-        $user->save();
-
 
         /*formato json: {"user":"usuarioRegistrado","userName":"registradoPsot","lastName":"metodoRegister","email":"register@registrado.com.devel","rol":"user",
             "phoneNumber":"000000000","pass":"prueba","dni":"00000000D"}*/
@@ -84,8 +85,68 @@ class UserController extends Controller
         return response()->json($response, $response['code']);
     }
 
+    /*
+    para el login y usar el token utilizaremos la libreria jwt, cuando se logee un usuario se generara un token, en cada una de las peticiones que haga el suaurio
+    se verificara si el token es correcto o no
+    
+    */
     public function login(request $request)
     {
-        return "accion de registro de usuario";
+        //$jwtAuth = new \JwtAuth(); --> no funciona alias
+
+        //recibir datos por post
+        $json = $request->input('json', null);
+
+        $atributos = json_decode($json, true); //array
+        $atributos = array_map('trim', $atributos);
+
+        //validar datos
+
+        $validate = validator::make($atributos, [
+            'user'          => 'required|alpha',
+            'pass'          => 'required'
+        ]);
+
+        if (!empty($atributos)) {
+            if ($validate->fails()) {
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => 'El usuario no es correcto',
+                    'error' => $validate->errors()
+                );
+            } else {
+                //datos validos
+                $jwtAuth = new \App\Helpers\JwtAuth();
+
+                //codificamos la contraseña pasada
+                $psw = hash('sha256', $atributos['pass']);
+
+                //generamos token
+                if (!empty($atributos['getToken'])) {
+                    $token = $jwtAuth->signup($atributos['user'], $psw, true);
+                } else {
+                    $token = $jwtAuth->signup($atributos['user'], $psw);
+                }
+
+                $response = array(
+                    'status' => 'success',
+                    'code'   => 200,
+                    'message' => 'El usuario se ha creado correctamente',
+                    'token' => $token
+                );
+            }
+        } else {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'datos enviados no son correctos',
+                'error' => $validate->errors()
+            );
+        }
+
+        return response()->json($response); //siempre devolver en json
+
+        /*{"user":"usuarioPrueba","pass":"123456"}*/
     }
 }
