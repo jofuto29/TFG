@@ -132,7 +132,7 @@ class UserController extends Controller
                 $response = array(
                     'status' => 'success',
                     'code'   => 200,
-                    'message' => 'El usuario se ha creado correctamente',
+                    'message' => 'El usuario se a logeado correctamente',
                     'token' => $token
                 );
             }
