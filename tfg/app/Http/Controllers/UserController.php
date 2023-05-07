@@ -149,4 +149,19 @@ class UserController extends Controller
 
         /*{"user":"usuarioPrueba","pass":"123456"}*/
     }
+
+    public function update(Request $request)
+    {
+        $token = $request->header('Authorization'); //recibimos token
+        $jwtAuth = new \App\Helpers\JwtAuth();
+        $checkToken = $jwtAuth->checkToken($token);
+
+        if ($checkToken) {
+            echo "<h1>Login correcto</h1>";
+        } else {
+            echo "<h1>login incorrecto</h1>";
+        }
+
+        die();
+    }
 }
