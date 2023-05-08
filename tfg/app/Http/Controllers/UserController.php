@@ -157,11 +157,75 @@ class UserController extends Controller
         $checkToken = $jwtAuth->checkToken($token);
 
         if ($checkToken) {
-            echo "<h1>Login correcto</h1>";
+
+            //recibir datos por post
+            $json = $request->input('json', null);
+
+            $atributos = json_decode($json, true); //datos de post pormato array
+            if (!empty($atributos)) {
+                $atributos = array_map('trim', $atributos);
+                $userToken = $jwtAuth->checkToken($token, true);
+
+                //VALIDAMOS LOS DATOS ENVIADOS
+                $validate = validator::make($atributos, [
+                    'user'          => 'required|alpha|unique:users,userName,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
+                    'userName'      => 'required|alpha',
+                    'lastName'      => 'required|alpha',
+                    'email'         => 'required|email',
+                    'phoneNumber'   => 'required|numeric',
+                    'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users,dni,' . $userToken->sub . ',id_user'
+                ]);
+
+                if ($validate->fails()) {
+                    $response = array(
+                        'status' => 'error',
+                        'code'   => 404,
+                        'message' => 'los datos introducidos no son validos',
+                        'error' => $validate->errors()
+                    );
+                } else {
+                    //datos correstos, actualizamos en la base de datos quitando por si acaso parametros que pusiesen ir en la peticion:
+                    unset($atributos['id_user']);
+                    unset($atributos['rol']);
+                    unset($atributos['created_at']);
+                    unset($atributos['remember_token']);
+
+                    $user_update = User::where('id_user', $userToken->sub)->update($atributos);
+
+                    $response = array(
+                        'status' => 'succes',
+                        'code'   => 200,
+                        'message' => 'usuario actualizado',
+                        'userToken' => $user_update
+                    );
+                }
+            } else {
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => 'se deve enviar nuevos datos para poder actualizar'
+                );
+            }
         } else {
-            echo "<h1>login incorrecto</h1>";
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'token incorrecto'
+            );
         }
 
-        die();
+        return response()->json($response);
     }
+
+    /*
+        ACTUALIZACION
+        {"user":"jose",
+        "userName":"jose",
+        "lastName":"fuertes",
+        "email":"jose@fuertes.com.devel",
+        "rol":"user",
+        "phoneNumber":"096000000",
+        "pass":"123456",
+        "dni":"00056200D"}
+    */
 }

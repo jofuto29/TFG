@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ApiAuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,7 @@ Route::get('/testORM', 'App\Http\Controllers\testORM@testORM');
 //rutas controlador funcion prueba
 Route::get('/user/prueba', 'App\Http\Controllers\UserController@prueba');
 Route::get('/vehicle/prueba', 'App\Http\Controllers\VehicleController@prueba');
+Route::get('/usedVehicle/prueba', 'App\Http\Controllers\UsedVehicleController@prueba');
 Route::get('/supplier/prueba', 'App\Http\Controllers\SupplierController@prueba');
 Route::get('/service/prueba', 'App\Http\Controllers\ServiceController@prueba');
 Route::get('/reparation/prueba', 'App\Http\Controllers\ReparationController@prueba');
@@ -81,4 +83,9 @@ Route::get('/category/prueba', 'App\Http\Controllers\categoryController@prueba')
 //Rutas controlador de usuarios
 Route::post('/user/register', 'App\Http\Controllers\UserController@register'); //estas ruta no se pueden acceder directamente con url, es decir necesitamos formulario 
 Route::post('/user/login', 'App\Http\Controllers\UserController@login');
-Route::post('/user/update', 'App\Http\Controllers\UserController@update');
+Route::put('/user/update', 'App\Http\Controllers\UserController@update'); //put se utiliza para actualizar datos
+
+
+//Rutas controlador de vehiculo usados
+Route::post('/usedVehicle/uploadImage', 'App\Http\Controllers\usedVehicleController@uploadImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class);
+Route::post('/usedVehicle/getImage', 'App\Http\Controllers\usedVehicleController@getImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class);
