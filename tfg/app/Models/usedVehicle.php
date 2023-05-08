@@ -10,6 +10,7 @@ class usedVehicle extends Model
     use HasFactory;
 
     protected $table = "usedvehicles";
+    protected $primaryKey = 'id_vehicle_used';
 
     public function vehicle()
     {

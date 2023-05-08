@@ -10,6 +10,7 @@ class vehicle extends Model
     use HasFactory;
 
     protected $table = "vehicles";
+    protected $primaryKey = 'id_vehicle';
 
     public function reparations()
     {

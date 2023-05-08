@@ -10,6 +10,7 @@ class service extends Model
     use HasFactory;
 
     protected $table = "services";
+    protected $primaryKey = 'id_service';
 
     public function serviceproduct()
     {

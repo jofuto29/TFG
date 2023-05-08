@@ -10,6 +10,7 @@ class product extends Model
     use HasFactory;
 
     protected $table = "products";
+    protected $primaryKey = 'id_product';
 
     //relacion de muchos a 1 [muchos productos son proporcionados por un supplier]
     public function suppliers()

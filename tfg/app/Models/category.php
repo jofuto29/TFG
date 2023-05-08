@@ -13,6 +13,7 @@ class category extends Model
     //con las tablas de la BD de una manera mas sencilla
 
     protected $table = "categories"; //tabla que relaciona el modelo
+    protected $primaryKey = 'id_category';
 
 
     //relacion 1 a muchos con productos [una categoria puede tener muchos productos]

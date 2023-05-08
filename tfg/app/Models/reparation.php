@@ -10,6 +10,7 @@ class reparation extends Model
     use HasFactory;
 
     protected $table = "reparations";
+    protected $primaryKey = 'id_reparation';
 
     public function servicereparation()
     {

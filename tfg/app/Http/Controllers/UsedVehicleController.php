@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
 
 use App\Models\User;
 use App\Models\vehicle;
@@ -59,5 +60,17 @@ class UsedVehicleController extends Controller
 
     public function getImage($filename)
     {
+        $isset = Storage::disk('usedVehicles')->exists($filename);
+        if ($isset) {
+            $file = Storage::disk('usedVehicles')->get($filename);
+            return new Response($file, 200);
+        } else {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'la imagen no se ha podido encontrar',
+            );
+            return response()->json($response, $response['code']);
+        }
     }
 }

@@ -10,6 +10,7 @@ class paysheet extends Model
     use HasFactory;
 
     protected $table = "paysheets";
+    protected $primaryKey = 'id_paysheet';
 
     public function employee()
     {

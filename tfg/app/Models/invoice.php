@@ -10,6 +10,7 @@ class invoice extends Model
     use HasFactory;
 
     protected $table = "invoices";
+    protected $primaryKey = 'id_invoice';
 
     public function pays()
     {

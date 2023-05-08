@@ -78,12 +78,10 @@ class UserController extends Controller
             );
         }
 
-
-        /*formato json: {"user":"usuarioRegistrado","userName":"registradoPsot","lastName":"metodoRegister","email":"register@registrado.com.devel","rol":"user",
-            "phoneNumber":"000000000","pass":"prueba","dni":"00000000D"}*/
-
         return response()->json($response, $response['code']);
     }
+    /*formato json: {"user":"usuarioRegistrado","userName":"registradoPsot","lastName":"metodoRegister","email":"register@registrado.com.devel","rol":"user",
+            "phoneNumber":"000000000","pass":"prueba","dni":"00000000D"}*/
 
     /*
     para el login y usar el token utilizaremos la libreria jwt, cuando se logee un usuario se generara un token, en cada una de las peticiones que haga el suaurio
@@ -211,6 +209,27 @@ class UserController extends Controller
                 'status' => 'error',
                 'code'   => 404,
                 'message' => 'token incorrecto'
+            );
+        }
+
+        return response()->json($response);
+    }
+
+    public function detailsUser($id)
+    {
+        $user = User::find($id);
+
+        if (is_object($user)) {
+            $response = array(
+                'status' => 'success',
+                'code'   => 200,
+                'user' => $user
+            );
+        } else {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'no se ha podido encontrar el usario'
             );
         }
 

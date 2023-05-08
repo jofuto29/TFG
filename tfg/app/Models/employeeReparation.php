@@ -10,6 +10,7 @@ class employeeReparation extends Model
     use HasFactory;
 
     protected $table = "employeereparation";
+    protected $primaryKey = 'id_employeeReparation';
 
     public function employee()
     {

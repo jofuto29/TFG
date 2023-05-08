@@ -10,6 +10,7 @@ class booking extends Model
     use HasFactory;
 
     protected $table = "bookings";
+    protected $primaryKey = 'id_booking';
 
     public function vehicle()
     {

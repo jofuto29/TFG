@@ -10,6 +10,7 @@ class supplier extends Model
     use HasFactory;
 
     protected $table = "suppliers";
+    protected $primaryKey = 'id_supplier';
 
     //relacion 1 a muchos con productos [un proeevedor puede proporcionar muchos productos]
     public function products()

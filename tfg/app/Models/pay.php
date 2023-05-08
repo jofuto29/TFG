@@ -10,6 +10,7 @@ class pay extends Model
     use HasFactory;
 
     protected $table = "pays";
+    protected $primaryKey = 'id_pay';
 
     public function paymentMethods()
     {
