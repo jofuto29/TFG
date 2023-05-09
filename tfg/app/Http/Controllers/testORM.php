@@ -24,6 +24,7 @@ use App\Models\employeeReparation;
 use App\Models\paymentMethod;
 use App\Models\invoice;
 use App\Models\pay;
+use App\Models\deduction;
 
 
 
@@ -261,8 +262,21 @@ class testORM extends Controller
             foreach ($invoice->pays as $pay) {
                 echo "<p> pago asociado: $pay->id_pay, coste total: " . $invoice->totalPrice . "</p>";
             }
+
+            foreach ($invoice->deductions as $deduction) {
+                echo "<p> descuento: $deduction->deductionName, coste total: " . $deduction->percentage . "</p>";
+            }
         }
         echo "</div>";
+
+
+        echo "<div style='margin: 5% 0;'><h2> Deductions </h2>";
+        $deductions = deduction::all();
+        foreach ($deductions as $deduction) {
+            echo "<h4> nombre del decuento: $deduction->deductionName, asociada a la factura: " . $deduction->invoice->id_invoice . "</h4>";
+        }
+        echo "</div>";
+
 
         echo "<h1 style=' text-align: center; color: green;'>TEST COMPLETADO CORRECTAMENTE</h1></body>";
     }

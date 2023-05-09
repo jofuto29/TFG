@@ -21,4 +21,9 @@ class invoice extends Model
     {
         return $this->belongsTo('App\Models\reparation', "id_reparation", "id_reparation");
     }
+
+    public function deductions()
+    {
+        return $this->hasMany('App\Models\deduction', 'id_invoice', 'id_invoice');
+    }
 }

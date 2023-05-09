@@ -354,11 +354,28 @@ CREATE TABLE Invoices(
 
 )ENGINE=InnoDb;
 
+INSERT INTO `deductions` (`id_deduction`, `id_invoice`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
+            VALUES (NULL, '1', 'descuento de empleados', 'Descuento para empleados', '20', NULL, NULL);
 
 
-INSERT INTO `invoices` (`id_invoice`, `id_reparation`, `invoiceDate`, `aditionalPrice`, `totalPrice`, `state`, `created_at`, `updated_at`) 
-            VALUES (NULL, '1', '2023-05-05 16:15:12', '150', '400', 'paid', NULL, NULL);
+CREATE TABLE Deductions(
 
+    id_deduction        int auto_increment NOT NULL,
+    id_invoice          int NOT NULL,
+    deductionName       varchar(255) NOT NULL,
+    description         varchar(255) NOT NULL,
+    percentage          INT CHECK (percentage >= 1 AND percentage <= 100) DEFAULT NULL,
+
+    created_at          datetime DEFAULT NULL,
+    updated_at          datetime DEFAULT NULL,
+
+    CONSTRAINT pk_deduction PRIMARY KEY(id_deduction),
+    CONSTRAINT pk_deduction_invoice  FOREIGN KEY(id_invoice) REFERENCES Invoices(id_invoice)
+
+)ENGINE=InnoDb;
+
+INSERT INTO `deductions` (`id_deduction`, `id_invoice`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
+                    VALUES (NULL, '1', 'Decuento de empleados', 'Decuento en reparaciones para empleados del taller', '20', NULL, NULL);
 
 
 CREATE TABLE Pays(
