@@ -264,7 +264,7 @@ class testORM extends Controller
             }
 
             foreach ($invoice->deductions as $deduction) {
-                echo "<p> descuento: $deduction->deductionName, coste total: " . $deduction->percentage . "</p>";
+                echo "<p> descuento: $deduction->deductionName, de un : " . $deduction->percentage . "% </p>";
             }
         }
         echo "</div>";
