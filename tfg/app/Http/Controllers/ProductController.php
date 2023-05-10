@@ -231,6 +231,21 @@ class ProductController extends Controller
             } else {
                 $product = Product::where('id_product', $id)->updateOrCreate($atributos); //con la funcion updateOrCreatedd() $product no tendra un boleano sino el objeto actualizado
 
+                /*Para meter una consulta y reducir el codigo podemos crearnos una variable con todos los campos de la tabla
+                $where = [
+                    'id' => $id,
+                    'user_id' => $user->sub
+                ]
+                $product = Product::updateOrCreate($where, $atributos);
+                
+                Pâra que todo funcione correctamente deberemo definir en el modelo en este caso de productos una variable protegida tipo:
+                proteted $fillable = [
+                    'name', 'surname', 'description',  'email', 'password'   //oviamente con los atirvutos de la tabla de productos
+                ];
+
+
+                */
+
                 $response = array(
                     'status' => 'success',
                     'code'   => 200,
