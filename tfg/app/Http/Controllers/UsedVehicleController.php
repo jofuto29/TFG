@@ -15,12 +15,29 @@ use App\Models\usedVehicle;
 
 class UsedVehicleController extends Controller
 {
+    /**
+     * Funcion de prueba para porbar la ruta del controlador
+     */
     public function prueba(request $request)
     {
         echo "FUNCION DE PRUEBA CONTROLADOR DE used VEHICLES, PETICION:<pre>$request </pre>";
     }
 
 
+    /**
+     * Funcion para utlizar el middleware antes del qualquier metodo de este controlador excepto index y show
+     */
+    public function __construct()
+    {
+        $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['index', 'show']]);
+    }
+
+
+    /**
+     * Funcion para subir una imagen a la BD
+     * 
+     * RUTA: http://tfg.com.devel/usedVehicle/uploadImage [POST]
+     */
     public function uploadImage(Request $request)
     {
 
@@ -53,11 +70,15 @@ class UsedVehicleController extends Controller
                 'image' => $image_name
             );
         }
-
         return response()->json($response, $response['code']);
     }
 
 
+    /**
+     * Funcion para obtener una imagen de la base de datos
+     * 
+     * RUTA: http://tfg.com.devel/usedVehicle/getImage/168356305911. Formulario a traves de postman.png [GET]
+     */
     public function getImage($filename)
     {
         $isset = Storage::disk('usedVehicles')->exists($filename);

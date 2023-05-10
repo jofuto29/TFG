@@ -14,7 +14,6 @@ class CategoryController extends Controller
         $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['index', 'show']]);
     }
 
-
     public function prueba(request $request)
     {
         echo "FUNCION DE PRUEBA CONTROLADOR DE CATEGORY, PETICION:<pre>$request </pre>";

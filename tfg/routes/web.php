@@ -95,3 +95,6 @@ Route::get('/usedVehicle/getImage/{filename}', 'App\Http\Controllers\usedVehicle
 //Rutas del controlador de categorias
 /*en este caso vamos a definir las rutas de una manera diferente, como vemos hemos ido creando las rutas una a una, ahora haremos que se creen automaticamente*/
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
+
+// Rutas del controlador de Productos
+Route::resource('/product', 'App\Http\Controllers\ProductController');

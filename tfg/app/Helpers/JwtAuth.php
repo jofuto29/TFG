@@ -6,6 +6,7 @@ use Firebase\JWT\JWT;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
+
 class JwtAuth
 {
     public $key;
@@ -35,6 +36,7 @@ class JwtAuth
                 'sub'   => $user->id_user,
                 'user'  => $user->user,
                 'name'  => $user->userName,
+                'rol'   => $user->rol,
                 'iat'   => time(), //fecha en la que se crea el token
                 'exp'   => time() + (7 * 24 * 60 * 60) //tiempo que dura el token = 7dias
             );

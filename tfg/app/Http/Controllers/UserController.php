@@ -8,12 +8,32 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function prueba(request $request) //funcion de prueba, request recibe toda la informacion de la peticion realizada( variables post, get etc)
+
+    /**
+     * Funcion de prueba para porbar la ruta del controlador
+     */
+    public function prueba(request $request)
     {
         echo "FUNCION DE PRUEBA CONTROLADOR DE USUARIOS, PETICION:<pre>$request </pre>";
     }
 
 
+    /*
+    Funcion que registra un nuevo producto en la base de datos
+    
+    RUTA: http://tfg.com.devel/user/register [POST]
+    DATOS QUE NECESITAMOS RECIBIR:
+    {
+        "user":"usuarioRegistrado",
+        "userName":"registradoPsot",
+        "lastName":"metodoRegister",
+        "email":"register@registrado.com.devel",
+        "rol":"user",
+        "phoneNumber":"000000000",
+        "pass":"prueba",
+        "dni":"00000000D"
+    }
+    */
     public function register(request $request)
     {
         //recoger datos de usuario
@@ -80,18 +100,26 @@ class UserController extends Controller
 
         return response()->json($response, $response['code']);
     }
-    /*formato json: {"user":"usuarioRegistrado","userName":"registradoPsot","lastName":"metodoRegister","email":"register@registrado.com.devel","rol":"user",
-            "phoneNumber":"000000000","pass":"prueba","dni":"00000000D"}*/
+
 
     /*
+    Funcion para el logeo de usuario
+    
+    RUTA: http://tfg.com.devel/user/login [POST]
+    DATOS QUE NECESITAMOS RECIBIR:
+    {
+        "user":"admin",
+        "pass":"aA@9517532684aA@"
+    }
+
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsInVzZXIiOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjgzNzQyMjA5LCJleHAiOjE2ODQzNDcwMDl9.KDaS7YrYBIbuyGkCjYq2yvPJuICZFTaNnF_0k-cJz7A
+   
     para el login y usar el token utilizaremos la libreria jwt, cuando se logee un usuario se generara un token, en cada una de las peticiones que haga el suaurio
     se verificara si el token es correcto o no
-    
     */
+
     public function login(request $request)
     {
-        //$jwtAuth = new \JwtAuth(); --> no funciona alias
-
         //recibir datos por post
         $json = $request->input('json', null);
 
@@ -143,11 +171,26 @@ class UserController extends Controller
             );
         }
 
-        return response()->json($response); //siempre devolver en json
-
-        /*{"user":"usuarioPrueba","pass":"123456"}*/
+        return response()->json($response);
     }
 
+    /*
+    Funcion para el update de usuario
+    
+    RUTA: http://tfg.com.devel/user/update [PUT]
+    DATOS QUE NECESITAMOS RECIBIR:
+    {
+        "user":"jose",
+        "userName":"jose",
+        "lastName":"fuertes",
+        "email":"jose@fuertes.com.devel",
+        "rol":"user",
+        "phoneNumber":"096000000",
+        "pass":"123456",
+        "dni":"00056200D"
+    }
+
+    */
     public function update(Request $request)
     {
         $token = $request->header('Authorization'); //recibimos token
@@ -215,6 +258,13 @@ class UserController extends Controller
         return response()->json($response);
     }
 
+    /*
+    Funcion para obtener detalles de un usuario
+    
+    RUTA: http://tfg.com.devel/user/detailsUser/1 [GET]
+    DATOS QUE NECESITAMOS RECIBIR:
+   
+    */
     public function detailsUser($id)
     {
         $user = User::find($id);
@@ -235,16 +285,4 @@ class UserController extends Controller
 
         return response()->json($response);
     }
-
-    /*
-        ACTUALIZACION
-        {"user":"jose",
-        "userName":"jose",
-        "lastName":"fuertes",
-        "email":"jose@fuertes.com.devel",
-        "rol":"user",
-        "phoneNumber":"096000000",
-        "pass":"123456",
-        "dni":"00056200D"}
-    */
 }
