@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\JwtAuthServiceProvider::class,
         App\Providers\getIdentityProvider::class,
+        App\Providers\crudProvider::class,
     ])->toArray(),
 
     /*
@@ -187,6 +188,7 @@ return [
         // 'Example' => App\Facades\Example::class,
         'JwtAuth' => App\Helpers\JwtAuth::class,
         'getIdentity' => App\Helpers\getIdentity::class,
+        'crud' => App\Helpers\crud::class,
     ])->toArray(),
 
 ];
