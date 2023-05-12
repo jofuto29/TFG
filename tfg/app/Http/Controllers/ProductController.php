@@ -122,6 +122,6 @@ class ProductController extends Controller
         $atributos = json_decode($json, true);
 
         $crud = new \App\Helpers\CRUD();
-        return $crud->update($atributos, "products", Product::find($id), $id);
+        return $crud->update($atributos, "products", Product::find($id), $id, "id_product");
     }
 }

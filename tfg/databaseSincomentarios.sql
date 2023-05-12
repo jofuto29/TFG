@@ -193,6 +193,7 @@ CREATE TABLE Services(
     description         varchar(255) NOT NULL,
     price               DECIMAL(10,2) NOT NULL,
     serviceType         varchar(255) NOT NULL,
+    duration            DECIMAL(2,1) NOT NULL,
     
     created_at          datetime DEFAULT NULL,
     updated_at          datetime DEFAULT NULL,
@@ -354,8 +355,8 @@ CREATE TABLE Invoices(
 
 )ENGINE=InnoDb;
 
-INSERT INTO `deductions` (`id_deduction`, `id_invoice`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
-            VALUES (NULL, '1', 'descuento de empleados', 'Descuento para empleados', '20', NULL, NULL);
+INSERT INTO `invoices` (`id_invoice`, `id_reparation`, `invoiceDate`, `aditionalPrice`, `totalPrice`, `state`, `created_at`, `updated_at`) 
+    VALUES (NULL, '1', '2023-05-12 20:35:50', '10', '1500', 'Unpaid', NULL, NULL);
 
 
 CREATE TABLE Deductions(
@@ -374,7 +375,7 @@ CREATE TABLE Deductions(
 
 )ENGINE=InnoDb;
 
-INSERT INTO `deductions` (`id_deduction`, `id_invoice`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
+INSERT INTO `Deductions` (`id_deduction`, `id_invoice`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
                     VALUES (NULL, '1', 'Decuento de empleados', 'Decuento en reparaciones para empleados del taller', '20', NULL, NULL);
 
 

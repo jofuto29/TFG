@@ -21,7 +21,29 @@ class crud
             'location'      => 'required|string',
             'img'           => 'required'
         ],
-        'productsUpdate' => []
+        'categories' => [
+            'categoryName'  => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:categories',
+            'description'   => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
+        ],
+        'users' => [
+            'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users',
+            'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'email'         => 'required|email',
+            'rol'           => 'required|alpha',
+            'phoneNumber'   => 'required|numeric',
+            'pass'          => 'required',
+            'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users'
+        ],
+        "suppliers" => [
+            'supplierName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'lastName'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'email'             => 'required|email',
+            'phoneNumber'       => 'required|numeric',
+            'address'           => 'required',
+            'dni'               => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:suppliers'
+        ]
+
     ];
 
 
@@ -117,7 +139,7 @@ class crud
      */
     public function store($params, $table, $object)
     {
-        if (!empty($params)) {
+        if (!empty($params)  && !empty($object)) {
             $atributos = array_map('trim', $params);
 
             $validationRules = $this->getValidationRules($table);
@@ -148,11 +170,19 @@ class crud
                 );
             }
         } else {
-            $response = array(
-                'status' => 'error',
-                'code'   => 404,
-                'message' => 'Faltan datos para completar el registro.'
-            );
+            if (empty($object)) {
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => "No se ha podido crear el objeto correctamente(MODELO)."
+                );
+            } else {
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => 'Faltan datos para completar la actualización.'
+                );
+            }
         }
 
         return response()->json($response, $response['code']);
@@ -162,7 +192,7 @@ class crud
     /**
      * Funcion para actualizar un registro
      */
-    public function update($params, $table, $object, $id)
+    public function update($params, $table, $object, $id, $key)
     {
         if (!empty($params) && !empty($object)) {
 
@@ -182,6 +212,20 @@ class crud
                     'location'      => 'required|string',
                     'img'           => 'required'
                 ];
+            } elseif ($table === 'categories') {
+                $validationRules = [
+                    'categoryName'  => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:categories',
+                    'description' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
+                ];
+            } elseif ($table === 'suppliers') {
+                $validationRules = [
+                    'supplierName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'lastName'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'email'             => 'required|email',
+                    'phoneNumber'       => 'required|numeric',
+                    'address'           => 'required',
+                    'dni'               => "required|regex:/^[0-9]{8}[A-Za-z]$/|unique:suppliers,dni,$id,id_supplier"
+                ];
             }
 
             $filteredArray = array_intersect_key($atributos, array_flip(array_keys($validationRules)));
@@ -197,7 +241,7 @@ class crud
                     'filterred' => $filteredArray
                 );
             } else {
-                $object::where('id_product', $id)->update($filteredArray);
+                $object::where($key, $id)->update($filteredArray);
 
                 $response = array(
                     'status' => 'success',
@@ -207,33 +251,23 @@ class crud
                 );
             }
         } else {
-            $response = array(
-                'status' => 'error',
-                'code'   => 404,
-                'message' => 'Faltan datos para completar la actualización.'
-            );
+            if (empty($object)) {
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => "No se ha encontrado el registro con id=$id."
+                );
+            } else {
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => 'Faltan datos para completar la actualización.'
+                );
+            }
         }
 
         return response()->json($response, $response['code']);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /*Para meter una consulta y reducir el codigo podemos crearnos una variable con todos los campos de la tabla
     $where = [

@@ -85,12 +85,12 @@ Route::post('/user/register', 'App\Http\Controllers\UserController@register'); /
 Route::post('/user/login', 'App\Http\Controllers\UserController@login');
 Route::put('/user/update', 'App\Http\Controllers\UserController@update'); //put se utiliza para actualizar datos
 Route::get('/user/detailsUser/{id}', 'App\Http\Controllers\UserController@detailsUser');
-
+Route::delete('/user/deleteUser/{id}', 'App\Http\Controllers\UserController@deleteUser');
+Route::get('/user/listUsers', 'App\Http\Controllers\UserController@listUsers');
 
 //Rutas controlador de vehiculo usados
 Route::post('/usedVehicle/uploadImage', 'App\Http\Controllers\usedVehicleController@uploadImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class);
 Route::get('/usedVehicle/getImage/{filename}', 'App\Http\Controllers\usedVehicleController@getImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class); //filename sera una paremtro obligatorio en esta ruta
-
 
 //Rutas del controlador de categorias
 /*en este caso vamos a definir las rutas de una manera diferente, como vemos hemos ido creando las rutas una a una, ahora haremos que se creen automaticamente*/
@@ -98,3 +98,6 @@ Route::resource('/category', 'App\Http\Controllers\CategoryController');
 
 // Rutas del controlador de Productos
 Route::resource('/product', 'App\Http\Controllers\ProductController');
+
+// Rutas del controlador de Suppliers
+Route::resource('/supplier', 'App\Http\Controllers\SupplierController');
