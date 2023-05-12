@@ -36,14 +36,6 @@ class UserController extends Controller
     */
     public function register(request $request)
     {
-
-        $json = $request->input('json', null);
-        $atributos = json_decode($json, true);
-
-        $crud = new \App\Helpers\CRUD();
-        return $crud->store($atributos, "users", new user());
-
-
         //recoger datos de usuario
         $json = $request->input('json', null); //en caso de json no llegar, default nul
 
@@ -53,9 +45,9 @@ class UserController extends Controller
 
         //validar datos
         $validate = validator::make($atributos, [
-            'user'          => 'required|alpha|unique:users',
-            'userName'      => 'required|alpha',
-            'lastName'      => 'required|alpha',
+            'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users',
+            'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'email'         => 'required|email',
             'rol'           => 'required|alpha',
             'phoneNumber'   => 'required|numeric',

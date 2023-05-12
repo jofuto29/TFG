@@ -25,16 +25,6 @@ class crud
             'categoryName'  => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:categories',
             'description'   => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
         ],
-        'users' => [
-            'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users',
-            'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
-            'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
-            'email'         => 'required|email',
-            'rol'           => 'required|alpha',
-            'phoneNumber'   => 'required|numeric',
-            'pass'          => 'required',
-            'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users'
-        ],
         "suppliers" => [
             'supplierName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'lastName'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
@@ -42,6 +32,17 @@ class crud
             'phoneNumber'       => 'required|numeric',
             'address'           => 'required',
             'dni'               => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:suppliers'
+        ],
+        "services" => [
+            'serviceName'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'description'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'price'             => 'required|numeric',
+            'duration'          => 'required|numeric',
+            'serviceType'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
+        ],
+        "serviceproduct" => [
+            'id_service'   => 'required|exists:services,id_service', //exists:table,column
+            'id_product'   => 'required|exists:products,id_product'
         ]
 
     ];
@@ -226,6 +227,19 @@ class crud
                     'address'           => 'required',
                     'dni'               => "required|regex:/^[0-9]{8}[A-Za-z]$/|unique:suppliers,dni,$id,id_supplier"
                 ];
+            } elseif ($table === 'services') {
+                $validationRules = [
+                    'serviceName'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'description'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'price'             => 'required|numeric',
+                    'duration'          => 'required|numeric',
+                    'serviceType'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
+                ];
+            } elseif ($table === 'serviceproduct') {
+                $validationRules = [
+                    'id_service'   => 'required|exists:services,id_service', //exists:table,column
+                    'id_product'   => 'required|exists:products,id_product'
+                ];
             }
 
             $filteredArray = array_intersect_key($atributos, array_flip(array_keys($validationRules)));
@@ -247,7 +261,7 @@ class crud
                     'status' => 'success',
                     'code'   => 200,
                     'message' => 'El registro se ha actualizado correctamente.',
-                    'data'  => $object
+                    'data'  => $object->find($id)
                 );
             }
         } else {

@@ -23,29 +23,29 @@ class ServiceController extends Controller
     /**
      * Funcion para listar todos los proeevedores registrador
      * 
-     * RUTA: http://tfg.com.devel/supplier [GET]
+     * RUTA: http://tfg.com.devel/service [GET]
      */
     public function index()
     {
         $crud = new \App\Helpers\CRUD();
-        return $crud->index(service::all(), "proeevedores");
+        return $crud->index(service::all(), "servicios");
     }
 
     /**
      * Funcion para mostrar el proeevedor con el $id que se le pase
      * 
-     * RUTA: http://tfg.com.devel/supplier/$id [GET]
+     * RUTA: http://tfg.com.devel/service/$id [GET]
      */
     public function show($id)
     {
         $crud = new \App\Helpers\CRUD();
-        return $crud->show(service::find($id), "proeevedor", $id);
+        return $crud->show(service::find($id), "servicio", $id);
     }
 
     /**
      * Funcion para eliminar un proeevedor con el $id que se le pase
      * 
-     * RUTA: http://tfg.com.devel/supplier/$id [DELETE]
+     * RUTA: http://tfg.com.devel/service/$id [DELETE]
      */
     public function destroy($id, Request $request)
     {
@@ -55,7 +55,7 @@ class ServiceController extends Controller
         if ($user->rol == "admin") { //administrador
 
             $crud = new \App\Helpers\CRUD();
-            return $crud->destroy(service::find($id), "proeevedor", $id);
+            return $crud->destroy(service::find($id), "servicio", $id);
         } else {
             $response = array(
                 'status' => 'error',
@@ -69,15 +69,14 @@ class ServiceController extends Controller
 
     /*
     Funcion que registra un nuevo proevedor en la base de datos
-    RUTA: http://tfg.com.devel/supplier [POST]
+    RUTA: http://tfg.com.devel/service [POST]
     DATOS QUE NECESITAMOS RECIBIR:
     {
-        "supplierName":"Heraldo",
-        "lastName":"de la muerte",
-        "email":"heraldo@delamuerte.com",
-        "phoneNumber":"105265245",
-        "address":"Avenida de la luz general 24 56 12",
-        "dni":"78569845A"
+        "serviceName":"Cambio de chapado",
+        "description":"cambio de la chapa de un vehiculo",
+        "price":"145.99",
+        "serviceType":"recambio",
+        "duration":"10.5"
     }
     */
     public function store(Request $request)
@@ -86,20 +85,19 @@ class ServiceController extends Controller
         $atributos = json_decode($json, true);
 
         $crud = new \App\Helpers\CRUD();
-        return $crud->store($atributos, "suppliers", new service()); //la segunda variable se utiliza para la regla de validacion
+        return $crud->store($atributos, "services", new service());
     }
 
     /*
     Funcion que actualiza un nuevo proeevedor en la base de datos
-    RUTA: http://tfg.com.devel/supplier/5 [PUT]
+    RUTA: http://tfg.com.devel/service/2 [PUT]
     DATOS QUE NECESITAMOS RECIBIR:
     {
-        "supplierName":"Heraldo",
-        "lastName":"de la muerte",
-        "email":"heraldo@delamuerte.com",
-        "phoneNumber":"10526524521",
-        "address":"Avenida de la luz general 24 56 12",
-        "dni":"78569845A"
+        "serviceName":"Cambio de chapado",
+        "description":"cambio de la chapa de un vehiculo",
+        "price":"145.99",
+        "serviceType":"recambio",
+        "duration":"10.5"
     }
     */
     public function update($id, Request $request)
@@ -108,6 +106,6 @@ class ServiceController extends Controller
         $atributos = json_decode($json, true);
 
         $crud = new \App\Helpers\CRUD();
-        return $crud->update($atributos, "suppliers", service::find($id), $id, "id_supplier");
+        return $crud->update($atributos, "services", service::find($id), $id, "id_service");
     }
 }

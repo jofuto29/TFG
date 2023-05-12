@@ -25,31 +25,6 @@ class UserController extends Controller
         $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['register', 'login']]);
     }
 
-    /*
-    Funcion que registra un nuevo producto en la base de datos
-    RUTA: http://tfg.com.devel/user/register [POST]
-    DATOS QUE NECESITAMOS RECIBIR:
-    {
-        "user":"usuarioRegistrado",
-        "userName":"registradoPsot",
-        "lastName":"metodoRegister",
-        "email":"register@registrado.com.devel",
-        "rol":"user",
-        "phoneNumber":"000000000",
-        "pass":"prueba",
-        "dni":"00000000D"
-    }
-    */
-    public function register(request $request)
-    {
-        $json = $request->input('json', null);
-        $atributos = json_decode($json, true);
-
-        $crud = new \App\Helpers\CRUD();
-        return $crud->store($atributos, "users", new user());
-    }
-
-
     /**
      * Funcion para listar todos los productos registrador
      * 
@@ -87,6 +62,89 @@ class UserController extends Controller
 
 
     /*
+    Funcion que registra un nuevo producto en la base de datos
+    RUTA: http://tfg.com.devel/user/register [POST]
+    DATOS QUE NECESITAMOS RECIBIR:
+    {
+        "user":"usuarioRegistrado",
+        "userName":"registradoPsot",
+        "lastName":"metodoRegister",
+        "email":"register@registrado.com.devel",
+        "rol":"user",
+        "phoneNumber":"000000000",
+        "pass":"prueba",
+        "dni":"00000000D"
+    }
+    */
+    public function register(request $request)
+    {
+        //recoger datos de usuario
+        $json = $request->input('json', null); //en caso de json no llegar, default nul
+
+        //$atributos = json_decode($json);//convertimo el json en obj
+        $atributos = json_decode($json, true); //convertimos el json en array
+        $atributos = array_map('trim', $atributos); //limpiamos campos de espacios
+
+        //validar datos
+        $validate = validator::make($atributos, [
+            'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users',
+            'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'email'         => 'required|email',
+            'rol'           => 'required|alpha',
+            'phoneNumber'   => 'required|numeric',
+            'pass'          => 'required',
+            'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users', //comporbar si el usuario existe, este campo no se puede repetir
+        ]);
+
+        if (!empty($atributos)) {
+            if ($validate->fails()) {
+
+                $response = array(
+                    'status' => 'error',
+                    'code'   => 404,
+                    'message' => 'El usuario no se ha creado correctamente',
+                    'error' => $validate->errors()
+                );
+            } else {
+                //cigrar contraseña
+                //$psw = password_hash($atributos['pass'], PASSWORD_BCRYPT, ['cost' => 4]); --> no genera el mismo hash
+                $psw = hash('sha256', $atributos['pass']);
+
+                //crear usuario
+                $user = new User();
+                $user->user = $atributos['user'];
+                $user->userName = $atributos['userName'];
+                $user->lastName = $atributos['lastName'];
+                $user->email = $atributos['email'];
+                $user->rol = 'user';
+                $user->phoneNumber = $atributos['phoneNumber'];
+                $user->pass = $psw;
+                $user->dni = $atributos['dni'];
+
+                //guardar en la BD
+                $user->save();
+                $response = array(
+                    'status' => 'success',
+                    'code'   => 200,
+                    'message' => 'El usuario se ha creado correctamente',
+                    'user'  => $user
+                );
+            }
+        } else {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'datos enviados no son correctos',
+                'error' => $validate->errors()
+            );
+        }
+
+        return response()->json($response, $response['code']);
+    }
+
+
+    /*
     Funcion para el update de usuario
     RUTA: http://tfg.com.devel/user/update [PUT]
     DATOS QUE NECESITAMOS RECIBIR:
@@ -118,9 +176,9 @@ class UserController extends Controller
 
                 //VALIDAMOS LOS DATOS ENVIADOS
                 $validate = validator::make($atributos, [
-                    'user'          => 'required|alpha|unique:users,userName,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
-                    'userName'      => 'required|alpha',
-                    'lastName'      => 'required|alpha',
+                    'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users,userName,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
+                    'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'email'         => 'required|email',
                     'phoneNumber'   => 'required|numeric',
                     'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users,dni,' . $userToken->sub . ',id_user'
@@ -171,10 +229,10 @@ class UserController extends Controller
     RUTA: http://tfg.com.devel/user/login [POST]
     DATOS QUE NECESITAMOS RECIBIR:
     {
-        "user":"admin",
-        "pass":"aA@9517532684aA@"
+        "user":"admin1",
+        "pass":"admin"
     }
-    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsInVzZXIiOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjgzNzQyMjA5LCJleHAiOjE2ODQzNDcwMDl9.KDaS7YrYBIbuyGkCjYq2yvPJuICZFTaNnF_0k-cJz7A
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsInVzZXIiOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInJvbCI6ImFkbWluIiwiaWF0IjoxNjgzOTE4MTcxLCJleHAiOjE2ODQ1MjI5NzF9.WkDFsoXeTP95KzED2yGxKYwBglVB1QRsCHIR_gNoKHA
     para el login y usar el token utilizaremos la libreria jwt, cuando se logee un usuario se generara un token, en cada una de las peticiones que haga el suaurio
     se verificara si el token es correcto o no
     */
@@ -187,9 +245,8 @@ class UserController extends Controller
         $atributos = array_map('trim', $atributos);
 
         //validar datos
-
         $validate = validator::make($atributos, [
-            'user'          => 'required|alpha',
+            'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'pass'          => 'required'
         ]);
 

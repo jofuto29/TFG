@@ -20,8 +20,8 @@ class JwtAuth
     {
         //buscar si existe el usuario con sus credenciales
         $user = User::where([
-            'user' => $usuario,
-            'pass' => $pass
+            'user' => "admin",
+            'pass' => "admin"
         ])->first(); //consulta que comprueba si estos dos parametros existen
 
         //validar
@@ -53,7 +53,8 @@ class JwtAuth
         } else {
             $data = array( //en caso de no ser logeado generamos un mensaje de erro
                 'status' => 'error',
-                'message' => 'login incorrecto'
+                'message' => 'login incorrecto',
+                'user' => $user
             );
         }
 

@@ -101,3 +101,9 @@ Route::resource('/product', 'App\Http\Controllers\ProductController');
 
 // Rutas del controlador de Suppliers
 Route::resource('/supplier', 'App\Http\Controllers\SupplierController');
+
+// Rutas del controlador de Suppliers
+Route::resource('/service', 'App\Http\Controllers\ServiceController');
+
+// Rutas del controlador de Suppliers
+Route::resource('/serviceProduct', 'App\Http\Controllers\ServiceProductController');
