@@ -4,6 +4,9 @@ namespace App\Helpers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
 
 class crud
 {
@@ -282,6 +285,64 @@ class crud
 
         return response()->json($response, $response['code']);
     }
+
+    /**
+     * Funcion para guardar una imagen
+     */
+    public function storeImage($request, $disk)
+    {
+        //Recoger datos de la peticion
+        $image = $request->file('file0'); //nombre del archivo en este caso la imagen file0
+
+        //validmaos que el arhicvo es una imagen
+        $validate = validator::make($request->all(), [
+            'file0' => 'required|image|mimes:jpg,jpeg,png,gif'
+        ]);
+
+        //guardar imagen
+        if (!$image || $validate->fails()) {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'la imagen no se ha podido guardar correctamente',
+                'error' => $validate->errors()
+            );
+        } else {
+            $image_name = time() . $image->getClientOriginalName(); //sacamos el nombre de la imagen y le agregamos el tiempo de unix irrepetible para no sobrescribir nada en BD
+            Storage::disk($disk)->put($image_name, File::get($image)); //cada disco es una carpeta dentro del diorectorio storage
+
+            $response = array(
+                'status' => 'success',
+                'code'   => 200,
+                'message' => 'imagen guardarda correctamente',
+                'image' => $image_name
+            );
+        }
+        return response()->json($response, $response['code']);
+    }
+
+
+    /**
+     * Funcion para obtener una imagen
+     */
+    public function getImage($filename, $disk)
+    {
+        $isset = Storage::disk($disk)->exists($filename);
+        if ($isset) {
+            $file = Storage::disk($disk)->get($filename);
+            return new Response($file, 200);
+        } else {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => 'la imagen no se ha podido encontrar',
+            );
+            return response()->json($response, $response['code']);
+        }
+    }
+
+
+
 
     /*Para meter una consulta y reducir el codigo podemos crearnos una variable con todos los campos de la tabla
     $where = [

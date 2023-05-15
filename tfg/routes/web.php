@@ -98,6 +98,10 @@ Route::resource('/category', 'App\Http\Controllers\CategoryController');
 
 // Rutas del controlador de Productos
 Route::resource('/product', 'App\Http\Controllers\ProductController');
+Route::post('/product/storeImage', 'App\Http\Controllers\productController@storeImage');
+Route::get('/product/getImage/{filename}', 'App\Http\Controllers\productController@getImage');
+Route::get('/product/getProductsByCategory/{id}', 'App\Http\Controllers\productController@getProductsByCategory');
+Route::get('/product/getProductsBySupplier/{id}', 'App\Http\Controllers\productController@getProductsBySupplier');
 
 // Rutas del controlador de Suppliers
 Route::resource('/supplier', 'App\Http\Controllers\SupplierController');

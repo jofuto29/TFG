@@ -1,0 +1,19 @@
+ANGULAR:
+
+Desarollaremos una aplicacion Web SPA, una aplicacion que no recargar la pagina en ningun momento, que sera completamente asincrona con el servidor,
+completamente dinamica y practicamente instantanea.
+
+Indice
+1. Instalacion de Angular
+2. modelos
+3. compnentes basicso
+4. sitema de rutas en Angular
+5. registro de usuario
+6. login frontend (una vez el back nos devuelva esa informacion la guardaremos en el front para persistir el logeo del usuario)
+7. Ajustes de usuario
+
+INSTALACION Angular
+
+1. nodeJS
+
+
