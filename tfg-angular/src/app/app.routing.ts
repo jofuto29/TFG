@@ -4,16 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 // Componentes
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { ErrorComponent } from './components/error/error.component';
 
 // Definir las rutas
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent }, // localhost:4200/
-  { path: 'inicio', component: LoginComponent }, // inicio
+  { path: '', component: HomeComponent }, // localhost:4200/
+  { path: 'inicio', component: HomeComponent }, // inicio
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '**', component: ErrorComponent },//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];
-
-
 
 //EXPORTS
 export const appRoutingProviders: any[] = [];

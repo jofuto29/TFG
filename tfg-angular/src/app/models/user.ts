@@ -7,7 +7,7 @@ export class user{
         public user: string,
         public userName: string,
         public lastName:string,
-        public email: EmailValidator,
+        public email: string,
         public rol: string,
         public phoneNumber: number,
         public pass: string,

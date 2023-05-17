@@ -8,15 +8,15 @@
 </head>
 
 <body>
-  <img src="./assets/img/rodal.png" width="40" height="40" class="d-inline-block align-top" alt="">
-      Automoviles rodal
   <nav>
     <ul class="menu">
-      <li><a href="#">Inicio</a></li>
+      <li>
+        <img src="./assets/img/rodal.png" width="40" height="40" class="d-inline-block align-top" alt="">
+      </li>
+      <li><a [routerLink]="['/inicio']">Inicio</a></li>
       <li><a href="#">Vehículos de Ocasión</a></li>
       <li><a href="#">Conócenos</a></li>
-      <li><a href="#">Iniciar Sesión</a></li>
-      <li><a href="#">Salir</a>
+      <li><a href="#">Cuenta</a>
         <ul class="submenu">
           <li><a href="#">Vehículos</a></li>
           <li><a href="#">Reservas</a></li>
@@ -26,10 +26,14 @@
           <li><a href="#">Ajustes</a></li>
         </ul>
       </li>
+      <li><a [routerLink]="['/login']">Iniciar Sesión</a></li>
+      <li><a [routerLink]="['/register']">Registrarse</a></li>
+      <li><a href="#">Salir</a></li>
+      
     </ul>
   </nav>
 
-  <router-outlet></router-outlet>
+  <router-outlet></router-outlet><!--Muestra el componente asociado a la ruta que estamos mostrando-->
 
 </body>
 </html>
