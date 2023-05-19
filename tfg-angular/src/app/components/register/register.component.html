@@ -9,7 +9,7 @@
         <div class="form-group">
             <label for="user">Usuario: </label>
             <input type="text" name="user" id="user" placeholder="¿Cual quieres que sea tu nombre de usuario?" class="form-control" 
-                    #user="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z0-9]+" >  <!-- enlazamos el valor de name diciendo que pertenece a user-name y ademas establecemos una validacion para el campo: pattern="[a-zA-Z]"-->
+                    #user="ngModel" [(ngModel)]="userData.user" required pattern="[a-zA-Z0-9]+" >  <!-- enlazamos el valor de name diciendo que pertenece a user-name y ademas establecemos una validacion para el campo: pattern="[a-zA-Z]"-->
                     <small *ngIf="!user.valid && user.touched" class="invalid-feedback d-block"><!-- Si el campo que introducimo no es correcto saltara mensaje de error (con d-block se muestra el msj)-->
                         El nombre de usuario no es valido
                     </small>
@@ -17,32 +17,57 @@
 
         <div class="form-group">
             <label for="pass">Contraseña: </label>
-            <input type="text" name="pass" id="pass" placeholder="¿Cual quieres que sea tu contraseña?" class="form-control">
+            <input type="text" name="pass" id="pass" placeholder="¿Cual quieres que sea tu contraseña?" class="form-control"
+                #pass="ngModel" [(ngModel)]="userData.pass" required>
+                <small *ngIf="!pass.valid && pass.touched" class="invalid-feedback d-block">
+                    Se debe indicar una contraseña por su seguridad
+                </small>
         </div>
 
         <div class="form-group">
             <label for="userName">Nombre: </label>
-            <input type="text" name="userName" id="userName" placeholder="¿Cual es tu nombre?" class="form-control">
+            <input type="text" name="userName" id="userName" placeholder="¿Cual es tu nombre?" class="form-control"
+                    #userName="ngModel" [(ngModel)]="userData.userName" required pattern="[a-zA-Z]+" > 
+                    <small *ngIf="!userName.valid && userName.touched" class="invalid-feedback d-block">
+                        Introduzca su nombre real
+                    </small>
         </div>
 
         <div class="form-group">
             <label for="lastName">Apellidos: </label>
-            <input type="text" name="lastName" id="lastName" placeholder="¿Cual es tu apellido" class="form-control">
+            <input type="text" name="lastName" id="lastName" placeholder="¿Cual es tu apellido" class="form-control"
+            #lastName="ngModel" [(ngModel)]="userData.lastName" required pattern="[a-zA-Z]+" > 
+                    <small *ngIf="!lastName.valid && lastName.touched" class="invalid-feedback d-block">
+                        Introduzca sus apellidos reales
+                    </small>
+            
         </div>
 
         <div class="form-group">
             <label for="email">Correo Electrónico: </label>
-            <input type="email" name="email" id="email" placeholder="¿Cual es tu correo electrónico?" class="form-control">
+            <input type="email" name="email" id="email" placeholder="¿Cual es tu correo electrónico?" class="form-control"
+                    #email="ngModel" [(ngModel)]="userData.email" required email> 
+                    <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                        Introduzca un correo electronico real
+                    </small>
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">Número de telefono: </label>
-            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="¿Cual es tu número de telefono?" class="form-control">
+            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="¿Cual es tu número de telefono?" class="form-control"
+                #phoneNumber="ngModel" [(ngModel)]="userData.phoneNumber" required pattern="[0-9]+" minlength="10" maxlength="10"> 
+                <small *ngIf="!phoneNumber.valid && phoneNumber.touched" class="invalid-feedback d-block">
+                    Introduzca un numero de telefono correcto
+                </small>
         </div>
 
         <div class="form-group">
             <label for="dni">DNI / pasaporte: </label>
-            <input type="text" name="dni" id="dni" placeholder="¿Cual es tu dni?" class="form-control">
+            <input type="text" name="dni" id="dni" placeholder="¿Cual es tu dni?" class="form-control"
+            #dni="ngModel" [(ngModel)]="userData.dni" required pattern="[a-zA-Z0-9]{8,15}"> 
+                <small *ngIf="!dni.valid && dni.touched" class="invalid-feedback d-block">
+                    Introduzca un dni real
+                </small>
         </div>
 
         <div class="form-group checkbox">
@@ -51,7 +76,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="registrarme" class="btn btn-success">
+            <input type="submit" value="registrarme" class="btn btn-success" [disabled]="registerForm.invalid"><!--no dejamos enviar-->
         </div>
 
     </form>

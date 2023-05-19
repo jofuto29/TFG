@@ -1,5 +1,3 @@
-import { EmailValidator } from "@angular/forms";
-
 export class user{
 
     constructor(
@@ -10,7 +8,7 @@ export class user{
         public email: string,
         public rol: string,
         public phoneNumber: number,
-        public pass: string,
+        public pass: string, //estyoy eguro esta aquiio
         public dni: number,
         public created_at: any,
         public updated_at:any
