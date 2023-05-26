@@ -44,7 +44,7 @@
     <ul *ngIf="identity && identity.rol === 'admin'" class="menu" [ngClass]="{ 'unseen': isMenuOpen }">
       <li><a [routerLink]="['/inicio']">Usuarios</a></li>
       <li><a href="#">Vehículos</a></li>
-      <li><a href="#">Productos</a></li>
+      <li><a [routerLink]="['/productos']">Productos</a></li>
       <li *ngIf="identity"><a href="#">
         {{ identity.user | capitalize }}
       </a>

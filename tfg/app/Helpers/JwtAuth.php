@@ -35,7 +35,11 @@ class JwtAuth
             $token = array( //generamos el token si el usuario existe, es decir si tenemos un objeto en $user
                 'sub'   => $user->id_user,
                 'user'  => $user->user,
-                'name'  => $user->userName,
+                'userName'  => $user->userName,
+                'lastName'  => $user->lastName,
+                'email' => $user->email,
+                'phoneNumber'  => $user->phoneNumber,
+                'dni' => $user->dni,
                 'rol'   => $user->rol,
                 'iat'   => time(), //fecha en la que se crea el token
                 'exp'   => time() + (7 * 24 * 60 * 60) //tiempo que dura el token = 7dias
