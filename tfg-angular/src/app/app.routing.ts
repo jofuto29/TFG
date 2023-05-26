@@ -6,14 +6,18 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+
 
 // Definir las rutas
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }, // localhost:4200/
   { path: 'inicio', component: HomeComponent }, // inicio
   { path: 'login', component: LoginComponent },
+  { path: 'logout/:sure', component: LoginComponent}, //lo que haremos para no definir un nuevo componenete es en la ruta de login añadir un parametro para cerrar la sesion
   { path: 'register', component: RegisterComponent },
-  { path: '**', component: ErrorComponent },//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
+  { path: 'ajustes', component: UserEditComponent},
+  { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];
 
 //EXPORTS

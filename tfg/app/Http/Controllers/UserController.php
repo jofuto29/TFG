@@ -91,7 +91,7 @@ class UserController extends Controller
             'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'email'         => 'required|email',
-            'rol'           => 'required|in:admin,client,employee',
+            'rol'           => '',
             'phoneNumber'   => 'required|numeric',
             'pass'          => 'required',
             'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users', //comporbar si el usuario existe, este campo no se puede repetir
@@ -117,7 +117,7 @@ class UserController extends Controller
                 $user->userName = $atributos['userName'];
                 $user->lastName = $atributos['lastName'];
                 $user->email = $atributos['email'];
-                $user->rol = 'user';
+                $user->rol = 'client';
                 $user->phoneNumber = $atributos['phoneNumber'];
                 $user->pass = $psw;
                 $user->dni = $atributos['dni'];

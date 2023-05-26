@@ -10,6 +10,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { CapitalizePipe } from './capitalize.pipe';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ErrorComponent } from './components/error/error.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
+    CapitalizePipe,
+    UserEditComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

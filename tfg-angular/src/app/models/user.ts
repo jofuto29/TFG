@@ -11,7 +11,8 @@ export class user{
         public pass: string, //estyoy eguro esta aquiio
         public dni: number,
         public created_at: any,
-        public updated_at:any
+        public updated_at:any,
+        public getToken:any
     ){
     }
 }

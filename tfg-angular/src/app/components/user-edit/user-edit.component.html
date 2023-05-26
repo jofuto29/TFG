@@ -1,17 +1,19 @@
 
 <div class="col-md-12 mt-3">
     <h1>{{page_title}}</h1>
-    <p>Registrate en nuestra plataforma</p>
-
+    <p>Modifica los mensajes de ussuario</p>
+    <hr>
+<!--
     <div class="alert alert-success" *ngIf="status == 'success' ">
         El registro se ha completado correctamente, <a [routerLink]="['/login']">Logueate aquí</a>
     </div>
     <div class="alert alert-danger" *ngIf="status == 'error' ">
         El registro no se ha completado correctamente. Introduzca correctamente los datos.
     </div>
+-->
 
     <!--formulario de registro-->
-    <form class="col-md-5" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)"><!--variable ngform que llama a onsumir y le pasa los parametros del formulario-->
+    <form class="col-md-5" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)"><!--variable ngform que llama a onsumir y le pasa los parametros del formulario-->
 
         <div class="form-group">
             <label for="user">Usuario: </label>
@@ -20,15 +22,6 @@
                     <small *ngIf="!user.valid && user.touched" class="invalid-feedback d-block"><!-- Si el campo que introducimo no es correcto saltara mensaje de error (con d-block se muestra el msj)-->
                         El nombre de usuario no es valido
                     </small>
-        </div>
-
-        <div class="form-group">
-            <label for="pass">Contraseña: </label>
-            <input type="text" name="pass" id="pass" placeholder="¿Cual quieres que sea tu contraseña?" class="form-control"
-                #pass="ngModel" [(ngModel)]="userData.pass" required>
-                <small *ngIf="!pass.valid && pass.touched" class="invalid-feedback d-block">
-                    Se debe indicar una contraseña por su seguridad
-                </small>
         </div>
 
         <div class="form-group">
@@ -47,7 +40,6 @@
                     <small *ngIf="!lastName.valid && lastName.touched" class="invalid-feedback d-block">
                         Introduzca sus apellidos reales
                     </small>
-            
         </div>
 
         <div class="form-group">
@@ -77,13 +69,21 @@
                 </small>
         </div>
 
-        <div class="form-group checkbox">
-            <input type="checkbox" name="checkbox" id="checkbox">
-            <label for="checkbox">¿Quieres subscribirte a nuestro boletin de novedades? </label>
+        <!--Descripcion
+        <div class="form-group">
+            <label for="descripcion">Biografia </label>
+            <input type="text" name="descripcion" id="descripcion" placeholder="¿Cual es tu dni?" class="form-control"
+            #descriprion="ngModel" [(ngModel)]="userData.descripcion"> 
         </div>
 
         <div class="form-group">
-            <input type="submit" value="registrarme" class="btn btn-success" [disabled]="registerForm.invalid"><!--no dejamos enviar-->
+            <label for="image">Imagen </label>
+            <input type="file" name="image" class="form-control" placeholder="¿Cual es tu dni?">
+        </div>
+        -->
+
+        <div class="form-group">
+            <input type="submit" value="Guardar cambios" class="btn btn-success" [disabled]="userEditForm.invalid"><!--no dejamos enviar-->
         </div>
 
     </form>

@@ -13,12 +13,14 @@ export class RegisterComponent {
 
     public page_title: string;
     public userData: user;
+    public status: string;
 
     constructor(
       private _userService: UserService
     ){
       this.page_title = "Registrate";
-      this.userData = new user(1,'','','','','user',2,'',2,'','');//e rellaran lso datos con forme lo enviamos desde el formulario
+      this.status = "";
+      this.userData = new user(1,'','','','','user',2,'',2,'','','');//e rellaran lso datos con forme lo enviamos desde el formulario
 
     }
 
@@ -28,6 +30,24 @@ export class RegisterComponent {
 
     onSubmit(form: any){
       console.log(this.userData);
+      this._userService.register(this.userData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
+        response =>{
+          if(response.status == "success"){
+            this.status = response.status;
+            form.reset();
+          }else{
+            this.status = 'error';
+          }
+          console.log(response);
+        },
+        error=>{
+          this.status = 'error';
+          console.log(<any>error);
+        }
+      );
+      //console.log(this.userData);
       //form.reset();//vacia el formulario enviado, pero raro porque al abrir el json esta vacio {Revisar}
     }
 }
+
+/*nos permitira crear un modelo, el modelo que sea, y llamar metedos del servicio, es la calse enlace*/

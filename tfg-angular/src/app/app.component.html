@@ -8,32 +8,64 @@
 </head>
 
 <body>
-  <nav>
-    <ul class="menu">
-      <li>
-        <img src="./assets/img/rodal.png" width="40" height="40" class="d-inline-block align-top" alt="">
-      </li>
+  <nav class="menuContainer">
+    <div class ="logo" >
+      <a [routerLink]="['/inicio']">
+        Automoviles Rodal
+        <img src="./assets/img/rodal.png" class="d-inline-block align-top" alt="">
+      </a>
+    </div>
+    <div class ="button" >
+      <button class="menuToggle" (click)="toggleMenu()">☰</button>
+    </div>
+
+    <!--Menu cliente/empleado, solo sera mostrado para el cliente o el empleado-->
+    <ul *ngIf="!identity || identity.rol !== 'admin'" class="menu" [ngClass]="{ 'unseen': isMenuOpen }">
       <li><a [routerLink]="['/inicio']">Inicio</a></li>
       <li><a href="#">Vehículos de Ocasión</a></li>
       <li><a href="#">Conócenos</a></li>
-      <li><a href="#">Cuenta</a>
+      <li *ngIf="identity"><a href="#">
+        {{ identity.user | capitalize }}
+      </a>
         <ul class="submenu">
           <li><a href="#">Vehículos</a></li>
           <li><a href="#">Reservas</a></li>
           <li><a href="#">Reparaciones</a></li>
           <li><a href="#">Facturas</a></li>
-          <li><a href="#">Métodos de Pago</a></li>
-          <li><a href="#">Ajustes</a></li>
+          <li><a [routerLink]="['/ajustes']">Ajustes</a></li>
         </ul>
       </li>
-      <li><a [routerLink]="['/login']">Iniciar Sesión</a></li>
-      <li><a [routerLink]="['/register']">Registrarse</a></li>
-      <li><a href="#">Salir</a></li>
-      
+      <li *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
+      <li *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
+      <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
+    </ul>
+
+    <!--Menu administrador, solo sera mostrado para el administrador-->
+    <ul *ngIf="identity && identity.rol === 'admin'" class="menu" [ngClass]="{ 'unseen': isMenuOpen }">
+      <li><a [routerLink]="['/inicio']">Usuarios</a></li>
+      <li><a href="#">Vehículos</a></li>
+      <li><a href="#">Productos</a></li>
+      <li *ngIf="identity"><a href="#">
+        {{ identity.user | capitalize }}
+      </a>
+        <ul class="submenu">
+          <li><a href="#">Vehículos</a></li>
+          <li><a href="#">Reservas</a></li>
+          <li><a href="#">Reparaciones</a></li>
+          <li><a href="#">Facturas</a></li>
+          <li><a [routerLink]="['/ajustes']">Ajustes</a></li>
+        </ul>
+      </li>
+      <li *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
+      <li *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
+      <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
     </ul>
   </nav>
 
-  <router-outlet></router-outlet><!--Muestra el componente asociado a la ruta que estamos mostrando-->
+  <div class="content">
+    
+    <router-outlet></router-outlet><!--Muestra el componente asociado a la ruta que estamos mostrando-->
 
+  </div>
 </body>
 </html>
