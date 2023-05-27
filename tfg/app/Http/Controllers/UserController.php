@@ -188,23 +188,26 @@ class UserController extends Controller
                     $response = array(
                         'status' => 'error',
                         'code'   => 404,
-                        'message' => 'los datos introducidos no son validos',
+                        'message' => 'los datos introducidos no son validosss',
                         'error' => $validate->errors()
                     );
                 } else {
                     //datos correstos, actualizamos en la base de datos quitando por si acaso parametros que pusiesen ir en la peticion:
                     unset($atributos['id_user']);
                     unset($atributos['rol']);
+                    unset($atributos['pass']);
                     unset($atributos['created_at']);
+                    unset($atributos['updated_at']);
                     unset($atributos['remember_token']);
+                    unset($atributos['getToken']);
 
                     $user_update = User::where('id_user', $userToken->sub)->update($atributos);
 
                     $response = array(
-                        'status' => 'succes',
+                        'status' => 'success',
                         'code'   => 200,
                         'message' => 'usuario actualizado',
-                        'userToken' => $user_update
+                        'userToken' => User::find($userToken->sub)
                     );
                 }
             } else {

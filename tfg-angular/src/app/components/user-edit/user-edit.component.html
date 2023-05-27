@@ -13,6 +13,9 @@
 -->
 
     <!--formulario de registro-->
+
+    <img [src]="sanitizedImageUrl" alt="Imagen">
+
     <form class="col-md-5" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)"><!--variable ngform que llama a onsumir y le pasa los parametros del formulario-->
 
         <div class="form-group">
@@ -69,18 +72,24 @@
                 </small>
         </div>
 
-        <!--Descripcion
+   
         <div class="form-group">
             <label for="descripcion">Biografia </label>
-            <input type="text" name="descripcion" id="descripcion" placeholder="¿Cual es tu dni?" class="form-control"
-            #descriprion="ngModel" [(ngModel)]="userData.descripcion"> 
+            <textarea  name="descripcion" id="descripcion" placeholder="¿Cual es tu dni?" class="form-control"></textarea>
         </div>
 
+     <!--Descripcion
+        #descriprion="ngModel" [(ngModel)]="userData.descripcion"> 
         <div class="form-group">
             <label for="image">Imagen </label>
             <input type="file" name="image" class="form-control" placeholder="¿Cual es tu dni?">
         </div>
         -->
+
+        <div class="form-group">
+            <label for="img">Subir imagen </label>
+            <input  type="file" name="img" id="img" (change)="subirFile($event)">
+        </div>
 
         <div class="form-group">
             <input type="submit" value="Guardar cambios" class="btn btn-success" [disabled]="userEditForm.invalid"><!--no dejamos enviar-->

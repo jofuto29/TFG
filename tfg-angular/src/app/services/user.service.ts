@@ -52,7 +52,7 @@ export class UserService {
         return this._http.post(this.url+'user/login', params, {headers: headers});
     }
 
-    update(token:any, user:user){
+    update(token:any, user:user): Observable<any>{
         let json = JSON.stringify(user);
         let params = 'json='+json;
 
@@ -85,6 +85,20 @@ export class UserService {
         }
 
         return this.token;
+    }
+
+
+    uploadImage(token:any, imageFile:any, url:string): Observable<any> {
+        const formData = new FormData();
+        formData.append('file0', imageFile); // Asegúrate de tener una referencia al archivo que deseas enviar
+    
+        let headers = new HttpHeaders().set('Authorization',token);
+        return this._http.post(this.url+url, formData, {headers: headers});
+      }
+
+    getImage(token:any, url:string, nombre:string): Observable<any> {
+        let headers = new HttpHeaders().set('Authorization',token);
+        return this._http.get(this.url+url+nombre, {headers: headers, responseType: 'blob'})
     }
 
 }

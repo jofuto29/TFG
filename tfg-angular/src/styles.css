@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Estilos para el menú */
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .content {
+    margin: 2%;
+  }
+
+  .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 2.5rem!important;
+    margin-bottom: 2.5rem!important;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  
+
+  table {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid black!important;
+  }
+  
+  th {
+    background-color: #E96348;
+    color: #fff;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  td:hover {
+    background-color: #ddd;
+  }
+
+  h1 {
+    text-align: left;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  

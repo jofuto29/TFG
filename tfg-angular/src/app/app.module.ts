@@ -4,7 +4,6 @@ import { routing, appRoutingProviders } from './app.routing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -29,7 +28,7 @@ import { ProductComponent } from './components/product/product.component';
     BrowserModule,
     routing,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     appRoutingProviders

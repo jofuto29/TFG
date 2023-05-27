@@ -1,1 +1,50 @@
-<p>product works!</p>
+<div class ="container">
+
+    <h1>Listado de productos registrados</h1>
+    <span class="buton"> Añadir producto</span>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>ID Producto</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Fecha de Admisión</th>
+              <th>Fecha de Caducidad</th>
+              <th>Ubicación</th>
+              <th>ID Proveedor</th>
+              <th>ID Categoría</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productos">
+              <td><img [src]="producto.img" alt="Imagen"></td>
+              <td>{{ producto.id_product }}</td>
+              <td>{{ producto.productName }}</td>
+              <td>{{ producto.description }}</td>
+              <td>{{ producto.price }}</td>
+              <td>{{ producto.stock }}</td>
+              <td>{{ producto.admisionDate }}</td>
+              <td>{{ producto.expiryDate }}</td>
+              <td>{{ producto.location }}</td>
+              <td>{{ producto.id_supplier }}</td>
+              <td>{{ producto.id_category }}</td>
+              <td>
+                <span class="icon" (click)="updateProduct(producto.id_product)">
+                  <i class="fas fa-pencil-alt"></i>
+                </span>
+            </td>
+                <td>
+                <span class="icon" (click)="deleteProduct(producto.id_product)">
+                  <i class="fas fa-trash-alt"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+</div>

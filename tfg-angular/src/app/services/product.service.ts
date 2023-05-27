@@ -6,18 +6,32 @@ import { product } from '../models/product';
 
 /*crearemos un servicio que envie las peticiones correspondiente al backend*/
 @Injectable()
-export class UserService {
+export class productService {
     public url: string;
-    public identity: any;
-    public token: any;
 
     constructor(
         public _http: HttpClient
         
     ){
-        this.identity = '';
-        this.token = '';
         this.url = global.url;
+    }
+
+    uploadImage(token:any, imageFile:any, url:string): Observable<any> {
+        const formData = new FormData();
+        formData.append('file0', imageFile); // Asegúrate de tener una referencia al archivo que deseas enviar
+    
+        let headers = new HttpHeaders().set('Authorization',token);
+        return this._http.post(this.url+url, formData, {headers: headers});
+      }
+
+    getImage(token:any, url:string, nombre:string): Observable<any> {
+        let headers = new HttpHeaders().set('Authorization',token);
+        return this._http.get(this.url+url+nombre, {headers: headers, responseType: 'blob'})
+    }
+
+    listProducts(token:any, url:string): Observable<any>{
+        let headers = new HttpHeaders().set('Authorization',token);
+        return this._http.get(this.url+url, {headers: headers});
     }
 
 }
