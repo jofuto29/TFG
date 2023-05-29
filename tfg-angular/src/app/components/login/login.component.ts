@@ -33,12 +33,14 @@ export class LoginComponent {
   }
 
   onSubmit(form: any){
+    console.log(this.userData);
     this._userService.signup(this.userData).subscribe(
       response=>{
           //TOKEN
           this.status = 'success';
           this.token = response;
           //indetity
+          console.log(this.userData);
           this._userService.signup(this.userData,'true').subscribe(
             response =>{
               this.identity = response;

@@ -1,139 +1,149 @@
-ul, ol {
-  list-style: none;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-  color: black;
+.main {
+  padding: 20px;
 }
 
 .menuContainer {
-  padding: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #E96348;
   height: 100px;
+  padding: 0 20px;
 }
 
 .logo {
-  width: 20%;
-  float: right;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 27px;
 }
 
 .logo a {
   display: flex;
-  justify-content: right;
-  text-align: center;
   align-items: center;
-  gap: 10%;
+  text-decoration: none;
   color: white;
-  font-size: 27px;
+  font-weight: bold;
 }
 
 .logo img {
   border-radius: 10px;
   width: 55px;
+  margin-left: 10px;
 }
 
 .menu {
   display: flex;
-  position: relative;
-  justify-content: left;
-  align-items: center;
-  width: 80%;
-  gap: 2%;
-  height: 60px;
-}
-
-.menu li {
-  width: 16%;
-  height: 51%;
-  text-decoration: none;
-  color: black;
-  background-color: white;
-  border: 1px solid black;
+  list-style: none;
+  width: 73%;
   text-align: center;
-  border-radius: 7px;
-  box-shadow: 0px 4px 8px rgba(255, 255, 255, 1);
-}
-
-.menu li:hover {
-  color: white;
-  box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, 1);
-}
-
-.menu li a{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-
-.menu li ul {
-  display: none;
-  position: absolute;
   z-index: 32;
 }
 
-.menu li:hover > ul {
-  display: block;
-  font-size: 15px;
+.menu li{
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px #E96348;
+  position: relative;
+  margin-right: 20px;
+  min-width: 15%;
+  background-color: #f1f1f1;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #f1f1f1;
+  border-radius: 15px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.menu li:hover{
+  font-size: 17px;
+  box-shadow: 0 4px 8px rgb(245, 160, 160);
+}
+
+.menu li ul {
+    position: absolute;
+    top: 100%;
+    left: -45px;
+    display: none;
+    padding-top: 10px;
+    min-width: 275px;
 }
 
 .menu li:hover ul {
-  width: 100%;
+  display: block;
 }
 
-.menuToggle{
+.menu li ul li {
+  margin-bottom: 5px;
+}
+
+.botonMenu {
   display: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
 }
 
 
+/*movile tablet*/
 @media (max-width: 1250px) {
 
-  .menu {
-    display: block;
-    width: 100%;
-    bottom: -10%;
-  }
-
-  .menu li {
-    width: 70%;
-  }
-
-  .unseen{
-    display: none;
-  }
-
-  .logo{
-    width: 90%;
-  }
-
-  .logo a{
-    gap: 20%;
-    height: 88px;
-  }
-
-  .submenu{
-    left:25%;
-    top: 50%;
-  }
-
-  .button{
-    width: 10%;
-    display: flex;
-    justify-content: initial;
-    align-items: center;
-    height: 85px;
-  }
-
-  .menuToggle {
+  .botonMenu {
     display: block;
     background-color: #E96348;
     color: white;
-    border: none;
-    font-size: 30px;
-    cursor: pointer;
   }
 
+  .menu {
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 120px;
+    left: -5px;
+  }
+
+  .menu li{
+    border-radius: 0px;
+  }
+
+  .menu .submenu5:hover{
+    margin-bottom: 225px;
+  }
+
+  .menu .submenu4:hover{
+    margin-bottom: 180px;
+  }
+
+  .menu .submenu3:hover{
+    margin-bottom: 135px;
+  }
+
+  .menu .submenu2:hover{
+    margin-bottom: 90px;
+  }
+
+  .menu .submenu1:hover{
+    margin-bottom: 45px;
+  }
+
+  .menu li ul{
+    width: 100%;
+    left: 0;
+  }
+
+  .seen{
+    display: none!important;
+  }
+
+  .unseen{
+    display: block!important;
+  }
 }
 

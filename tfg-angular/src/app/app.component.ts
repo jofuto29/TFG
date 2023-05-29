@@ -10,7 +10,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit, DoCheck{
   public title = 'tfg-angular-front';
-  public isMenuOpen: boolean = true;
+  public isMenuVisible = true;
   public identity:any;
   public token:any;
 
@@ -35,8 +35,8 @@ export class AppComponent implements OnInit, DoCheck{
     this.token  = this._userService.getToken();
   }
 
-  //menu desplegable
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
+  showMenu() {
+    this.isMenuVisible = !this.isMenuVisible;
   }
+
 }

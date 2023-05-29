@@ -1,2 +1,35 @@
-<h1>{{page_title}}</h1>
-<p>home works!</p>
+<div class="main">
+
+
+  <div class="titleDiv">
+    <h1 class="title">AUTOMOVILES RODAL</h1>
+  </div>
+  
+  <div class="slider">
+    <img alt="Imagen 1" *ngFor="let image of images; let i = index" [src]="image.src" [alt]="image.alt" [class.active]="i === currentImage">
+  </div>
+
+  <div class="content">
+    <h1>Tu taller con garantia y compromiso.</h1>
+    <p>Empresa con más de 30 años de trayectoria dedicada a la reparación, mantenimiento y venta de vehículos.</p>
+  </div>
+
+  <script>
+    // Script para cambiar automáticamente las imágenes del slider
+    const slider = document.querySelector('.slider');
+    const images = Array.from(slider.querySelectorAll('img'));
+    let currentImage = 0;
+
+    console.log(images);
+
+    function showNextImage() {
+      images[currentImage].classList.remove('active');
+      currentImage = (currentImage + 1) % images.length;
+      images[currentImage].classList.add('active');
+    }
+
+    setInterval(showNextImage, 3000); // Cambiar la imagen cada 3 segundos (3000 milisegundos)
+  </script>
+  
+
+</div>

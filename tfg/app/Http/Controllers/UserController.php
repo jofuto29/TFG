@@ -117,7 +117,7 @@ class UserController extends Controller
                 $user->userName = $atributos['userName'];
                 $user->lastName = $atributos['lastName'];
                 $user->email = $atributos['email'];
-                $user->rol = 'client';
+                $user->rol = 'client'; //admin y employee
                 $user->phoneNumber = $atributos['phoneNumber'];
                 $user->pass = $psw;
                 $user->dni = $atributos['dni'];
@@ -292,5 +292,10 @@ class UserController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    public function changeRol()
+    {
+        //debse ser el administrador el unico que pueda realizar esta funcion
     }
 }

@@ -16,61 +16,107 @@
         <img src="./assets/img/rodal.png" class="d-inline-block align-top" alt="">
       </a>
     </div>
-    <div class ="button" >
-      <button class="menuToggle" (click)="toggleMenu()">☰</button>
-    </div>
+    
 
-    <!--Menu cliente/empleado, solo sera mostrado para el cliente o el empleado-->
-    <ul *ngIf="!identity || identity.rol !== 'admin'" class="menu" [ngClass]="{ 'unseen': isMenuOpen }">
+    <!--Menu Usuario no registrado-->
+    <button class="botonMenu" (click)="showMenu()">☰</button>
+    <!--<button class="botonMenu" (click)="showMenu()" (click)="hideMenu()">☰</button>-->
+
+    <ul *ngIf="!identity || identity.rol == ''" class="menu " [ngClass]="{ 'unseen': !isMenuVisible }">
       <li><a [routerLink]="['/inicio']">Inicio</a></li>
-      <li><a href="#">Vehículos de Ocasión</a></li>
+      <li><a href="#">Vehículos de ocasión</a></li>
       <li><a href="#">Conócenos</a></li>
-      <li *ngIf="identity"><a href="#">
-        {{ identity.user | capitalize }}
-      </a>
-        <ul class="submenu">
-          <li><a href="#">Vehículos</a></li>
-          <li><a href="#">Reservas</a></li>
-          <li><a href="#">Reparaciones</a></li>
-          <li><a href="#">Facturas</a></li>
-          <li><a [routerLink]="['/ajustes']">Ajustes</a></li>
-        </ul>
-      </li>
       <li *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
       <li *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
       <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
     </ul>
 
-    <!--Menu administrador, solo sera mostrado para el administrador-->
-    <ul *ngIf="identity && identity.rol === 'admin'" class="menu" [ngClass]="{ 'unseen': isMenuOpen }">
-      <li><a [routerLink]="['/inicio']">Usuarios</a></li>
-      <li><a href="#">Vehículos</a></li>
-      <li><a [routerLink]="['/productos']">Productos</a></li>
-      <li *ngIf="identity"><a href="#">
-        {{ identity.user | capitalize }}
-      </a>
-        <ul class="submenu">
+
+    <!--Menu Usuario empleado/cliente registrado-->
+    <ul *ngIf="identity && identity.rol != 'admin'" class="menu" [ngClass]="{ 'unseen': !isMenuVisible }">
+      <li><a [routerLink]="['/inicio']">Inicio</a></li>
+      <li class="submenu4" *ngIf="identity">
+        <a href="#">Operaciones</a>
+        <ul>
           <li><a href="#">Vehículos</a></li>
+          <li><a href="#">Promociones</a></li>
           <li><a href="#">Reservas</a></li>
           <li><a href="#">Reparaciones</a></li>
+        </ul>
+      </li>
+      <li *ngIf="identity && identity.rol == 'employee'" class="submenu4">
+        <a href="#">Gestión</a>
+        <ul>
+          <li><a href="#">Pagos</a></li>
+          <li><a href="#">Métodos de pago</a></li>
           <li><a href="#">Facturas</a></li>
+          <li><a [routerLink]="">Nóminas</a></li>
+        </ul>
+      </li>
+      <li *ngIf="identity && identity.rol == 'client'" class="submenu3">
+        <a href="#">Gestión</a>
+        <ul>
+          <li><a href="#">Pagos</a></li>
+          <li><a href="#">Métodos de pago</a></li>
+          <li><a href="#">Facturas</a></li>
+        </ul>
+      </li>
+      <li class="submenu1" *ngIf="identity">
+        <a href="#">{{ identity.user | capitalize }}</a>
+        <ul>
           <li><a [routerLink]="['/ajustes']">Ajustes</a></li>
         </ul>
       </li>
-      <li *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
-      <li *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
+      <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
+    </ul>
+
+    <!--Menu administrador, solo sera mostrado para el administrador-->
+    <ul *ngIf="identity && identity.rol == 'admin'" class="menu" [ngClass]="{ 'unseen': !isMenuVisible, 'seen': isMenuVisible }">
+      <li><a [routerLink]="['/inicio']">Inicio</a></li>
+      <li class="submenu3" *ngIf="identity">
+        <a href="#">Usuarios</a>
+        <ul>
+          <li><a href="#">Clientes</a></li>
+          <li><a href="#">Empleados</a></li>
+          <li><a href="#">Todos</a></li>
+        </ul>
+      </li>
+      <li class="submenu4" *ngIf="identity">
+        <a href="#">Operaciones</a>
+        <ul>
+          <li><a href="#">Reservas</a></li>
+          <li><a href="#">Reparaciones</a></li>
+          <li><a href="#">Vehículos</a></li>
+          <li><a href="#">Promociones</a></li>
+        </ul>
+      </li>
+      <li class="submenu4" *ngIf="identity">
+        <a href="#">Gestión</a>
+        <ul>
+          <li><a href="#">Servicios</a></li>
+          <li><a [routerLink]="['/productos']">Productos</a></li>
+          <li><a href="#">Proveedores</a></li>
+          <li><a href="#">Categorías</a></li>
+        </ul>
+      </li>
+      <li class="submenu5" *ngIf="identity">
+        <a href="#">Finanzas</a>
+        <ul>
+          <li><a href="#">Pagos</a></li>
+          <li><a href="#">Nóminas</a></li>
+          <li><a href="#">Métodos de pago</a></li>
+          <li><a href="#">Descuentos</a></li>
+          <li><a href="#">Facturas</a></li>
+        </ul>
+      </li>
       <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
     </ul>
   </nav>
 
   <div class="content">
-    
     <router-outlet></router-outlet><!--Muestra el componente asociado a la ruta que estamos mostrando-->
-
   </div>
 
-  <footer>
-    footer
-  </footer>
+  <!--cargaremos el footer aqui-->
 </body>
 </html>

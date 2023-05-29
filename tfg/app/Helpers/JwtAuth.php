@@ -20,8 +20,8 @@ class JwtAuth
     {
         //buscar si existe el usuario con sus credenciales
         $user = User::where([
-            'user' => "admin",
-            'pass' => "admin"
+            'user' => $usuario,
+            'pass' => $pass
         ])->first(); //consulta que comprueba si estos dos parametros existen
 
         //validar
