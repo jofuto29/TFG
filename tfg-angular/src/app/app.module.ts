@@ -12,6 +12,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ProductComponent } from './components/product/product.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ProductComponent } from './components/product/product.component';
     ErrorComponent,
     CapitalizePipe,
     UserEditComponent,
-    ProductComponent
+    ProductComponent,
+    FooterComponent,
+    ConocenosComponent
   ],
   imports: [
     BrowserModule,

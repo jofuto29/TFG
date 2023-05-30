@@ -1,18 +1,67 @@
+<header class="header">
+  <h1 class="title">AUTOMÓVILES RODAL</h1>
+</header>
 <div class="main">
 
-
-  <div class="titleDiv">
-    <h1 class="title">AUTOMOVILES RODAL</h1>
-  </div>
-  
   <div class="slider">
     <img alt="Imagen 1" *ngFor="let image of images; let i = index" [src]="image.src" [alt]="image.alt" [class.active]="i === currentImage">
   </div>
 
   <div class="content">
-    <h1>Tu taller con garantia y compromiso.</h1>
+    <h1>Tu taller con garantía y compromiso</h1>
     <p>Empresa con más de 30 años de trayectoria dedicada a la reparación, mantenimiento y venta de vehículos.</p>
   </div>
+
+  <div class='content-Section' style="display: flex;justify-content: center;">
+    <p class="title-section">Trabajamos por su tranquilidad</p>
+  </div>
+
+  <div class="content-Section">
+    <div class="section sectionText">
+      <p>En Automóviles Rodal, nos dedicamos a brindar un servicio integral de reparaciones y venta de vehículos, con el objetivo de garantizar su tranquilidad en 
+        todo momento.</p>
+
+      <p>Sabemos que su automóvil es una parte fundamental de su vida diaria, por lo que entendemos la importancia de mantenerlo en óptimas condiciones. 
+        Nuestro taller automovilístico cuenta con un equipo de profesionales altamente capacitados y experimentados en el sector, quienes se encargarán de 
+        brindarle un servicio de calidad y confianza.</p>
+
+      <p>En Automóviles Rodal, nos esforzamos por establecer relaciones duraderas con nuestros clientes, basadas en la confianza y la transparencia. 
+        Por eso, nos comprometemos a mantener una comunicación clara y accesible, explicándole de manera comprensible cualquier aspecto relacionado con 
+        su vehículo y las opciones disponibles.</p>
+    </div>
+    <div class="section sectionImg">
+      <img alt="Imagen 1" src="./assets/img/rodal1.png">
+    </div>
+  </div>
+  <br>
+
+  <div class="content-Section">
+    <div class="section sectionImg">
+      <img alt="Imagen 1" src="./assets/img/rodal1.png">
+    </div>
+
+    <div class="section sectionText">
+      <p>En cuanto a las reparaciones, nos esforzamos por diagnosticar y solucionar cualquier problema que pueda surgir en su vehículo de manera eficiente y efectiva. 
+        Trabajamos con las últimas herramientas y tecnologías para garantizar un trabajo preciso y duradero. Además, utilizamos repuestos de calidad, lo que nos 
+        permite ofrecerle una garantía en nuestras reparaciones.</p>
+
+      <p>Si está buscando adquirir un nuevo vehículo, en Automóviles Rodal también podemos ayudarle. Contamos con una amplia variedad de vehículos de diferentes
+         marcas y modelos, todos ellos sometidos a rigurosos controles de calidad para asegurar su buen estado. Nuestro equipo estará encantado de asesorarle y 
+         encontrar el automóvil que se ajuste a sus necesidades y preferencias.</p>
+    </div>
+  </div>
+  <br>
+
+  <div class="content-Section">
+    <div class="section01">
+      <img alt="Imagen 1" src="./assets/img/rodal1.png">
+    </div>
+
+    <div class="section02">
+      <p>Si desea conocer más sobre nuestros servicios, reparaciones o vehículos disponibles, le invitamos a visitar nuestra página web. Allí encontrará información detallada y podrá contactarnos a través del formulario de consulta. Estamos aquí para responder a todas sus inquietudes y ayudarle en todo lo que necesite.</p>
+      <a class="contact-button" href="contacto.html">Contáctenos</a>
+    </div>
+    <br>
 
   <script>
     // Script para cambiar automáticamente las imágenes del slider

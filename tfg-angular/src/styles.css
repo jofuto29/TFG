@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Estilos para el menú */
+/* Estilos generales */
 * {
   margin: 0;
   padding: 0;
@@ -9,66 +9,85 @@
 
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
   
 dl, ol, ul {
   margin-bottom: 0rem!important;
 }
 
+.contentMain{
+  margin: 0px 2%;
+  padding: 6% 2% 0 2%;
+  background-color: #f9f9f9;
+}
 
-  .content {
-    margin: 2%;
-  }
+/*Estilos generales contenido*/
 
-  .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    margin-top: 2.5rem!important;
-    margin-bottom: 2.5rem!important;
-    font-weight: 500;
-    line-height: 1.2;
-  }
-  
+.content h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-  table {
-    font-family: Arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin: 0;
-    text-align: center;
-  }
-  
-  th, td {
-    padding: 12px;
-    border: 1px solid black!important;
-  }
-  
-  th {
-    background-color: #E96348;
-    color: #fff;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  td:hover {
-    background-color: #ddd;
-  }
+.content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
 
-  h1 {
-    text-align: left;
-  }
+.content {
+
+  padding: 20px;
+  text-align: center;
+}
+
+
+/*Estilos generales tabla*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
   
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
+th, td {
+  padding: 12px;
+  border: 1px solid black!important;
+}
+  
+th {
+  background-color: #E96348;
+  color: #fff;
+}
+  
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+  
+td:hover {
+  background-color: #ddd;
+}
 
-  .unseen{
-    display: none!important;
-  }
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
 
-  .seen{
-    display: block;
-  }
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/*bloques vista*/
+
+.unseen{
+  display: none!important;
+}
+
+.seen{
+  display: block;
+}
   

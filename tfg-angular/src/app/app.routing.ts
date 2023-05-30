@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ProductComponent } from './components/product/product.component';
+import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 
 // Definir las rutas
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'ajustes', component: UserEditComponent},
   { path: 'productos', component: ProductComponent},
+  { path: 'conocenos', component: ConocenosComponent},
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];
 
