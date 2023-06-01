@@ -8,13 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit{
 
   public images: { src: string, alt: string }[] = [
-    { src: './assets/img/rodal.png', alt: 'Imagen 1' },
-    { src: './assets/img/rodal1.png', alt: 'Imagen 2' },
-    { src: './assets/img/rodal2.png', alt: 'Imagen 3' },
-    { src: './assets/img/rodal3.png', alt: 'Imagen 4' },
-    { src: './assets/img/rodal4.png', alt: 'Imagen 5' },
-    { src: './assets/img/rodal5.png', alt: 'Imagen 6' },
-    { src: './assets/img/rodal6.png', alt: 'Imagen 7' }
+    { src: './assets/img/slider01.jpg', alt: 'Imagen 1' },
+    { src: './assets/img/slider02.jpg', alt: 'Imagen 1' },
+    { src: './assets/img/slider03.jpg', alt: 'Imagen 1' },
+    { src: './assets/img/slider04.jpg', alt: 'Imagen 1' }
   ];
   public currentImage = 0;
 
@@ -27,12 +24,10 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     setInterval(() => {
       this.showNextImage();
-    }, 3000);
+    }, 4000);
   }
 
   showNextImage(): void {
     this.currentImage = (this.currentImage + 1) % this.images.length;
   }
-
-  
 }

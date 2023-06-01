@@ -21,6 +21,7 @@ dl, ol, ul {
   margin: 0px 2%;
   padding: 6% 2% 0 2%;
   background-color: #f9f9f9;
+  min-height: 1000px;
 }
 
 /*Estilos generales contenido*/
@@ -82,12 +83,38 @@ td:hover {
 }
 
 /*bloques vista*/
-
 .unseen{
   display: none!important;
 }
 
-.seen{
-  display: block;
-}
+/*.seen{
+  display: block!important;
+}*/
   
+@media (max-width: 1400px) {
+  .contentMain{
+    margin: 0px 4%;
+    padding: 10% 2% 0 2%;
+  }
+}
+
+@media (max-width: 850px) {
+  .contentMain{
+    margin: 0px 4%;
+    padding: 15% 2% 0 2%;
+  }
+}
+
+@media (max-width: 550px) {
+  .contentMain{
+    margin: 0px 4%;
+    padding: 20% 2% 0 2%;
+  }
+}
+
+@media (max-width: 450px) {
+  .contentMain{
+    margin: 0px 4%;
+    padding: 25% 2% 0 2%;
+  }
+}

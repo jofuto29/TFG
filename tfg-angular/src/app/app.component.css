@@ -59,6 +59,8 @@
   text-decoration: none;
   color: black;
   font-weight: bold;
+  width: 100%;
+  height: 27px;
 }
 
 .menu li:hover{
@@ -80,7 +82,7 @@
 }
 
 .menu li ul li {
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 }
 
 .botonMenu {
@@ -105,7 +107,7 @@
     flex-direction: column;
     width: 100%;
     position: absolute;
-    top: 120px;
+    top: 100px;
     left: -5px;
   }
 
@@ -136,14 +138,6 @@
   .menu li ul{
     width: 100%;
     left: 0;
-  }
-
-  .seen{
-    display: none!important;
-  }
-
-  .unseen{
-    display: block!important;
   }
 }
 

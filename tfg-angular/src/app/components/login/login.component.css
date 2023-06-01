@@ -1,0 +1,12 @@
+.loginContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4%;
+}
+
+.butonLogin{
+    display: flex;
+    justify-content: center;
+    padding: 4%;
+}
