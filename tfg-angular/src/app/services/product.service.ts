@@ -34,4 +34,25 @@ export class productService {
         return this._http.get(this.url+url, {headers: headers});
     }
 
+    updateProduct(){
+
+    }
+
+    deleteProduct(id_product: number, url:string, token:any){
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded').set('Authorization',token);
+        return this._http.delete(this.url + url + id_product, {headers: headers});
+    }
+
+    registerProduct(token:any, url:string, object:any): Observable<any>{
+        let json = JSON.stringify(object);
+        let params = 'json='+json;
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded').set('Authorization',token);
+
+        return this._http.post(this.url + url, params, {headers: headers});
+    }
+
+    getProduct(){
+        
+    }
+
 }

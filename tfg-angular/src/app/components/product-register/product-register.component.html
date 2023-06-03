@@ -1,0 +1,118 @@
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Registrata un nuevo producto para el taller</h1>
+
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+        El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+        El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerProductForm="ngForm" (ngSubmit)="onSubmit(registerProductForm)">
+
+        <div class="form-group">
+          <label for="supplier">Proveedor:</label>
+          <input type="text" name="supplier" id="supplier" placeholder="¿Proveedor?" class="form-control"
+            #id_supplier="ngModel" [(ngModel)]="productData.id_supplier" required pattern="^[0-9]+$">
+          <small *ngIf="!id_supplier.valid && id_supplier.touched" class="invalid-feedback d-block">
+            supplier no es valido
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="category">Categoría:</label>
+          <input type="text" name="category" id="category" placeholder="¿Categoría?" class="form-control"
+            #id_category="ngModel" [(ngModel)]="productData.id_category" required pattern="^[0-9]+$">
+          <small *ngIf="!id_category.valid && id_category.touched" class="invalid-feedback d-block">
+            Categoría no es válida
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="productName">Nombre del producto:</label>
+          <input type="text" name="productName" id="productName" placeholder="¿Nombre del producto?" class="form-control"
+            #productName="ngModel" [(ngModel)]="productData.productName" required
+            pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+          <small *ngIf="!productName.valid && productName.touched" class="invalid-feedback d-block">
+            Nombre del producto no es válido
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="description">Descripción:</label>
+          <textarea name="description" id="description" placeholder="¿Descripción?" class="form-control"
+            #description="ngModel" [(ngModel)]="productData.description" required
+            pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
+          <small *ngIf="!description.valid && description.touched" class="invalid-feedback d-block">
+            Descripción no es válida
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="price">Precio:</label>
+          <input type="number" name="price" id="price" placeholder="¿Precio?" class="form-control"
+            #price="ngModel" [(ngModel)]="productData.price" required>
+          <small *ngIf="!price.valid && price.touched" class="invalid-feedback d-block">
+            Precio no es válido
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="stock">Stock:</label>
+          <input type="number" name="stock" id="stock" placeholder="¿Stock?" class="form-control"
+            #stock="ngModel" [(ngModel)]="productData.stock" required min="0">
+          <small *ngIf="!stock.valid && stock.touched" class="invalid-feedback d-block">
+            Stock no es válido
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="marca">Marca:</label>
+          <input type="text" name="marca" id="marca" placeholder="¿Nombre de la marca?" class="form-control"
+            #productName="ngModel" [(ngModel)]="productData.marca"
+            pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+          <small *ngIf="!productName.valid && productName.touched" class="invalid-feedback d-block">
+            Nombre de la marca no valido
+          </small>
+        </div>
+
+        <div class="form-group">
+            <label for="admisionDate">Fecha de admisión:</label>
+            <input type="date" name="admisionDate" id="admisionDate" class="form-control"
+              #admisionDate="ngModel" [(ngModel)]="productData.admisionDate" required>
+            <small *ngIf="!admisionDate.valid && admisionDate.touched" class="invalid-feedback d-block">
+              Fecha de admisión no es válida
+            </small>
+          </div>
+        
+          <div class="form-group">
+            <label for="expiryDate">Fecha de vencimiento:</label>
+            <input type="date" name="expiryDate" id="expiryDate" class="form-control"
+              #expiryDate="ngModel" [(ngModel)]="productData.expiryDate" required [min]="productData.admisionDate">
+            <small *ngIf="!expiryDate.valid && expiryDate.touched" class="invalid-feedback d-block">
+              Fecha de vencimiento no es válida
+            </small>
+          </div>
+        
+          <div class="form-group">
+            <label for="location">Ubicación:</label>
+            <input type="text" name="location" id="location" placeholder="¿Ubicación?" class="form-control"
+              #location="ngModel" [(ngModel)]="productData.location" required>
+            <small *ngIf="!location.valid && location.touched" class="invalid-feedback d-block">
+              Ubicación no es válida
+            </small>
+          </div>
+        
+          <div class="form-group">
+            <label for="imgProduct">Subir imagen</label>
+            <input type="file" name="imageProduct" id="imgProduct" placeholder="¿Ubicación?" class="form-control" (change)="subirFile($event)">
+          </div>
+
+          <div class="buttonAdmin form-group">
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerProductForm.invalid">
+            <!--no dejamos enviar-->
+          </div>
+        </form>
+</div>
+

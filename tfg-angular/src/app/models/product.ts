@@ -14,7 +14,8 @@ export class product{
         public location: string,
         public img: string,
         public created_at: any,
-        public updated_at:any
+        public updated_at:any,
+        public marca:any
     ){
     }
 }

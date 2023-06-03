@@ -13,6 +13,10 @@ body {
   padding: 0;
 }
   
+ol, ul {
+  padding-left: 1rem!important;
+}
+
 dl, ol, ul {
   margin-bottom: 0rem!important;
 }
@@ -50,13 +54,11 @@ dl, ol, ul {
 }
 
 .content {
-
   padding: 20px;
   text-align: center;
 }
 
-
-/*Estilos generales tabla*/
+/*Estilos generales tabla --> Panel admin*/
 table {
   border-collapse: collapse;
   width: 100%;
@@ -85,8 +87,79 @@ td:hover {
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 1%;
 }
+
+.headerAdmin{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 2% 0;
+}
+
+.button{
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px #E96348;
+  position: relative;
+  min-width: 15%;
+  background-color: #f1f1f1;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #f1f1f1;
+  border-radius: 15px;
+}
+
+.button a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    height: 27px;
+    text-align: center;
+}
+
+.button a:hover{
+  box-shadow: 0 4px 15px rgb(245, 160, 160);
+  color: black;
+}
+
+.icon a{
+  color: black;
+}
+
+td:hover .icon{
+  color: red;
+}
+
+.adminComponent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4%;
+}
+
+.form-group{
+  padding: 2% 0;
+}
+
+.buttonAdmin{
+  display: flex;
+  justify-content: center;
+}
+
+.buttonAdmin input{
+  width: 30%;
+}
+
+tbody tr td img{
+  width: 100px;
+  height: 100px;
+}
+
+/*footer*/
 
 .footer {
   background-color: #333;
@@ -115,6 +188,10 @@ td:hover {
   
   .seen{
     display: none!important;
+  }
+
+  ol, ul {
+    padding-left: 2rem!important;
   }
 }
 

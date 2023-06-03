@@ -4,6 +4,9 @@ import { UserService } from 'src/app/services/user.service';
 import { productService } from 'src/app/services/product.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-product',
@@ -15,6 +18,7 @@ export class ProductComponent implements OnInit {
   public token: any;
   public identity: any;
   public productos: any[] = []; // Array para almacenar los productos
+  public sanitizedImageUrls: { [key: string]: any } = {};
 
   constructor(
     private _userService: UserService,
@@ -35,6 +39,8 @@ export class ProductComponent implements OnInit {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
         console.log(response);
         this.productos = [...response.$model]; // Asignar la respuesta al array de productos
+        this.getUrlsImage();
+        console.log(this.sanitizedImageUrls);
       },
       (error) => {
         // Manejar el error aquí
@@ -48,12 +54,38 @@ export class ProductComponent implements OnInit {
     this.token = this._userService.getToken();
   }
 
-  updateProduct(productId: number) {
-    // Lógica para actualizar el producto con el ID proporcionado
-  }
-  
   deleteProduct(productId: number) {
     // Lógica para eliminar el producto con el ID proporcionado
+    console.log(productId);
+    this._productService.deleteProduct(productId,'product/',this.token).subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        console.log(response);
+        window.location.reload();
+      },
+      (error) => {
+        // Manejar el error aquí
+        console.error(error);
+      }
+    );
+  }
+
+  /*no funcionaba porque se ejecutan asincronamente, subscribe hace que el valor espera a que tenga la resupeusa*/
+  getUrlsImage(){
+    for (const producto of this.productos) {
+      this.getImage(producto.img).subscribe((result: SafeUrl) => {
+        this.sanitizedImageUrls[producto.img] = result;
+      });
+    }
+  }
+
+  getImage(name:string): Observable<any>{
+    return this._userService.getImage(this.token, 'product/getImage/', name).pipe(//tranformamos el observable que es lo que devolemos, el src de la imagen cargada
+      map((response: Blob) => {//dentro de map se tranforma la respuesta de tipo blob en una url segura 
+        const objectUrl = URL.createObjectURL(response);
+        return this.sanitizer.bypassSecurityTrustUrl(objectUrl);//devolvemos a pipe una url segura
+      }),
+    );
   }
 }
 

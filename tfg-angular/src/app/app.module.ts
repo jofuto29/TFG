@@ -14,6 +14,8 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ProductComponent } from './components/product/product.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
+import { ProductRegisterComponent } from './components/product-register/product-register.component';
+import { ProductUpdateComponent } from './components/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
     UserEditComponent,
     ProductComponent,
     FooterComponent,
-    ConocenosComponent
+    ConocenosComponent,
+    ProductRegisterComponent,
+    ProductUpdateComponent
   ],
   imports: [
     BrowserModule,

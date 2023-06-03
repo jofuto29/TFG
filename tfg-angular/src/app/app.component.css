@@ -69,21 +69,22 @@
 }
 
 .menu li ul {
-    position: absolute;
-    top: 100%;
-    left: -45px;
-    display: none;
-    padding-top: 10px;
-    min-width: 275px;
+  position: absolute;
+  top: 100%;
+  display: none;
+  padding-top: 5px;
+  align-items: center;
 }
 
 .menu li:hover ul {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
-.menu li ul li {
-  margin-bottom: 1px;
+.menu li ul li{
+  width: 200px;
 }
+
 
 .botonMenu {
   display: none;
@@ -116,28 +117,32 @@
   }
 
   .menu .submenu5:hover{
-    margin-bottom: 225px;
+    margin-bottom: 190px;
   }
 
   .menu .submenu4:hover{
-    margin-bottom: 180px;
+    margin-bottom: 152px;
   }
 
   .menu .submenu3:hover{
-    margin-bottom: 135px;
+    margin-bottom: 114px;
   }
 
   .menu .submenu2:hover{
-    margin-bottom: 90px;
+    margin-bottom: 76px;
   }
 
   .menu .submenu1:hover{
-    margin-bottom: 45px;
+    margin-bottom: 38px;
   }
 
   .menu li ul{
     width: 100%;
     left: 0;
+  }
+
+  .menu li ul li{
+    width: 100%;
   }
 }
 

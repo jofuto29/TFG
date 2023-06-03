@@ -19,10 +19,11 @@ class crud
             'description'   => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'price'         => 'required|numeric',
             'stock'         => 'required|integer|min:0',
+            'marca'         => 'regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'admisionDate'  => 'required|date',
             'expiryDate'    => 'required|date|after:admisionDate',
             'location'      => 'required|string',
-            'img'           => 'required'
+            'img'           => 'string'
         ],
         'categories' => [
             'categoryName'  => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:categories',
@@ -195,6 +196,8 @@ class crud
 
     /**
      * Funcion para actualizar un registro
+     * 
+     * todo required dado que el formulario se rellanara con los datos del objeto a actualizar, y el suaurio solo debera cambiar aquellosq ue quiere actualizar
      */
     public function update($params, $table, $object, $id, $key)
     {
@@ -211,10 +214,11 @@ class crud
                     'description'   => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'price'         => 'required|numeric',
                     'stock'         => 'required|integer|min:0',
+                    'marca'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'admisionDate'  => 'required|date',
                     'expiryDate'    => 'required|date|after:admisionDate',
                     'location'      => 'required|string',
-                    'img'           => 'required'
+                    'img'           => 'required|string'
                 ];
             } elseif ($table === 'categories') {
                 $validationRules = [

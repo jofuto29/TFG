@@ -45,9 +45,6 @@ export class RegisterComponent {
           console.log(<any>error);
         }
       );
-      //console.log(this.userData);
-      //form.reset();//vacia el formulario enviado, pero raro porque al abrir el json esta vacio {Revisar}
     }
 }
 
-/*nos permitira crear un modelo, el modelo que sea, y llamar metedos del servicio, es la calse enlace*/

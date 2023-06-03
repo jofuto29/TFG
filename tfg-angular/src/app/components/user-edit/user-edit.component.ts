@@ -90,7 +90,6 @@ export class UserEditComponent implements OnInit{
         console.error(error);
       }
     );
-
   }
 
   getImage(){
