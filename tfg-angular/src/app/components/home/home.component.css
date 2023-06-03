@@ -131,6 +131,10 @@
   object-fit: contain;
 }
 
+.pear{
+  display: none;
+}
+
 @media (max-width: 1400px) {
   .slider{
     height: 350px;
@@ -194,5 +198,18 @@
 
   .contact-button{
     width: 45%;
+  }
+
+  .disapear{
+    display: none;
+  }
+
+  .pear{
+    display: flex;
+    justify-content: center;
+  }
+
+  .pear img{
+    width: 225px;
   }
 }

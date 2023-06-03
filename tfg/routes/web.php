@@ -83,6 +83,7 @@ Route::get('/category/prueba', 'App\Http\Controllers\categoryController@prueba')
 //Rutas controlador de usuarios
 Route::post('/user/register', 'App\Http\Controllers\UserController@register'); //estas ruta no se pueden acceder directamente con url, es decir necesitamos formulario 
 Route::post('/user/login', 'App\Http\Controllers\UserController@login');
+Route::post('/user/sendMail', 'App\Http\Controllers\UserController@sendMail');
 Route::put('/user/update', 'App\Http\Controllers\UserController@update'); //put se utiliza para actualizar datos
 Route::get('/user/detailsUser/{id}', 'App\Http\Controllers\UserController@detailsUser');
 Route::delete('/user/deleteUser/{id}', 'App\Http\Controllers\UserController@deleteUser');

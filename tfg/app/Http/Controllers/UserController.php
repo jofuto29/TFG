@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+require 'C:\wamp64\www\ServidorPruebasTFG\tfg\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Exception;
+use GuzzleHttp\Psr7\Message;
+use PHPMailer\PHPMailer\PHPMailer;
+
+
 
 class UserController extends Controller
 {
-
     /**
      * Funcion de prueba para porbar la ruta del controlador
      */
@@ -22,7 +28,7 @@ class UserController extends Controller
      */
     public function __construct() //cargamos el middleware aqui en vez de en rutas dado que no queremos que todos los metodos tengan el middleware aplicado
     {
-        $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['register', 'login']]);
+        $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['register', 'login', 'sendMail']]);
     }
 
     /**
@@ -297,5 +303,49 @@ class UserController extends Controller
     public function changeRol()
     {
         //debse ser el administrador el unico que pueda realizar esta funcion
+    }
+
+    /*
+        POST: http://tfg.com.devel/user/sendMail
+        {"name":"jose",
+        "message":"desempleado",
+        "email":"ypo@yo"}
+    */
+    public function sendMail(Request $request)
+    {
+        $json = $request->input('json', null);
+        $atributos = json_decode($json, true); //array
+        $nombre = $atributos['name'];
+        $email = $atributos['email'];
+        $message = $atributos['message'];
+
+        $mail = new PHPMailer();
+
+        try {
+
+            // Configurar el servidor SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Cambia esto con la configuración de tu servidor SMTP
+            $mail->SMTPAuth = true;
+            $mail->Username = 'clientessoporterodalrodal@gmail.com';  // Tu dirección de correo electrónico
+            $mail->Password = '9517532684a';  // Tu contraseña de correo electrónico
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            // Configurar el remitente y el destinatario
+            $mail->setFrom($email, $nombre);
+            $mail->addAddress('jofuto29@gmail.com');  // Dirección de correo electrónico del destinatario
+
+            // Configurar el contenido del correo electrónico
+            $mail->Subject = 'Mensaje de contacto';
+            $mail->Body = $message;
+
+            // Enviar el correo electrónico
+            $mail->send();
+
+            return response()->json(['message' => 'Correo electrónico enviado correctamente', 'nombre' => $nombre, 'mesajeFrom' => $message], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Correo electrónico no se pudo enviar correctamente', 'error e' => $e], 500);
+        }
     }
 }

@@ -22,94 +22,94 @@
     <button class="botonMenu" (click)="showMenu()">☰</button>
     <!--<button class="botonMenu" (click)="showMenu()" (click)="hideMenu()">☰</button>-->
 
-    <ul *ngIf="!identity || identity.rol == ''" class="menu " [ngClass]="{ 'unseen': !isMenuVisible }">
-      <li><a [routerLink]="['/inicio']">Inicio</a></li>
-      <li><a href="#">Vehículos de ocasión</a></li>
-      <li><a href="#">Conócenos</a></li>
-      <li *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
-      <li *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
-      <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
+    <ul *ngIf="!identity || identity.rol == ''" class="menu " [ngClass]="{ 'unseen': !isMenuVisible, 'seen': isMenuVisible }">
+      <li (click)="disapear()"><a [routerLink]="['/inicio']">Inicio</a></li>
+      <li (click)="disapear()"><a href="#">Vehículos de ocasión</a></li>
+      <li (click)="disapear()"><a [routerLink]="['/conocenos']">Conócenos</a></li>
+      <li (click)="disapear()" *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
+      <li (click)="disapear()" *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
+      <li (click)="disapear()" *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
     </ul>
 
 
     <!--Menu Usuario empleado/cliente registrado-->
-    <ul *ngIf="identity && identity.rol != 'admin'" class="menu" [ngClass]="{ 'unseen': !isMenuVisible }">
-      <li><a [routerLink]="['/inicio']">Inicio</a></li>
+    <ul *ngIf="identity && identity.rol != 'admin'" class="menu" [ngClass]="{ 'unseen': !isMenuVisible, 'seen': isMenuVisible }">
+      <li (click)="disapear()" ><a [routerLink]="['/inicio']">Inicio</a></li>
       <li class="submenu4" *ngIf="identity">
         <a href="#">Operaciones</a>
         <ul>
-          <li><a href="#">Vehículos</a></li>
-          <li><a href="#">Promociones</a></li>
-          <li><a href="#">Reservas</a></li>
-          <li><a href="#">Reparaciones</a></li>
+          <li (click)="disapear()"><a href="#">Vehículos</a></li>
+          <li (click)="disapear()"><a href="#">Promociones</a></li>
+          <li (click)="disapear()"><a href="#">Reservas</a></li>
+          <li (click)="disapear()"><a href="#">Reparaciones</a></li>
         </ul>
       </li>
       <li *ngIf="identity && identity.rol == 'employee'" class="submenu4">
         <a href="#">Gestión</a>
         <ul>
-          <li><a href="#">Pagos</a></li>
-          <li><a href="#">Métodos de pago</a></li>
-          <li><a href="#">Facturas</a></li>
-          <li><a [routerLink]="">Nóminas</a></li>
+          <li (click)="disapear()"><a href="#">Pagos</a></li>
+          <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
+          <li (click)="disapear()"><a href="#">Facturas</a></li>
+          <li (click)="disapear()"><a [routerLink]="">Nóminas</a></li>
         </ul>
       </li>
       <li *ngIf="identity && identity.rol == 'client'" class="submenu3">
         <a href="#">Gestión</a>
         <ul>
-          <li><a href="#">Pagos</a></li>
-          <li><a href="#">Métodos de pago</a></li>
-          <li><a href="#">Facturas</a></li>
+          <li (click)="disapear()"><a href="#">Pagos</a></li>
+          <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
+          <li (click)="disapear()"><a href="#">Facturas</a></li>
         </ul>
       </li>
       <li class="submenu1" *ngIf="identity">
         <a href="#">{{ identity.user | capitalize }}</a>
         <ul>
-          <li><a [routerLink]="['/ajustes']">Ajustes</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/ajustes']">Ajustes</a></li>
         </ul>
       </li>
-      <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
+      <li (click)="disapear()" *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
     </ul>
 
     <!--Menu administrador, solo sera mostrado para el administrador-->
     <ul *ngIf="identity && identity.rol == 'admin'" class="menu" [ngClass]="{ 'unseen': !isMenuVisible, 'seen': isMenuVisible }">
-      <li><a [routerLink]="['/inicio']">Inicio</a></li>
+      <li (click)="disapear()" ><a [routerLink]="['/inicio']">Inicio</a></li>
       <li class="submenu3" *ngIf="identity">
         <a href="#">Usuarios</a>
         <ul>
-          <li><a href="#">Clientes</a></li>
-          <li><a href="#">Empleados</a></li>
-          <li><a href="#">Todos</a></li>
+          <li (click)="disapear()"><a href="#">Clientes</a></li>
+          <li (click)="disapear()"><a href="#">Empleados</a></li>
+          <li (click)="disapear()"><a href="#">Todos</a></li>
         </ul>
       </li>
       <li class="submenu4" *ngIf="identity">
         <a href="#">Operaciones</a>
         <ul>
-          <li><a href="#">Reservas</a></li>
-          <li><a href="#">Reparaciones</a></li>
-          <li><a href="#">Vehículos</a></li>
-          <li><a href="#">Promociones</a></li>
+          <li (click)="disapear()"><a href="#">Reservas</a></li>
+          <li (click)="disapear()"><a href="#">Reparaciones</a></li>
+          <li (click)="disapear()"><a href="#">Vehículos</a></li>
+          <li (click)="disapear()"><a href="#">Promociones</a></li>
         </ul>
       </li>
       <li class="submenu4" *ngIf="identity">
         <a href="#">Gestión</a>
         <ul>
-          <li><a href="#">Servicios</a></li>
-          <li><a [routerLink]="['/productos']">Productos</a></li>
-          <li><a href="#">Proveedores</a></li>
-          <li><a href="#">Categorías</a></li>
+          <li (click)="disapear()"><a href="#">Servicios</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/productos']">Productos</a></li>
+          <li (click)="disapear()"><a href="#">Proveedores</a></li>
+          <li (click)="disapear()"><a href="#">Categorías</a></li>
         </ul>
       </li>
       <li class="submenu5" *ngIf="identity">
         <a href="#">Finanzas</a>
         <ul>
-          <li><a href="#">Pagos</a></li>
-          <li><a href="#">Nóminas</a></li>
-          <li><a href="#">Métodos de pago</a></li>
-          <li><a href="#">Descuentos</a></li>
-          <li><a href="#">Facturas</a></li>
+          <li (click)="disapear()"><a href="#">Pagos</a></li>
+          <li (click)="disapear()"><a href="#">Nóminas</a></li>
+          <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
+          <li (click)="disapear()"><a href="#">Descuentos</a></li>
+          <li (click)="disapear()"><a href="#">Facturas</a></li>
         </ul>
       </li>
-      <li *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
+      <li (click)="disapear()" *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>
     </ul>
   </nav>
 

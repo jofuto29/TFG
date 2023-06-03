@@ -47,10 +47,15 @@ export class LoginComponent {
               console.log(this.identity.token.user);//pq viene dentro de token
               console.log(this.token.token);
 
-              //guardamos en el navegador para persitir los datos de sesion
-              localStorage.setItem('token', this.token.token);
-              localStorage.setItem('identity', JSON.stringify(this.identity.token));
-
+              if(this.identity.token.status == "error"){
+                console.log("login incorrecto");
+                this.identity = null; //vaciamos tambien los parametros
+                this.token = null;
+              }else{
+                //guardamos en el navegador para persitir los datos de sesion
+                localStorage.setItem('token', this.token.token);
+                localStorage.setItem('identity', JSON.stringify(this.identity.token));
+              }
               //redireccion a la pagina principal O administracion dependiendo del logeo
               this._router.navigate(['inicio']);
             },

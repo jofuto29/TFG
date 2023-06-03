@@ -3,8 +3,12 @@
 </header>
 <div class="main">
 
-  <div class="slider">
+  <div class="slider disapear">
     <img alt="Imagen 1" *ngFor="let image of images; let i = index" [src]="image.src" [alt]="image.alt" [class.active]="i === currentImage">
+  </div>
+
+  <div class="pear">
+    <img alt="imagen" src="./assets/img/rodal.png">
   </div>
 
   <div class="content">
@@ -63,7 +67,7 @@
     <div class="section03">
       <p>Nos complace invitarlos a unirse a la emocionante aplicación de automóviles Rodal, donde podrán disfrutar de una experiencia única en el mundo del transporte sobre ruedas.</p>
       <p>¡Te esperamos en la aplicación de automóviles Rodal! ¡Descárgala hoy mismo y comienza a disfrutar de todas las ventajas que ofrecemos!</p>
-      <a class="contact-button" href="">Registrate</a>
+      <a class="contact-button" [routerLink]="['/register']" >Registrate</a>
     </div>
     
   <script>

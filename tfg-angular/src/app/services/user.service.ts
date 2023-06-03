@@ -101,4 +101,10 @@ export class UserService {
         return this._http.get(this.url+url+nombre, {headers: headers, responseType: 'blob'})
     }
 
+    sendMail(mail:any){
+        let params = "json=" + mail;
+
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
+        return this._http.post(this.url+'user/sendMail', params, {headers: headers});
+    }
 }

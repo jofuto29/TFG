@@ -31,12 +31,16 @@ export class AppComponent implements OnInit, DoCheck{
   }
 
   loadUser(){
-    this.identity = this._userService.getIdentity();
-    this.token  = this._userService.getToken();
+      this.identity = this._userService.getIdentity();
+      this.token  = this._userService.getToken();
   }
 
   showMenu() {
     this.isMenuVisible = !this.isMenuVisible;
+  }
+
+  disapear(){
+    this.isMenuVisible = true;
   }
 
 }

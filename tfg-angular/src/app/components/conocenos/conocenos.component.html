@@ -1,1 +1,89 @@
-<p>conocenos works!</p>
+<br>
+<header class="header">
+    <h1 class="title">AUTOMÓVILES RODAL</h1>
+</header>
+<div class="contentKnow">
+    <div class="presentacion">
+        <section>
+            <h2>Conócenos</h2>
+            <br><br>
+            <p>¡Bienvenido a Automóviles Rodal! Somos un taller especializado en el mantenimiento y reparación de vehículos. Nuestro equipo de expertos mecánicos está listo para brindarte un servicio de calidad y atención personalizada.</p>
+            <br>
+            <p>En Automóviles Rodal nos enorgullece ofrecer soluciones eficientes y confiables para mantener tu vehículo en óptimas condiciones. Contamos con la última tecnología en equipos y herramientas de diagnóstico, lo que nos permite detectar y solucionar rápidamente cualquier problema que pueda presentar tu automóvil.</p>
+            <br>
+            <p>Nuestros servicios incluyen mantenimiento preventivo, reparaciones mecánicas, cambio de aceite, revisión de frenos, alineación y balanceo de ruedas, entre otros. Trabajamos con todo tipo de vehículos, desde automóviles de pasajeros hasta camionetas y SUVs.</p>
+            <br>
+            <p>Estamos comprometidos con la satisfacción total de nuestros clientes y nos esforzamos por ofrecer un servicio amable, transparente y a precios competitivos. Nos encantaría atenderte y ayudarte a mantener tu vehículo en excelentes condiciones. ¡Visítanos hoy mismo!</p>
+          </section>
+    </div>
+
+    <div class="contacto">
+        
+        <div class="info-item">
+          <h2>Ubicación</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3091.932269527043!2d-0.43584902356149485!3d39.19898772885204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd61b1ca484a150d%3A0x20b4cb804a65999d!2sC.%20Valencia%2C%20222%2C%2046680%20Algemes%C3%AD%2C%20Valencia!5e0!3m2!1ses!2ses!4v1685728329570!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <br>
+        <section class="contactInfo">
+            <div class="info-item">
+              <p><i class="fas fa-map-marker-alt"></i>Dirección</p>
+              <p> Calle Valencia, 222, 46680 </p>
+            </div>
+        
+            <div class="info-item">
+              <p><i class="fas fa-phone-alt"></i> Móvil</p>
+              <p>638 27 83 48</p>
+            </div>
+        
+            <div class="info-item">
+              <p><i class="far fa-envelope"></i> Correo electrónico</p>
+              <p>maribelautorodal@gmail.com</p>
+            </div>
+
+            <div class="info-item">
+                <p id="horario"><i class="fas fa-clock"></i> {{horarioTexto}}</p>
+                <p>8:00/13:00--15:00/19:00</p>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<div class="sendMail">
+    <h2>Si tienes alguna duda o sugerencia, envianos un correo.<h2>
+    </h2>Te reponderemos lo mas breve posible</h2>
+    <form class="col-md-5" #sendMail="ngForm" (ngSubmit)="onSubmit(sendMail)">
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" name="name" id="name" placeholder="¿Cuál es tu nombre?" class="form-control"
+            [(ngModel)]="formData.name" required pattern="[a-zA-Z]+">
+        <small *ngIf="!formData.name && sendMail.controls['name'] && sendMail.controls['name'].touched" class="invalid-feedback d-block">
+            Introduzca un nombre real
+        </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="email">Correo Electrónico:</label>
+          <input type="email" name="email" id="email" placeholder="¿Cuál es tu correo electrónico?" class="form-control"
+            [(ngModel)]="formData['email']" required email>
+          <small *ngIf="!formData.email && sendMail.controls['email'] && sendMail.controls['email'].touched" class="invalid-feedback d-block">
+            Introduce un correo electrónico válido.
+          </small>
+        </div>
+      
+        <div class="form-group">
+          <label for="message">Mensaje:</label>
+          <textarea name="message" id="message" placeholder="¿Cuál es el problema o mensaje que quieres enviar?"
+            class="form-control" [(ngModel)]="formData['message']" required></textarea>
+          <small *ngIf="!formData.message && sendMail.controls['message'] && sendMail.controls['message'].touched"
+            class="invalid-feedback d-block">
+            Introduce un mensaje.
+          </small>
+        </div>
+      
+        <div class="butonSendMail form-group">
+          <input type="submit" value="Enviar correo" class="btn btn-success" [disabled]="sendMail.invalid">
+        </div>
+      </form>
+</div>
+

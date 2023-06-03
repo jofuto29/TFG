@@ -24,6 +24,19 @@ dl, ol, ul {
   min-height: 1000px;
 }
 
+.title {
+  width: 100%;
+  text-align: center;
+  background-color: #E96348;
+  color: white;
+  padding: 10px; /* Agrega un poco de espacio interno alrededor del título */
+  font-size: 24px; /* Ajusta el tamaño de fuente según tus preferencias */
+  font-weight: bold; /* Resalta el título en negrita */
+  text-transform: uppercase; /* Convierte el texto en mayúsculas */
+  border-radius: 5px; /* Agrega bordes redondeados al título */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil al título */
+}
+
 /*Estilos generales contenido*/
 
 .content h1 {
@@ -87,14 +100,21 @@ td:hover {
   display: none!important;
 }
 
-/*.seen{
-  display: block!important;
-}*/
-  
+
 @media (max-width: 1400px) {
   .contentMain{
     margin: 0px 4%;
     padding: 10% 2% 0 2%;
+  }
+}
+
+@media (max-width: 1250px) {
+  .unseen{
+    display: block!important;
+  }
+  
+  .seen{
+    display: none!important;
   }
 }
 
@@ -117,4 +137,5 @@ td:hover {
     margin: 0px 4%;
     padding: 25% 2% 0 2%;
   }
+
 }
