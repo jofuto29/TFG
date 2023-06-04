@@ -78,22 +78,22 @@
         </div>
 
         <div class="form-group">
-            <label for="admisionDate">Fecha de admisión:</label>
-            <input type="date" name="admisionDate" id="admisionDate" class="form-control"
-              #admisionDate="ngModel" [(ngModel)]="productData.admisionDate" required>
-            <small *ngIf="!admisionDate.valid && admisionDate.touched" class="invalid-feedback d-block">
-              Fecha de admisión no es válida
-            </small>
-          </div>
+          <label for="admisionDate">Fecha de admisión:</label>
+          <input type="datetime-local" name="admisionDate" id="admisionDate" class="form-control"
+            #admisionDate="ngModel" [(ngModel)]="productData.admisionDate" required>
+          <small *ngIf="!admisionDate.valid && admisionDate.touched" class="invalid-feedback d-block">
+            Fecha de admisión no es válida
+          </small>
+        </div>
         
-          <div class="form-group">
-            <label for="expiryDate">Fecha de vencimiento:</label>
-            <input type="date" name="expiryDate" id="expiryDate" class="form-control"
-              #expiryDate="ngModel" [(ngModel)]="productData.expiryDate" required [min]="productData.admisionDate">
-            <small *ngIf="!expiryDate.valid && expiryDate.touched" class="invalid-feedback d-block">
-              Fecha de vencimiento no es válida
-            </small>
-          </div>
+        <div class="form-group">
+          <label for="expiryDate">Fecha de vencimiento:</label>
+          <input type="datetime-local" name="expiryDate" id="expiryDate" class="form-control"
+            #expiryDate="ngModel" [(ngModel)]="productData.expiryDate" required [min]="productData.admisionDate">
+          <small *ngIf="!expiryDate.valid && expiryDate.touched" class="invalid-feedback d-block">
+            Fecha de vencimiento no es válida
+          </small>
+        </div>
         
           <div class="form-group">
             <label for="location">Ubicación:</label>

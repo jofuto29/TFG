@@ -1,0 +1,38 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de categorías registradas</h1>
+      <span class="button"><a [routerLink]="['/addCategory']"> Añadir categoría </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>id_category</th>
+            <th>Nombre categoría</th>
+            <th>Descripción</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{ category.id_category }}</td>
+            <td>{{ category.categoryName }}</td>
+            <td>{{ category.description }}</td>
+            <td [routerLink]="['/updateCategory']" [queryParams]="{ id: category.id_category }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteCategory(category.id_category)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

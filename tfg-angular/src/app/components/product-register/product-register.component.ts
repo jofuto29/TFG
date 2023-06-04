@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { product } from '../../models/product';
-import { productService } from 'src/app/services/product.service';
-import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { crudService } from 'src/app/services/crudService';
+import { Router} from '@angular/router';
 
 
 @Component({
   selector: 'app-product-register',
   templateUrl: './product-register.component.html',
   styleUrls: ['./product-register.component.css'],
-  providers:[productService, UserService]
+  providers:[crudService]
 })
 
 export class ProductRegisterComponent {
@@ -20,10 +19,8 @@ export class ProductRegisterComponent {
   public token: any;
 
   constructor(
-    private _productService: productService,
-    private _userService: UserService,
-    private _router: Router,
-    private _route: ActivatedRoute
+    private _crudService: crudService,
+    private _router: Router
   ){
     this.status = "";
     this.productData = new product(1,1,1,'','',100.0,2,this.today,this.today,'','','','','');
@@ -31,13 +28,12 @@ export class ProductRegisterComponent {
   }
 
   loadUser() {
-    this.identity = this._userService.getIdentity();
-    this.token = this._userService.getToken();
+    this.identity = this._crudService.getIdentity();
+    this.token = this._crudService.getToken();
   }
 
   onSubmit(form: any){
-    console.log(this.productData);
-    this._productService.registerProduct(this.token, "product", this.productData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
+    this._crudService.registerObject(this.token, "product", this.productData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
       (response) => {
         console.log(response);
         this.status = "success";
@@ -53,13 +49,9 @@ export class ProductRegisterComponent {
 
   subirFile(event:any){
     const imagen = event.target.files[0];
-    console.log(imagen);
-    console.log(this.token);
-    
-    this._userService.uploadImage(this.token, imagen, 'product/storeImage').subscribe(
+
+    this._crudService.uploadImage(this.token, imagen, 'product/storeImage').subscribe(
       (response) => {
-        console.log(response);
-        console.log("nombre de la imagen " + response.image)
         this.productData.img = response.image;
       },
       (error) => {

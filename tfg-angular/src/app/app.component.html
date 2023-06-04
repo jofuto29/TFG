@@ -93,10 +93,10 @@
       <li class="submenu4" *ngIf="identity">
         <a href="#">Gestión</a>
         <ul>
-          <li (click)="disapear()"><a href="#">Servicios</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/services']">Servicios</a></li>
           <li (click)="disapear()"><a [routerLink]="['/productos']">Productos</a></li>
-          <li (click)="disapear()"><a href="#">Proveedores</a></li>
-          <li (click)="disapear()"><a href="#">Categorías</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/suppliers']">Proveedores</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/categories']">Categorías</a></li>
         </ul>
       </li>
       <li class="submenu5" *ngIf="identity">

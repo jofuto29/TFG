@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from '../../models/product';
 import { productService } from 'src/app/services/product.service';
+import { crudService } from 'src/app/services/crudService';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.css'],
-  providers:[productService, UserService]
+  providers:[productService, UserService, crudService]
 })
 export class ProductUpdateComponent implements OnInit{
   public productData: product;
@@ -20,51 +21,51 @@ export class ProductUpdateComponent implements OnInit{
 
   constructor(
     private _productService: productService,
+    private _crudService: crudService,
     private _userService: UserService,
     private _router: Router,
     private _route: ActivatedRoute
   ){
     this.status = "";
     this.productId = 0;
-    this.productData = new product(1,1,1,'','',100.0,2,this.today,this.today,'','','','','');
     this.loadUser();
+    this.productData = new product(1,1,1,'','',100.0,2,this.today,this.today,'','','','','');
   }
 
   ngOnInit(): void {
     this.productId = this._route.snapshot.queryParams['id'];
-    console.log(this.productId);
+    this.getProduct();
   }
 
   loadUser() {
-    this.identity = this._userService.getIdentity();
-    this.token = this._userService.getToken();
+    this.identity = this._crudService.getIdentity();
+    this.token = this._crudService.getToken();
   }
 
+  /*http://tfg.com.devel/product/5 [PUT]*/
   onSubmit(form: any){
     console.log(this.productData);
-    this._productService.registerProduct(this.token, "product", this.productData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
-      (response) => {
-        console.log(response);
-        this.status = "success";
-        this._router.navigate(['productos']);
-      },
-      (error) => {
-        // Manejar el error aquí
-        console.error(error);
-        this.status = "error";
-      }
-    );
+    this._crudService.updateObject(this.token,"product/", this.productData, this.productId).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
+        response =>{
+          if(response.status == "success"){
+            this.status = "success";
+            this._router.navigate(['productos']);
+          }else{
+            this.status = 'error';
+          }
+        },
+        error=>{
+          this.status = 'error';
+          console.log(<any>error);
+        }
+      );
   }
 
   subirFile(event:any){
     const imagen = event.target.files[0];
-    console.log(imagen);
-    console.log(this.token);
-    
-    this._userService.uploadImage(this.token, imagen, 'product/storeImage').subscribe(
+
+    this._crudService.uploadImage(this.token, imagen, 'product/storeImage').subscribe(
       (response) => {
-        console.log(response);
-        console.log("nombre de la imagen " + response.image)
         this.productData.img = response.image;
       },
       (error) => {
@@ -74,7 +75,13 @@ export class ProductUpdateComponent implements OnInit{
   }
 
   getProduct(){
-    this._productService.getProduct();
+    this._crudService.getObject(this.token, "product/", this.productId).subscribe(
+      (response) => {
+        this.productData = response.$model as product;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
-    
 }

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { global } from './global';
 import { Observable } from 'rxjs';
-import { product } from '../models/product';
 
 /*crearemos un servicio que envie las peticiones correspondiente al backend*/
 @Injectable()
@@ -34,8 +33,11 @@ export class productService {
         return this._http.get(this.url+url, {headers: headers});
     }
 
-    updateProduct(){
-
+    updateProduct(token:any, url:string, object:any, id_product:any): Observable<any>{
+        let json = JSON.stringify(object);
+        let params = 'json='+json;
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded').set('Authorization',token);
+        return this._http.put(this.url + url + id_product, params, {headers: headers});
     }
 
     deleteProduct(id_product: number, url:string, token:any){
@@ -51,8 +53,9 @@ export class productService {
         return this._http.post(this.url + url, params, {headers: headers});
     }
 
-    getProduct(){
-        
+    getProduct(token:any, url:string, id_product:any): Observable<any>{
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded').set('Authorization',token);
+        return this._http.get(this.url + url + id_product, {headers: headers});
     }
 
 }

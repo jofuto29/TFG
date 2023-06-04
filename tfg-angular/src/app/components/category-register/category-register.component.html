@@ -1,0 +1,42 @@
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Registrata una nueva categoría para el taller</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerCategoryForm="ngForm" (ngSubmit)="onSubmit(registerCategoryForm)">
+  
+        <div class="form-group">
+            <label for="categoryName">categoryName:</label>
+            <input type="text" name="categoryName" id="categoryName" placeholder="¿Nombre de la categoria?" class="form-control"
+            #categoryName="ngModel" [(ngModel)]="categoryData.categoryName" required pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+            <small *ngIf="!categoryName.valid && categoryName.touched" class="invalid-feedback d-block">
+                nombre no valido
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea name="description" id="description" placeholder="¿Descripción?" class="form-control"
+              #description="ngModel" [(ngModel)]="categoryData.description" required
+              pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
+            <small *ngIf="!description.valid && description.touched" class="invalid-feedback d-block">
+              Descripción no es válida
+            </small>
+        </div>
+
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerCategoryForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/categories']" > Volver atrás</span>
+        </div>
+  
+    </form>
+</div>
