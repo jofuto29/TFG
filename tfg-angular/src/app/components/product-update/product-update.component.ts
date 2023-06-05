@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { product } from '../../models/product';
-import { productService } from 'src/app/services/product.service';
 import { crudService } from 'src/app/services/crudService';
-import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.css'],
-  providers:[productService, UserService, crudService]
+  providers:[crudService]
 })
 export class ProductUpdateComponent implements OnInit{
   public productData: product;
@@ -20,9 +18,7 @@ export class ProductUpdateComponent implements OnInit{
   public productId: Number;
 
   constructor(
-    private _productService: productService,
     private _crudService: crudService,
-    private _userService: UserService,
     private _router: Router,
     private _route: ActivatedRoute
   ){

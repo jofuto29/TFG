@@ -1,1 +1,44 @@
-<p>supplier works!</p>
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de proveedores registrados</h1>
+      <span class="button"><a [routerLink]="['/addSupplier']"> Añadir proveedor </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id proveedor</th>
+            <th>Nombre proveedor</th>
+            <th>Email</th>
+            <th>Número de telefono</th>
+            <th>Dirección</th>
+            <th>Dni</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supplier of suppliers">
+            <td>{{ supplier.id_supplier }}</td>
+            <td>{{ supplier.supplierName }}</td>
+            <td>{{ supplier.email }}</td>
+            <td>{{ supplier.phoneNumber }}</td>
+            <td>{{ supplier.address }}</td>
+            <td>{{ supplier.dni }}</td>
+            <td [routerLink]="['/updateSupplier']" [queryParams]="{ id: supplier.id_supplier }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteSupplier(supplier.id_supplier)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

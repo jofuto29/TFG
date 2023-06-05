@@ -150,8 +150,8 @@ td:hover .icon{
   justify-content: center;
 }
 
-.buttonAdmin input{
-  width: 30%;
+.buttonAdmin input, .buttonAdmin span{
+  width: 40%;
 }
 
 tbody tr td img{

@@ -12,11 +12,11 @@
     <form class="col-md-5 ml-0 pl-0" #registerCategoryForm="ngForm" (ngSubmit)="onSubmit(registerCategoryForm)">
   
         <div class="form-group">
-            <label for="categoryName">categoryName:</label>
+            <label for="categoryName">Nombre de la categoría:</label>
             <input type="text" name="categoryName" id="categoryName" placeholder="¿Nombre de la categoria?" class="form-control"
             #categoryName="ngModel" [(ngModel)]="categoryData.categoryName" required pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
             <small *ngIf="!categoryName.valid && categoryName.touched" class="invalid-feedback d-block">
-                nombre no valido
+                Nombre no valido
             </small>
         </div>
 

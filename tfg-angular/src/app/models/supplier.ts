@@ -6,7 +6,7 @@ export class supplier{
         public id_supplier: number,
         public supplierName: string,
         public lastName:string,
-        public email: EmailValidator,
+        public email: string,
         public phoneNumber: number,
         public dni: number,
         public address: string,
