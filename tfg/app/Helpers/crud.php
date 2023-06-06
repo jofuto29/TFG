@@ -48,8 +48,24 @@ class crud
             'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
             'id_product'      => 'required|exists:products,id_product',
             'quantity'        => 'required|numeric|integer'
-        ]
-
+        ],
+        "reparations" => [
+            'id_reparation'     => 'required|exists:reparations,id_reparation',
+            'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+            'startDate'         => 'required|date',
+            'endDate'           => 'date|after:startDate',
+            'problemDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'solutionDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'state'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
+        ],
+        "vehicles" => [
+            'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+            'id_user'           => 'required|exists:users,id_user',
+            'trademark'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'model'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'registration'      => 'required|regex:/^[0-9]{4} [A-Z]{3}$/|unique:vehicles',
+            'mileage'           => 'required|numeric'
+        ],
     ];
 
 
@@ -248,6 +264,25 @@ class crud
                     'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
                     'id_product'      => 'required|exists:products,id_product',
                     'quantity'        => 'required|numeric|integer'
+                ];
+            } elseif ($table === 'reparations') {
+                $validationRules = [
+                    'id_reparation'     => 'required|exists:reparations,id_reparation',
+                    'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+                    'startDate'         => 'required|date',
+                    'endDate'           => 'date|after:startDate',
+                    'problemDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'solutionDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'state'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
+                ];
+            } elseif ($table === 'vehicles') {
+                $validationRules = [
+                    'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+                    'id_user'           => 'required|exists:users,id_user',
+                    'trademark'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'model'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'registration'      => 'required|regex:/^[0-9]{4} [A-Z]{3}$/|unique:vehicles',
+                    'mileage'           => 'required|numeric'
                 ];
             }
 

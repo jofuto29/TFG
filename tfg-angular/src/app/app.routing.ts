@@ -25,6 +25,9 @@ import { ServiceUpdateComponent } from './components/service-update/service-upda
 import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierRegiterComponent } from './components/supplier-regiter/supplier-regiter.component';
 import { SupplierUpdateComponent } from './components/supplier-update/supplier-update.component';
+import { ReparationComponent } from './components/reparation/reparation.component';
+import { ReparationRegisterComponent } from './components/reparation-register/reparation-register.component';
+import { ReparationUpdateComponent } from './components/reparation-update/reparation-update.component';
 
 
 // Definir las rutas
@@ -53,6 +56,10 @@ const appRoutes: Routes = [
   { path: 'services', component: ServiceComponent},
   { path: 'addService', component: ServiceRegisterComponent},
   { path: 'updateService', component: ServiceUpdateComponent},
+
+  { path: 'reparations', component: ReparationComponent},
+  { path: 'addReparation', component: ReparationRegisterComponent},
+  { path: 'updateReparation', component: ReparationUpdateComponent},
 
   
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]

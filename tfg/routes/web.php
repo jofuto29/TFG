@@ -114,3 +114,9 @@ Route::resource('/service', 'App\Http\Controllers\ServiceController');
 
 // Rutas del controlador de Suppliers
 Route::resource('/reparationProducts', 'App\Http\Controllers\reparationProductsController');
+
+// Rutas del controlador de reparation
+Route::resource('/reparation', 'App\Http\Controllers\reparationController');
+
+// Rutas del controlador de reparation
+Route::resource('/vehicle', 'App\Http\Controllers\vehicleController');

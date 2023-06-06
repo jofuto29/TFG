@@ -1,1 +1,58 @@
-<p>reparation works!</p>
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de reparaciones creadas</h1>
+      <span class="button"><a [routerLink]="['/addReparation']"> Crear reparación </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID reparation</th>
+            <th>Fecha de inicio</th>
+            <th>Fecha de fin</th>
+            <th>Descripción del problema</th>
+            <th>Descripción de la solución</th>
+            <th>Estado</th>
+            <th>Id vehículo</th>
+            <th>Ver productos asociados</th>
+            <th>Ver servicios asociados</th>
+            <th>Actualizar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reparation of reparations">
+            <td>{{ reparation.id_reparation }}</td>
+            <td>{{ reparation.startDate }}</td>
+            <td>{{ reparation.endDate }}</td>
+            <td>{{ reparation.problemDescription }}</td>
+            <td>{{ reparation.solutionDescription }}</td>
+            <td>{{ reparation.state }}</td>
+            <td>{{ reparation.id_vehicle }}</td>
+            <td [routerLink]="['/seeAssociatedProducts']" [queryParams]="{ id: reparation.id_reparation }">
+              <span class="icon">
+                <i class="far fa-eye"></i>
+              </span>
+            </td>
+            <td [routerLink]="['/seeAssociatedServices']" [queryParams]="{ id: reparation.id_reparation }">
+              <span class="icon">
+                <i class="far fa-eye"></i>
+              </span>
+            </td>
+            <td [routerLink]="['/updateReparation']" [queryParams]="{ id: reparation.id_reparation }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteReparation(reparation.id_reparation)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

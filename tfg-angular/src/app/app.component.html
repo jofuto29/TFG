@@ -81,18 +81,18 @@
           <li (click)="disapear()"><a href="#">Todos</a></li>
         </ul>
       </li>
-      <li class="submenu4" *ngIf="identity">
+      <li class="submenu3" *ngIf="identity">
         <a href="#">Operaciones</a>
         <ul>
           <li (click)="disapear()"><a href="#">Reservas</a></li>
-          <li (click)="disapear()"><a href="#">Reparaciones</a></li>
           <li (click)="disapear()"><a href="#">Vehículos</a></li>
           <li (click)="disapear()"><a href="#">Promociones</a></li>
         </ul>
       </li>
-      <li class="submenu4" *ngIf="identity">
+      <li class="submenu5" *ngIf="identity">
         <a href="#">Gestión</a>
         <ul>
+          <li (click)="disapear()"><a [routerLink]="['/reparations']">Reparaciones</a></li>
           <li (click)="disapear()"><a [routerLink]="['/services']">Servicios</a></li>
           <li (click)="disapear()"><a [routerLink]="['/productos']">Productos</a></li>
           <li (click)="disapear()"><a [routerLink]="['/suppliers']">Proveedores</a></li>

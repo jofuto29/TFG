@@ -9,7 +9,7 @@ import { supplier } from 'src/app/models/supplier';
   styleUrls: ['./supplier-update.component.css'],
   providers:[crudService]
 })
-export class SupplierUpdateComponent {
+export class SupplierUpdateComponent implements OnInit{
   public supplierData: supplier;
   public status: string;
   public identity: any;
