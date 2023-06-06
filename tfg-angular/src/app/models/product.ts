@@ -1,4 +1,3 @@
-
 export class product{
 
     constructor(
@@ -13,9 +12,9 @@ export class product{
         public expiryDate: Date,
         public location: string,
         public img: string,
+        public marca:any,
         public created_at: any,
-        public updated_at:any,
-        public marca:any
+        public updated_at:any
     ){
     }
 }

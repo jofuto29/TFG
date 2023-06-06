@@ -25,6 +25,9 @@ import { SupplierUpdateComponent } from './components/supplier-update/supplier-u
 import { ServiceComponent } from './components/service/service.component';
 import { ServiceRegisterComponent } from './components/service-register/service-register.component';
 import { ServiceUpdateComponent } from './components/service-update/service-update.component';
+import { ReparationComponent } from './components/reparation/reparation.component';
+import { ReparationRegisterComponent } from './components/reparation-register/reparation-register.component';
+import { ReparationUpdateComponent } from './components/reparation-update/reparation-update.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { ServiceUpdateComponent } from './components/service-update/service-upda
     SupplierUpdateComponent,
     ServiceComponent,
     ServiceRegisterComponent,
-    ServiceUpdateComponent
+    ServiceUpdateComponent,
+    ReparationComponent,
+    ReparationRegisterComponent,
+    ReparationUpdateComponent
   ],
   imports: [
     BrowserModule,
