@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\serviceProduct;
+use App\Models\reparationProducts;
 
-class ServiceProductController extends Controller
+class reparationProductsController extends Controller
 {
     public function prueba(request $request)
     {
@@ -23,29 +23,29 @@ class ServiceProductController extends Controller
     /**
      * Funcion para listar todos los proeevedores registrador
      * 
-     * RUTA: http://tfg.com.devel/serviceProduct [GET]
+     * RUTA: http://tfg.com.devel/reparationProducts [GET]
      */
     public function index()
     {
         $crud = new \App\Helpers\CRUD();
-        return $crud->index(serviceProduct::all(), "relacion Servicios-Productos");
+        return $crud->index(reparationProducts::all(), "relacion Servicios-Productos");
     }
 
     /**
      * Funcion para mostrar el proeevedor con el $id que se le pase
      * 
-     * RUTA: http://tfg.com.devel/serviceProduct/$id [GET]
+     * RUTA: http://tfg.com.devel/reparationProducts/$id [GET]
      */
     public function show($id)
     {
         $crud = new \App\Helpers\CRUD();
-        return $crud->show(serviceProduct::find($id), "relacion servicio-Producto", $id);
+        return $crud->show(reparationProducts::find($id), "relacion servicio-Producto", $id);
     }
 
     /**
      * Funcion para eliminar un proeevedor con el $id que se le pase
      * 
-     * RUTA: http://tfg.com.devel/serviceProduct/$id [DELETE]
+     * RUTA: http://tfg.com.devel/reparationProducts/$id [DELETE]
      */
     public function destroy($id, Request $request)
     {
@@ -54,7 +54,7 @@ class ServiceProductController extends Controller
 
         if ($user->rol == "admin") { //administrador
             $crud = new \App\Helpers\CRUD();
-            return $crud->destroy(serviceProduct::find($id), "relacion servicio producto", $id);
+            return $crud->destroy(reparationProducts::find($id), "relacion servicio producto", $id);
         } else {
             $response = array(
                 'status' => 'error',
@@ -67,7 +67,7 @@ class ServiceProductController extends Controller
 
     /*
     Funcion que registra un nuevo proevedor en la base de datos
-    RUTA: http://tfg.com.devel/serviceProduct [POST]
+    RUTA: http://tfg.com.devel/reparationProducts [POST]
     DATOS QUE NECESITAMOS RECIBIR:
     {
         "id_service":2,
@@ -80,12 +80,12 @@ class ServiceProductController extends Controller
         $atributos = json_decode($json, true);
 
         $crud = new \App\Helpers\CRUD();
-        return $crud->store($atributos, "serviceproduct", new serviceProduct());
+        return $crud->store($atributos, "reparationProducts", new reparationProducts());
     }
 
     /*
     Funcion que actualiza un nuevo proeevedor en la base de datos
-    RUTA: http://tfg.com.devel/serviceProduct/2 [PUT]
+    RUTA: http://tfg.com.devel/reparationProducts/2 [PUT]
     DATOS QUE NECESITAMOS RECIBIR:
     {
         "id_service":2,
@@ -98,6 +98,6 @@ class ServiceProductController extends Controller
         $atributos = json_decode($json, true);
 
         $crud = new \App\Helpers\CRUD();
-        return $crud->update($atributos, "serviceproduct", serviceproduct::find($id), $id, "id_serviceProduct");
+        return $crud->update($atributos, "reparationProducts", reparationProducts::find($id), $id, "id_reparationProducts");
     }
 }

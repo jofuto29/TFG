@@ -20,10 +20,10 @@ export class SupplierComponent {
   }
 
   ngOnInit(): void {
-    this.listSupppliers();
+    this.listSuppliers();
   }
 
-  listSupppliers() {
+  listSuppliers() {
     this._crudService.listObjects(this.token, 'supplier').subscribe(
       (response) => {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida

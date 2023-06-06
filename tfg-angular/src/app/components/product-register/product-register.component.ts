@@ -18,6 +18,9 @@ export class ProductRegisterComponent {
   public identity: any;
   public token: any;
 
+  public categories: any[] = []; // Array para almacenar las categorias
+  public suppliers: any[] = []; // Array para almacenar los suppliers
+
   constructor(
     private _crudService: crudService,
     private _router: Router
@@ -30,7 +33,10 @@ export class ProductRegisterComponent {
   loadUser() {
     this.identity = this._crudService.getIdentity();
     this.token = this._crudService.getToken();
+    this.listCategories();
+    this.listSuppliers();
   }
+
 
   onSubmit(form: any){
     this._crudService.registerObject(this.token, "product", this.productData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
@@ -47,6 +53,7 @@ export class ProductRegisterComponent {
     );
   }
 
+
   subirFile(event:any){
     const imagen = event.target.files[0];
 
@@ -60,4 +67,31 @@ export class ProductRegisterComponent {
     );
   }
 
+
+  listSuppliers() {
+    this._crudService.listObjects(this.token, 'supplier').subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.suppliers = [...response.$model]; // Asignar la respuesta al array de productos
+      },
+      (error) => {
+        // Manejar el error aquí
+        console.error(error);
+      }
+    );
+  }
+
+  
+  listCategories() {
+    this._crudService.listObjects(this.token, 'category').subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.categories = [...response.$model]; // Asignar la respuesta al array de productos
+      },
+      (error) => {
+        // Manejar el error aquí
+        console.error(error);
+      }
+    );
+  }
 }

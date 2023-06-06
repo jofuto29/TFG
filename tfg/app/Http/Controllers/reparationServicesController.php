@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ServiceReparationController extends Controller
+class reparationServicesController extends Controller
 {
     public function prueba(request $request)
     {

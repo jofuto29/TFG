@@ -44,9 +44,10 @@ class crud
             'duration'          => 'required|numeric',
             'serviceType'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
         ],
-        "serviceproduct" => [
-            'id_service'   => 'required|exists:services,id_service', //exists:table,column
-            'id_product'   => 'required|exists:products,id_product'
+        "reparationProducts" => [
+            'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
+            'id_product'      => 'required|exists:products,id_product',
+            'quantity'        => 'required|numeric|integer'
         ]
 
     ];
@@ -242,10 +243,11 @@ class crud
                     'duration'          => 'required|numeric',
                     'serviceType'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
                 ];
-            } elseif ($table === 'serviceproduct') {
+            } elseif ($table === 'reparationProducts') {
                 $validationRules = [
-                    'id_service'   => 'required|exists:services,id_service', //exists:table,column
-                    'id_product'   => 'required|exists:products,id_product'
+                    'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
+                    'id_product'      => 'required|exists:products,id_product',
+                    'quantity'        => 'required|numeric|integer'
                 ];
             }
 

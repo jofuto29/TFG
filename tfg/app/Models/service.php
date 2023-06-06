@@ -12,13 +12,8 @@ class service extends Model
     protected $table = "services";
     protected $primaryKey = 'id_service';
 
-    public function serviceproduct()
+    public function reparationServices()
     {
-        return $this->hasMany('App\Models\serviceProduct', 'id_service', 'id_service');
-    }
-
-    public function servicereparation()
-    {
-        return $this->hasMany('App\Models\serviceReparation', 'id_service', 'id_service');
+        return $this->hasMany('App\Models\reparationServices', 'id_service', 'id_service');
     }
 }

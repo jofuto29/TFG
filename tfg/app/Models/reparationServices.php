@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class serviceProduct extends Model
+class reparationServices extends Model
 {
     use HasFactory;
 
-    protected $table = "serviceproduct";
-    protected $primaryKey = 'id_serviceProduct';
+    protected $table = "reparationServices";
+    protected $primaryKey = 'id_reparationServices';
 
-    public function products()
+    public function reparations()
     {
-        return $this->belongsTo('App\Models\product', "id_product", "id_product");
+        return $this->belongsTo('App\Models\reparation', "id_reparation", "id_reparation");
     }
 
     public function services()

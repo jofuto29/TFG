@@ -74,8 +74,10 @@ Route::get('/usedVehicle/prueba', 'App\Http\Controllers\UsedVehicleController@pr
 Route::get('/supplier/prueba', 'App\Http\Controllers\SupplierController@prueba');
 Route::get('/service/prueba', 'App\Http\Controllers\ServiceController@prueba');
 Route::get('/reparation/prueba', 'App\Http\Controllers\ReparationController@prueba');
-Route::get('/serviceProduct/prueba', 'App\Http\Controllers\ServiceProductController@prueba');
-Route::get('/serviceReparation/prueba', 'App\Http\Controllers\ServiceReparationController@prueba');
+
+Route::get('/reparationProducts/prueba', 'App\Http\Controllers\reparationProductsController@prueba');
+Route::get('/reparationServices/prueba', 'App\Http\Controllers\reparationServicesController@prueba');
+
 Route::get('/product/prueba', 'App\Http\Controllers\productController@prueba');
 Route::get('/category/prueba', 'App\Http\Controllers\categoryController@prueba');
 
@@ -111,4 +113,4 @@ Route::resource('/supplier', 'App\Http\Controllers\SupplierController');
 Route::resource('/service', 'App\Http\Controllers\ServiceController');
 
 // Rutas del controlador de Suppliers
-Route::resource('/serviceProduct', 'App\Http\Controllers\ServiceProductController');
+Route::resource('/reparationProducts', 'App\Http\Controllers\reparationProductsController');

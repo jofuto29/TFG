@@ -17,6 +17,9 @@ export class ProductUpdateComponent implements OnInit{
   public token: any;
   public productId: Number;
 
+  public categories: any[] = []; // Array para almacenar las categorias
+  public suppliers: any[] = []; // Array para almacenar los suppliers
+
   constructor(
     private _crudService: crudService,
     private _router: Router,
@@ -26,6 +29,8 @@ export class ProductUpdateComponent implements OnInit{
     this.productId = 0;
     this.loadUser();
     this.productData = new product(1,1,1,'','',100.0,2,this.today,this.today,'','','','','');
+    this.listCategories();
+    this.listSuppliers();
   }
 
   ngOnInit(): void {
@@ -76,6 +81,33 @@ export class ProductUpdateComponent implements OnInit{
         this.productData = response.$model as product;
       },
       (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  listSuppliers() {
+    this._crudService.listObjects(this.token, 'supplier').subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.suppliers = [...response.$model]; // Asignar la respuesta al array de productos
+      },
+      (error) => {
+        // Manejar el error aquí
+        console.error(error);
+      }
+    );
+  }
+
+  
+  listCategories() {
+    this._crudService.listObjects(this.token, 'category').subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.categories = [...response.$model]; // Asignar la respuesta al array de productos
+      },
+      (error) => {
+        // Manejar el error aquí
         console.error(error);
       }
     );

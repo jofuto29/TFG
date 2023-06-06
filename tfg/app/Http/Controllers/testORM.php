@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 
 /*Este controlador basicamente va a coger los modelos y hacer pruebas de que funcione correctamente, teneis informacion
 inicial en el controlador pruebasController.php*/
+/*Ruta del controlador::: */
 
 use App\Models\supplier;
 use App\Models\category;
 use App\Models\product;
-use App\Models\serviceProduct;
+use App\Models\reparationProducts;
 use App\Models\service;
-use App\Models\serviceReparation;
+use App\Models\reparationServices;
 use App\Models\reparation;
 use App\Models\vehicle;
 use App\Models\User;
@@ -79,41 +80,38 @@ class testORM extends Controller
             foreach ($supplier->products as $product) {
                 echo "<h5> Producto que proporciona:" . $product->productName . "</h5>";
                 echo "<p> cuya categoria es: " . $product->categories->categoryName . "</p>";
-                foreach ($product->serviceproduct as $sp) {
-                    echo "<p> cuyo id serviceProduct es: " . $sp->id_serviceProduct . ", relacion con producto: " . $sp->id_product . " y servicio " . $sp->id_service . "</p>";
+                foreach ($product->reparationProducts as $sp) {
+                    echo "<p> cuyo id serviceProduct es: " . $sp->id_reparationProducts . ", relacion con producto: " . $sp->id_product . " y reparacion " . $sp->id_reparation . "</p>";
                 }
             }
         }
         echo "</div>";
 
 
-        echo "<div style='margin: 5% 0;'><h2> ServiceProduct </h2>";
-        $serviceProduct = serviceProduct::all();
-        foreach ($serviceProduct as $sp) {
-            echo "<h4> id: $sp->id_serviceProduct </h4>";
+        echo "<div style='margin: 5% 0;'><h2> Modelo reparationProducts </h2>";
+        $reparationProducts = reparationProducts::all();
+        foreach ($reparationProducts as $sp) {
+            echo "<h4> id: $sp->id_reparationProducts </h4>";
             echo "<p> producto asociado: " . $sp->products->productName . "</p>"; //aqui solo vamos a tener un porducto asociado por la relacion, es decir no recorremos un arraay solo hay un registro con ese id
-            echo "<p> servicio asociado: " . $sp->services->serviceName . "</p>";
+            echo "<p> reparacion asociada: " . $sp->reparations->id_reparation . "</p>";
+            echo "<p>quantity:  $sp->id_quantity </p>";
         }
         echo "</div>";
 
 
-        echo "<div style='margin: 5% 0;'><h2> Service </h2>";
+        echo "<div style='margin: 5% 0;'><h2> Modelo Service </h2>";
         $services = service::all();
         foreach ($services as $service) {
             echo "<h4> nombre del servicio: $service->serviceName </h4>";
-            foreach ($service->serviceproduct as $sp) {
-                echo "<p> id de los serviceproducts relacionados: " . $sp->id_serviceProduct . "</p>";
-            }
-
-            foreach ($service->servicereparation as $sr) {
-                echo "<p> id de los serviceproducts relacionados: " . $sr->id_serviceReparation . "</p>";
+            foreach ($service->reparationServices as $sp) {
+                echo "<p> id de los reparacion relacionados: " . $sp->id_reparationServices . "</p>";
             }
         }
         echo "</div>";
 
 
         echo "<div style='margin: 5% 0;'><h2> ServiceReparation </h2>";
-        $serviceReparation = serviceReparation::all();
+        $serviceReparation = reparationServices::all();
         foreach ($serviceReparation as $sr) {
             echo "<h4> id: $sr->id_serviceReparation </h4>";
             echo "<p> reparacion asociada: " . $sr->reparations->id_reparation . "</p>";
@@ -133,8 +131,12 @@ class testORM extends Controller
                 echo "<p> id de los employeeRelacionados relacionados: " . $er->id_employeeReparation . "</p>";
             }
 
-            foreach ($reparation->serviceReparation as $sr) {
-                echo "<p> id de los ServiciosRelacionados relacionados: " . $sr->id_serviceReparation . "</p>";
+            foreach ($reparation->reparationServices as $sr) {
+                echo "<p> id de los ServiciosRelacionados relacionados: " . $sr->id_reparationServices . "</p>";
+            }
+
+            foreach ($reparation->reparationProducts as $sp) {
+                echo "<p> id de los productos relacionados: " . $sp->id_reparationProducts . "</p>";
             }
         }
         echo "</div>";

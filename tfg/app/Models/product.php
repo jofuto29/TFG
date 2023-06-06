@@ -26,9 +26,9 @@ class product extends Model
     }
 
     //relacion de uno a muchos con la calse ServiceProduct[un producto puede pertenecer a muchos servicios]
-    public function serviceproduct()
+    public function reparationProducts()
     {
-        return $this->hasMany('App\Models\serviceProduct', 'id_product', 'id_product');
+        return $this->hasMany('App\Models\reparationProducts', 'id_product', 'id_product');
     }
 }
 

@@ -12,9 +12,14 @@ class reparation extends Model
     protected $table = "reparations";
     protected $primaryKey = 'id_reparation';
 
-    public function servicereparation()
+    public function reparationServices()
     {
-        return $this->hasMany('App\Models\serviceReparation', 'id_reparation', 'id_reparation');
+        return $this->hasMany('App\Models\reparationServices', 'id_reparation', 'id_reparation');
+    }
+
+    public function reparationProducts()
+    {
+        return $this->hasMany('App\Models\reparationProducts', 'id_reparation', 'id_reparation');
     }
 
     public function employeeReparation()

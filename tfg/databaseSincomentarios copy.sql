@@ -207,23 +207,23 @@ INSERT INTO `services` (`id_service`, `serviceName`, `description`, `price`, `se
             (NULL, 'SERVICIO DE PRUEBA', 'SERVICIO DE PRUEBA PARA REALIZAR PRUEBAS', '100,0', 'CAMBIO DE ACEITE', NULL, NULL);
 
 
-CREATE TABLE reparationServices(
+CREATE TABLE ServiceReparation(
 
-    id_reparationServices    int auto_increment NOT NULL,
+    id_serviceReparation    int auto_increment NOT NULL,
     id_reparation           int NOT NULL,
     id_service              int NOT NULL,
 
     created_at          datetime DEFAULT NULL,
     updated_at          datetime DEFAULT NULL,
 
-    CONSTRAINT pk_reparationServices PRIMARY KEY(id_reparationServices),
-    CONSTRAINT pk_reparationServices_reparation  FOREIGN KEY(id_reparation) REFERENCES Reparations(id_reparation),
-    CONSTRAINT pk_reparationServices_service     FOREIGN KEY(id_service) REFERENCES Services(id_service)
+    CONSTRAINT pk_serviceReparation PRIMARY KEY(id_serviceReparation),
+    CONSTRAINT pk_serviceReparation_reparation  FOREIGN KEY(id_reparation) REFERENCES Reparations(id_reparation),
+    CONSTRAINT pk_serviceReparation_service     FOREIGN KEY(id_service) REFERENCES Services(id_service)
 
 )ENGINE=InnoDb;
 
 
-INSERT INTO `reparationServices` (`id_reparationServices`, `id_reparation`, `id_service`, `created_at`, `updated_at`) VALUES (NULL, '1', '1', NULL, NULL);
+INSERT INTO `servicereparation` (`id_serviceReparation`, `id_reparation`, `id_service`, `created_at`, `updated_at`) VALUES (NULL, '1', '1', NULL, NULL);
 
 
 CREATE TABLE Suppliers(
@@ -275,7 +275,7 @@ CREATE TABLE Products(
     productName         varchar(255) NOT NULL,
     description         varchar(255) NOT NULL,
     price               DECIMAL(10,2) NOT NULL,
-    stock               int NOT NULL,
+    Stock               int NOT NULL,
     admisionDate        datetime DEFAULT NULL,
     expiryDate          datetime DEFAULT NULL,
     location            varchar(255) NOT NULL,
@@ -291,29 +291,28 @@ CREATE TABLE Products(
 )ENGINE=InnoDb;
 
 
-INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `productName`, `description`, `price`, `stock`, `admisionDate`, `expiryDate`, `location`, `img`, `created_at`, `updated_at`) 
+INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `productName`, `description`, `price`, `Stock`, `admisionDate`, `expiryDate`, `location`, `img`, `created_at`, `updated_at`) 
                     VALUES (NULL, '1', '1', 'PRODUCTO DE PRUEBA', 'PRODUCTO PARA USAR EN PRUEBAS', '150', '2', NULL, NULL, '', '', NULL, NULL);
 
 
 
-CREATE TABLE reparationProducts(
+CREATE TABLE ServiceProduct(
 
-    id_reparationProducts    int auto_increment NOT NULL,
-    quantity                int NOT NULL,
-    id_reparation           int NOT NULL,
+    id_serviceProduct       int auto_increment NOT NULL,
+    id_service              int NOT NULL,
     id_product              int NOT NULL,
 
     created_at          datetime DEFAULT NULL,
     updated_at          datetime DEFAULT NULL,
 
-    CONSTRAINT pk_reparationProducts PRIMARY KEY(id_reparationProducts),
-    CONSTRAINT pk_reparationProducts_product  FOREIGN KEY(id_product) REFERENCES    Products(id_product),
-    CONSTRAINT pk_reparationProducts_service  FOREIGN KEY(id_reparation) REFERENCES Reparations(id_reparation)
+    CONSTRAINT pk_serviceProduct PRIMARY KEY(id_serviceProduct),
+    CONSTRAINT pk_serviceProduct_product  FOREIGN KEY(id_product) REFERENCES Products(id_product),
+    CONSTRAINT pk_serviceProduct_service  FOREIGN KEY(id_service) REFERENCES Services(id_service)
 
 )ENGINE=InnoDb;
 
 
-INSERT INTO `reparationProducts` (`id_reparationProducts`, `quantity` , `id_reparation`, `id_product`, `created_at`, `updated_at`) VALUES (NULL,'1','1', '1', NULL, NULL);
+INSERT INTO `serviceproduct` (`id_serviceProduct`, `id_service`, `id_product`, `created_at`, `updated_at`) VALUES (NULL, '1', '1', NULL, NULL);
 
 
 CREATE TABLE PaymentMethods(

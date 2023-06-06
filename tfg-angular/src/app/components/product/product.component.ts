@@ -14,7 +14,9 @@ import { map } from 'rxjs/operators';
 export class ProductComponent implements OnInit {
   public token: any;
   public identity: any;
+
   public productos: any[] = []; // Array para almacenar los productos
+
   public sanitizedImageUrls: { [key: string]: any } = {};
 
   constructor(

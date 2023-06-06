@@ -11,21 +11,43 @@
   <!--formulario de registro-->
   <form class="col-md-5 ml-0 pl-0" #registerProductForm="ngForm" (ngSubmit)="onSubmit(registerProductForm)">
 
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="supplier">Proveedor:</label>
       <input type="text" name="supplier" id="supplier" placeholder="¿Proveedor?" class="form-control"
         #id_supplier="ngModel" [(ngModel)]="productData.id_supplier" required pattern="^[0-9]+$">
       <small *ngIf="!id_supplier.valid && id_supplier.touched" class="invalid-feedback d-block">
         supplier no es valido
       </small>
+    </div>-->
+
+    <div class="form-group">
+      <label for="supplier">Proveedor:</label>
+      <select name="supplier" id="supplier" class="form-control" 
+        [(ngModel)]="productData.id_supplier" required>
+        <option *ngFor="let supplier of suppliers" [value]="supplier.id_supplier">{{ supplier.supplierName }}</option>
+      </select>
+      <small *ngIf="!productData.id_category" class="invalid-feedback d-block">
+        Selecciona una proveedor.
+      </small>
     </div>
       
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="category">Categoría:</label>
       <input type="text" name="category" id="category" placeholder="¿Categoría?" class="form-control"
         #id_category="ngModel" [(ngModel)]="productData.id_category" required pattern="^[0-9]+$">
       <small *ngIf="!id_category.valid && id_category.touched" class="invalid-feedback d-block">
         Categoría no es válida
+      </small>
+    </div>-->
+
+    <div class="form-group">
+      <label for="category">Categoría:</label>
+      <select name="category" id="category" class="form-control" 
+        [(ngModel)]="productData.id_category" required>
+        <option *ngFor="let category of categories" [value]="category.id_category">{{ category.categoryName }}</option>
+      </select>
+      <small *ngIf="!productData.id_category" class="invalid-feedback d-block">
+        Selecciona una categoría.
       </small>
     </div>
       
