@@ -147,6 +147,7 @@ CREATE TABLE Reparations(
 
     id_reparation       int auto_increment NOT NULL,
     id_vehicle          int NOT NULL,
+    id_employee         int NOT NULL,
     date_start          datetime NOT NULL,
     date_end            datetime,
     problemDescription  varchar(255) NOT NULL,
@@ -158,32 +159,14 @@ CREATE TABLE Reparations(
 
 
     CONSTRAINT pk_reparation PRIMARY KEY(id_reparation),
-    CONSTRAINT pk_reparation_vehicle  FOREIGN KEY(id_vehicle) REFERENCES Vehicles(id_vehicle)
+    CONSTRAINT pk_reparation_vehicle  FOREIGN KEY(id_vehicle) REFERENCES Vehicles(id_vehicle),
+    CONSTRAINT pk_reparation_employee  FOREIGN KEY(id_employee) REFERENCES Employees(id_employee)
 
 )ENGINE=InnoDb;
 
 
-INSERT INTO `reparations` (`id_reparation`, `id_vehicle`, `date_start`, `date_end`, `problemDescription`, `solutionDescription`, `state`, `created_at`, `updated_at`) 
-                    VALUES (NULL, '1', '2023-05-05 14:04:35.000000', '2023-05-10 16:04:35', 'CAMBIO DE ACEITE', 'CAMBIO DE ACEITE', 'COMPLETADO', NULL, NULL);
-
-
-CREATE TABLE employeeReparation(
-
-    id_employeeReparation       int auto_increment NOT NULL,
-    id_employee                 int NOT NULL,
-    id_reparation               int NOT NULL,
-
-    created_at          datetime DEFAULT NULL,
-    updated_at          datetime DEFAULT NULL,
-
-    CONSTRAINT pk_employeeReparation PRIMARY KEY(id_employeeReparation),
-    CONSTRAINT pk_employeeReparation_employee  FOREIGN KEY(id_employee) REFERENCES Employees(id_employee),
-    CONSTRAINT pk_employeeReparation_reparation  FOREIGN KEY(id_reparation) REFERENCES Reparations(id_reparation)
-
-)ENGINE=InnoDb;
-
-
-INSERT INTO `employeeReparation` (`id_employeeReparation`,  `id_employee`, `id_reparation`, `created_at`, `updated_at`) VALUES (NULL, '1', '1', NULL, NULL);
+INSERT INTO `reparations` (`id_reparation`, `id_vehicle`, `id_employee`, `date_start`, `date_end`, `problemDescription`, `solutionDescription`, `state`, `created_at`, `updated_at`) 
+                    VALUES (NULL, '1', '1', '2023-05-05 14:04:35.000000', '2023-05-10 16:04:35', 'CAMBIO DE ACEITE', 'CAMBIO DE ACEITE', 'COMPLETADO', NULL, NULL);
 
 
 CREATE TABLE Services(
@@ -344,7 +327,6 @@ CREATE TABLE Invoices(
     id_invoice          int auto_increment NOT NULL,
     id_reparation       int NOT NULL,
     invoiceDate         datetime DEFAULT NULL,
-    aditionalPrice      DECIMAL(10,2) NOT NULL,
     totalPrice          DECIMAL(10,2) NOT NULL,
     state               varchar(20) DEFAULT 'Unpaid' NOT NULL,
 
@@ -356,14 +338,13 @@ CREATE TABLE Invoices(
 
 )ENGINE=InnoDb;
 
-INSERT INTO `invoices` (`id_invoice`, `id_reparation`, `invoiceDate`, `aditionalPrice`, `totalPrice`, `state`, `created_at`, `updated_at`) 
-    VALUES (NULL, '1', '2023-05-12 20:35:50', '10', '1500', 'Unpaid', NULL, NULL);
+INSERT INTO `invoices` (`id_invoice`, `id_reparation`, `invoiceDate`, `totalPrice`, `state`, `created_at`, `updated_at`) 
+    VALUES (NULL, '1', '2023-05-12 20:35:50', '1500', 'Unpaid', NULL, NULL);
 
 
 CREATE TABLE Deductions(
 
     id_deduction        int auto_increment NOT NULL,
-    id_invoice          int NOT NULL,
     deductionName       varchar(255) NOT NULL,
     description         varchar(255) NOT NULL,
     percentage          INT CHECK (percentage >= 1 AND percentage <= 100) DEFAULT NULL,
@@ -371,14 +352,28 @@ CREATE TABLE Deductions(
     created_at          datetime DEFAULT NULL,
     updated_at          datetime DEFAULT NULL,
 
-    CONSTRAINT pk_deduction PRIMARY KEY(id_deduction),
-    CONSTRAINT pk_deduction_invoice  FOREIGN KEY(id_invoice) REFERENCES Invoices(id_invoice)
+    CONSTRAINT pk_deduction PRIMARY KEY(id_deduction)
 
 )ENGINE=InnoDb;
 
-INSERT INTO `Deductions` (`id_deduction`, `id_invoice`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
-                    VALUES (NULL, '1', 'Decuento de empleados', 'Decuento en reparaciones para empleados del taller', '20', NULL, NULL);
+INSERT INTO `Deductions` (`id_deduction`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
+                    VALUES (NULL, 'Decuento de empleados', 'Decuento en reparaciones para empleados del taller', '20', NULL, NULL);
 
+
+CREATE TABLE invoiceDeductions(
+
+    id_invoiceDeductions    int auto_increment NOT NULL,
+    id_invoice              int NOT NULL,
+    id_deduction            int NOT NULL,
+
+    created_at          datetime DEFAULT NULL,
+    updated_at          datetime DEFAULT NULL,
+
+    CONSTRAINT pk_invoiceDeductions PRIMARY KEY(id_invoiceDeductions),
+    CONSTRAINT pk_invoiceDeductions_invoice    FOREIGN KEY(id_invoice) REFERENCES  Invoices(id_invoice),
+    CONSTRAINT pk_invoiceDeductions_deduction  FOREIGN KEY(id_deduction) REFERENCES Deductions(id_deduction)
+
+)ENGINE=InnoDb;
 
 CREATE TABLE Pays(
 

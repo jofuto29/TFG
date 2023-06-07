@@ -22,7 +22,7 @@ class employee extends Model
         return $this->belongsTo('App\Models\User', "id_user", "id_user");
     }
 
-    public function employeeReparations()
+    public function reparations()
     {
         return $this->hasMany('App\Models\employeeReparation', 'id_employee', 'id_employee');
     }

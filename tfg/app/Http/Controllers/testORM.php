@@ -127,10 +127,6 @@ class testORM extends Controller
             echo "<p>  del vehiculo con id: " . $reparation->vehicle->id_vehicle . "</p>";
             echo "<p>  con invocie con id: " .  $reparation->invoice->id_invoice . "</p>";
 
-            foreach ($reparation->employeeReparation as $er) {
-                echo "<p> id de los employeeRelacionados relacionados: " . $er->id_employeeReparation . "</p>";
-            }
-
             foreach ($reparation->reparationServices as $sr) {
                 echo "<p> id de los ServiciosRelacionados relacionados: " . $sr->id_reparationServices . "</p>";
             }
@@ -190,10 +186,6 @@ class testORM extends Controller
             foreach ($employee->paysheets as $paysheet) {
                 echo "<p> Nominas empleado: $paysheet->id_paysheet, cuyo salario neto es " . $paysheet->salaryNet . "</p>";
             }
-
-            foreach ($employee->employeeReparations as $er) {
-                echo "<p> reparaciones del empleado: $er->id_employeeReparation, de la reparacion con id: " . $er->id_reparation . "</p>";
-            }
         }
         echo "</div>";
 
@@ -220,16 +212,6 @@ class testORM extends Controller
             echo "<h4> id usedVehicle: $uv->id_vehicle_used , cuya matricuka de vehiclulo es:  " . $uv->vehicle->registration . " </h4>";
         }
         echo "</div>";
-
-
-        echo "<div style='margin: 5% 0;'><h2> EmployeedReparations </h2>";
-        $employeereparations = employeeReparation::all();
-        foreach ($employeereparations as $er) {
-            echo "<h4> conjuntoreparacionEmpleado $er->id_employeeReparation</h4>";
-            echo "<p> empleado con id: " . $er->employee->id_employee . " cuya reparacion es: " . $er->reparation->id_reparation . " </p>";
-        }
-        echo "</div>";
-
 
         echo "<div style='margin: 5% 0;'><h2> PaymentMethods </h2>";
         $paymentMethods = paymentMethod::all();
@@ -260,13 +242,9 @@ class testORM extends Controller
         echo "<div style='margin: 5% 0;'><h2> Invoices </h2>";
         $invoices = invoice::all();
         foreach ($invoices as $invoice) {
-            echo "<h4> id factura: $invoice->id_invoice, asociada a la reparacion: " . $invoice->reparation->id_reparation . "</h4>";
+            //echo "<h4> id factura: $invoice->id_invoice, asociada a la reparacion: " . $invoice->reparation->id_reparation . "</h4>";
             foreach ($invoice->pays as $pay) {
                 echo "<p> pago asociado: $pay->id_pay, coste total: " . $invoice->totalPrice . "</p>";
-            }
-
-            foreach ($invoice->deductions as $deduction) {
-                echo "<p> descuento: $deduction->deductionName, de un : " . $deduction->percentage . "% </p>";
             }
         }
         echo "</div>";
@@ -275,7 +253,7 @@ class testORM extends Controller
         echo "<div style='margin: 5% 0;'><h2> Deductions </h2>";
         $deductions = deduction::all();
         foreach ($deductions as $deduction) {
-            echo "<h4> nombre del decuento: $deduction->deductionName, asociada a la factura: " . $deduction->invoice->id_invoice . "</h4>";
+            echo "<h4> nombre del decuento: $deduction->deductionName";
         }
         echo "</div>";
 

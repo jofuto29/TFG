@@ -12,8 +12,8 @@ class deduction extends Model
     protected $table = "deductions";
     protected $primaryKey = 'id_deduction';
 
-    public function invoice()
+    public function invoiceDeductions()
     {
-        return $this->belongsTo('App\Models\invoice', "id_invoice", "id_invoice");
+        return $this->hasMany('App\Models\invoiceDeduction', 'id_invoiceDeduction', 'id_invoiceDeduction');
     }
 }

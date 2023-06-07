@@ -3,6 +3,7 @@ export class reparation{
     constructor(
         public id_reparation: number,
         public id_vehicle: number,
+        public id_employee: number,
 
         public startDate: Date,
         public endDate: Date,

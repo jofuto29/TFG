@@ -16,6 +16,7 @@
             <th>Descripción de la solución</th>
             <th>Estado</th>
             <th>Id vehículo</th>
+            <th>Id empleado</th>
             <th>Ver productos asociados</th>
             <th>Ver servicios asociados</th>
             <th>Actualizar</th>
@@ -31,6 +32,7 @@
             <td>{{ reparation.solutionDescription }}</td>
             <td>{{ reparation.state }}</td>
             <td>{{ reparation.id_vehicle }}</td>
+            <td>{{ reparation.id_employee }}</td>
             <td [routerLink]="['/seeAssociatedProducts']" [queryParams]="{ id: reparation.id_reparation }">
               <span class="icon">
                 <i class="far fa-eye"></i>

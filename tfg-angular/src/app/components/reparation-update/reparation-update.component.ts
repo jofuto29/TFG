@@ -26,7 +26,7 @@ export class ReparationUpdateComponent {
     this.status = "";
     this.reparationId = 0;
     this.loadUser();
-    this.reparationData = new reparation(1,1,new Date(),new Date(),"","","", "","");
+    this.reparationData = new reparation(1,1,1,new Date(),new Date(),"","","", "","");
   }
 
   ngOnInit(): void {

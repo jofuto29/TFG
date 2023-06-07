@@ -22,9 +22,9 @@ class reparation extends Model
         return $this->hasMany('App\Models\reparationProducts', 'id_reparation', 'id_reparation');
     }
 
-    public function employeeReparation()
+    public function employee()
     {
-        return $this->hasMany('App\Models\employeeReparation', 'id_reparation', 'id_reparation');
+        return $this->hasMany('App\Models\employee', 'id_employee', 'id_employee');
     }
 
     public function vehicle()

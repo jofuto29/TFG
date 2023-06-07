@@ -50,8 +50,8 @@ class crud
             'quantity'        => 'required|numeric|integer'
         ],
         "reparations" => [
-            'id_reparation'     => 'required|exists:reparations,id_reparation',
             'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+            'id_employee'        => 'required|exists:employees,id_employee',
             'startDate'         => 'required|date',
             'endDate'           => 'date|after:startDate',
             'problemDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
@@ -59,7 +59,6 @@ class crud
             'state'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
         ],
         "vehicles" => [
-            'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
             'id_user'           => 'required|exists:users,id_user',
             'trademark'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'model'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
@@ -268,6 +267,7 @@ class crud
             } elseif ($table === 'reparations') {
                 $validationRules = [
                     'id_reparation'     => 'required|exists:reparations,id_reparation',
+                    'id_employee'        => 'required|exists:employees,id_employee',
                     'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
                     'startDate'         => 'required|date',
                     'endDate'           => 'date|after:startDate',
