@@ -67,22 +67,20 @@ Route::get('/testORM', 'App\Http\Controllers\testORM@testORM');
 */
 
 
-//rutas controlador funcion prueba
+// (0) rutas controlador funcion prueba
 Route::get('/user/prueba', 'App\Http\Controllers\UserController@prueba');
 Route::get('/vehicle/prueba', 'App\Http\Controllers\VehicleController@prueba');
 Route::get('/usedVehicle/prueba', 'App\Http\Controllers\UsedVehicleController@prueba');
 Route::get('/supplier/prueba', 'App\Http\Controllers\SupplierController@prueba');
 Route::get('/service/prueba', 'App\Http\Controllers\ServiceController@prueba');
 Route::get('/reparation/prueba', 'App\Http\Controllers\ReparationController@prueba');
-
 Route::get('/reparationProducts/prueba', 'App\Http\Controllers\reparationProductsController@prueba');
 Route::get('/reparationServices/prueba', 'App\Http\Controllers\reparationServicesController@prueba');
-
 Route::get('/product/prueba', 'App\Http\Controllers\productController@prueba');
 Route::get('/category/prueba', 'App\Http\Controllers\categoryController@prueba');
 
 
-//Rutas controlador de usuarios
+// (1) Rutas controlador de usuarios
 Route::post('/user/register', 'App\Http\Controllers\UserController@register'); //estas ruta no se pueden acceder directamente con url, es decir necesitamos formulario 
 Route::post('/user/login', 'App\Http\Controllers\UserController@login');
 Route::post('/user/sendMail', 'App\Http\Controllers\UserController@sendMail');
@@ -91,32 +89,60 @@ Route::get('/user/detailsUser/{id}', 'App\Http\Controllers\UserController@detail
 Route::delete('/user/deleteUser/{id}', 'App\Http\Controllers\UserController@deleteUser');
 Route::get('/user/listUsers', 'App\Http\Controllers\UserController@listUsers');
 
-//Rutas controlador de vehiculo usados
+// (2) Rutas del controlador de employee
+Route::resource('/employee', 'App\Http\Controllers\employeeController');
+
+// (3) Rutas del controlador de Paysheet
+Route::resource('/paysheet', 'App\Http\Controllers\paysheetController');
+
+// (4) Rutas del controlador de paymentMethods
+Route::resource('/paymentMethod', 'App\Http\Controllers\paymentMethodController');
+
+// (5) Rutas del controlador de vehicles
+Route::resource('/vehicle', 'App\Http\Controllers\vehicleController');
+
+// (6) Rutas controlador de vehiculo usados
+Route::resource('/usedVechile', 'App\Http\Controllers\usedVehicleController');
 Route::post('/usedVehicle/uploadImage', 'App\Http\Controllers\usedVehicleController@uploadImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class);
 Route::get('/usedVehicle/getImage/{filename}', 'App\Http\Controllers\usedVehicleController@getImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class); //filename sera una paremtro obligatorio en esta ruta
 
-//Rutas del controlador de categorias
+// (7) Rutas del controlador de bookings
+Route::resource('/booking', 'App\Http\Controllers\bookingController');
+
+// (8) Rutas del controlador de categorias
 /*en este caso vamos a definir las rutas de una manera diferente, como vemos hemos ido creando las rutas una a una, ahora haremos que se creen automaticamente*/
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 
-// Rutas del controlador de Productos
+// (9) Rutas del controlador de Productos
 Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::post('/product/storeImage', 'App\Http\Controllers\productController@storeImage');
 Route::get('/product/getImage/{filename}', 'App\Http\Controllers\productController@getImage');
 Route::get('/product/getProductsByCategory/{id}', 'App\Http\Controllers\productController@getProductsByCategory');
 Route::get('/product/getProductsBySupplier/{id}', 'App\Http\Controllers\productController@getProductsBySupplier');
 
-// Rutas del controlador de Suppliers
+// (10) Rutas del controlador de Suppliers
 Route::resource('/supplier', 'App\Http\Controllers\SupplierController');
 
-// Rutas del controlador de Suppliers
+// (11) Rutas del controlador de Service
 Route::resource('/service', 'App\Http\Controllers\ServiceController');
 
-// Rutas del controlador de Suppliers
+// (12) Rutas del controlador de ReparationProduct
 Route::resource('/reparationProducts', 'App\Http\Controllers\reparationProductsController');
 
-// Rutas del controlador de reparation
+// (13) Rutas del controlador de reparation
 Route::resource('/reparation', 'App\Http\Controllers\reparationController');
 
-// Rutas del controlador de reparation
-Route::resource('/vehicle', 'App\Http\Controllers\vehicleController');
+// (14) Rutas del controlador de reparationService
+Route::resource('/reparationServices', 'App\Http\Controllers\reparationServicesController');
+
+// (15) Rutas del controlador de reparation
+Route::resource('/invoiceDeductions', 'App\Http\Controllers\invoiceDeductionsController');
+
+// (16) Rutas del controlador de decutions
+Route::resource('/deduction', 'App\Http\Controllers\deductionController');
+
+// (17) Rutas del controlador de invoices
+Route::resource('/invoice', 'App\Http\Controllers\invoiceController');
+
+// (18) Rutas del controlador de pagos
+Route::resource('/pay', 'App\Http\Controllers\payController');

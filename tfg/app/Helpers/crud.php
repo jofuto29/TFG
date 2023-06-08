@@ -12,7 +12,7 @@ class crud
 {
     //validations only method store
     private $validationRules = [
-        'products' => [
+        'products' => [ //1
             'id_supplier'   => 'required|exists:suppliers,id_supplier',
             'id_category'   => 'required|exists:categories,id_category',
             'productName'   => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:products',
@@ -25,11 +25,11 @@ class crud
             'location'      => 'required|string',
             'img'           => 'string'
         ],
-        'categories' => [
+        'categories' => [ //2
             'categoryName'  => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:categories',
             'description'   => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
         ],
-        "suppliers" => [
+        "suppliers" => [ //3
             'supplierName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'lastName'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'email'             => 'required|email',
@@ -37,19 +37,19 @@ class crud
             'address'           => 'required',
             'dni'               => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:suppliers'
         ],
-        "services" => [
+        "services" => [ //4
             'serviceName'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'description'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'price'             => 'required|numeric',
             'duration'          => 'required|numeric',
             'serviceType'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
         ],
-        "reparationProducts" => [
+        "reparationProducts" => [ //5
             'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
             'id_product'      => 'required|exists:products,id_product',
             'quantity'        => 'required|numeric|integer'
         ],
-        "reparations" => [
+        "reparations" => [ //6
             'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
             'id_employee'        => 'required|exists:employees,id_employee',
             'startDate'         => 'required|date',
@@ -58,12 +58,72 @@ class crud
             'solutionDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'state'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
         ],
-        "vehicles" => [
+        "vehicles" => [ //7
             'id_user'           => 'required|exists:users,id_user',
             'trademark'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'model'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
             'registration'      => 'required|regex:/^[0-9]{4} [A-Z]{3}$/|unique:vehicles',
             'mileage'           => 'required|numeric'
+        ],
+        "usedVehicles" => [ //8
+            'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+            'color'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'img'               => 'required|string',
+            'opinion'           => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+            'price'             => 'required|numeric',
+            'year'             =>  'required|numeric',
+        ],
+        "paysheets" => [ //9
+            'id_employee'       => 'required|exists:employees,id_employee',
+            'salaryBase'        => 'required|numeric',
+            'contractedHours'   => 'required|integer',
+            'salaryExtra'       => 'required|numeric',
+            'extraHours'        => 'required|integer',
+            'salaryTotal'       => 'required|numeric',
+            'deductions'        => 'required|numeric',
+            'salaryNet'         => 'required|numeric',
+            'payDate'           => 'required|date',
+            'state'             => 'required|string'
+        ],
+        "paymentMethods" => [ //10
+            'id_user'           => 'required|exists:users,id_user',
+            'cardNumber'      => 'required|string|digits_between:12,19',
+            'cardName'        => 'required|string',
+            'cardSecurity'    => 'required|string|digits_between:3,4',
+            'cardExpiryDate'  => 'required|date_format:m/y'
+        ],
+        "pays" => [ //11
+            'id_card'         => 'required|exists:paymentMethods,id_card', //exists:table,column
+            'id_invoice'      => 'required|exists:invoices,id_invoice'
+        ],
+        "invoiceDeductions" => [ //12
+            'id_invoice'        => 'required|exists:invoices,id_invoice',
+            'id_deduction'      => 'required|exists:deductions,id_deduction'
+        ],
+        "invoices" => [ //13
+            'id_reparation' => 'required|exists:reparations,id_reparation',
+            'invoiceDate'   => 'required|date',
+            'totalPrice'    => 'required|numeric',
+            'state'         => 'required|string',
+        ],
+        "employees" => [ //14
+            'id_user'        => 'required|exists:users,id_user',
+            'nss'            => 'required|numeric',
+            'tipo_empleado'  => 'required|string',
+        ],
+        "deductions" => [ //15
+            'deductionName'  => 'required|string',
+            'description'    => 'nullable|string',
+            'percentage'     => 'required|numeric|min:0|max:100',
+        ],
+        "bookings" => [ //16
+            'id_user'        => 'required|exists:users,id_user',
+            'id_vehicle'     => 'required|exists:vehicles,id_vehicle',
+            'date_booking'   => 'required|date',
+        ],
+        "reparationServices" => [ //17
+            'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
+            'id_service'      => 'required|exists:services,id_service'
         ],
     ];
 
@@ -222,7 +282,7 @@ class crud
             $atributos = array_map('trim', $params);
 
             $validationRules = [];
-            if ($table === 'products') {
+            if ($table === 'products') { //1
                 $validationRules = [
                     'id_supplier'   => 'required|exists:suppliers,id_supplier', //exists:table,column
                     'id_category'   => 'required|exists:categories,id_category',
@@ -236,12 +296,12 @@ class crud
                     'location'      => 'required|string',
                     'img'           => 'required|string'
                 ];
-            } elseif ($table === 'categories') {
+            } elseif ($table === 'categories') { //2
                 $validationRules = [
                     'categoryName'  => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:categories',
                     'description' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
                 ];
-            } elseif ($table === 'suppliers') {
+            } elseif ($table === 'suppliers') { //3
                 $validationRules = [
                     'supplierName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'lastName'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
@@ -250,7 +310,7 @@ class crud
                     'address'           => 'required',
                     'dni'               => "required|regex:/^[0-9]{8}[A-Za-z]$/|unique:suppliers,dni,$id,id_supplier"
                 ];
-            } elseif ($table === 'services') {
+            } elseif ($table === 'services') { //4
                 $validationRules = [
                     'serviceName'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'description'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
@@ -258,15 +318,14 @@ class crud
                     'duration'          => 'required|numeric',
                     'serviceType'       => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
                 ];
-            } elseif ($table === 'reparationProducts') {
+            } elseif ($table === 'reparationProducts') { //5
                 $validationRules = [
                     'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
                     'id_product'      => 'required|exists:products,id_product',
                     'quantity'        => 'required|numeric|integer'
                 ];
-            } elseif ($table === 'reparations') {
+            } elseif ($table === 'reparations') { //6
                 $validationRules = [
-                    'id_reparation'     => 'required|exists:reparations,id_reparation',
                     'id_employee'        => 'required|exists:employees,id_employee',
                     'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
                     'startDate'         => 'required|date',
@@ -275,16 +334,93 @@ class crud
                     'solutionDescription' => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'state'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/'
                 ];
-            } elseif ($table === 'vehicles') {
+            } elseif ($table === 'vehicles') { //7
                 $validationRules = [
-                    'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
                     'id_user'           => 'required|exists:users,id_user',
                     'trademark'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'model'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'registration'      => 'required|regex:/^[0-9]{4} [A-Z]{3}$/|unique:vehicles',
                     'mileage'           => 'required|numeric'
                 ];
+            } elseif ($table === 'usedVehicles') { //8
+                $validationRules = [
+                    'id_vehicle'        => 'required|exists:vehicles,id_vehicle',
+                    'color'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'img'               => 'required|string',
+                    'opinion'           => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                    'price'             => 'required|numeric',
+                    'year'              => 'required|numeric',
+                ];
+            } elseif ($table === 'reparationServices') { //9
+                $validationRules = [
+                    'id_reparation'   => 'required|exists:reparations,id_reparation', //exists:table,column
+                    'id_service'      => 'required|exists:services,id_service'
+                ];
+            } elseif ($table === 'paysheets') { //10
+                $validationRules = [
+                    'id_employee'       => 'required|exists:employees,id_employee',
+                    'salaryBase'        => 'required|numeric',
+                    'contractedHours'   => 'required|integer',
+                    'salaryExtra'       => 'required|numeric',
+                    'extraHours'        => 'required|integer',
+                    'salaryTotal'       => 'required|numeric',
+                    'deductions'        => 'required|numeric',
+                    'salaryNet'         => 'required|numeric',
+                    'payDate'           => 'required|date',
+                    'state'             => 'required|string'
+                ];
+            } elseif ($table === 'paymentMethods') { //11
+                $validationRules = [
+                    'id_user'         => 'required|exists:users,id_user',
+                    'cardNumber'      => 'required|string|digits_between:12,19',
+                    'cardName'        => 'required|string',
+                    'cardSecurity'    => 'required|string|digits_between:3,4',
+                    'cardExpiryDate'  => 'required|date_format:m/y'
+                ];
+            } elseif ($table === 'pays') { //12
+                $validationRules = [
+                    'id_card'         => 'required|exists:paymentMethods,id_card', //exists:table,column
+                    'id_invoice'      => 'required|exists:invoices,id_invoice'
+                ];
+            } elseif ($table === 'invoiceDeductions') { //13
+                $validationRules = [
+                    'id_invoice'        => 'required|exists:invoices,id_invoice',
+                    'id_deduction'      => 'required|exists:deductions,id_deduction'
+                ];
+            } elseif ($table === 'invoices') { //14
+                $validationRules = [
+                    'id_reparation' => 'required|exists:reparations,id_reparation',
+                    'invoiceDate'   => 'required|date',
+                    'totalPrice'    => 'required|numeric',
+                    'state'         => 'required|string',
+                ];
+            } elseif ($table === 'deductions') { //15
+                $validationRules = [
+                    'deductionName'  => 'required|string',
+                    'description'    => 'nullable|string',
+                    'percentage'     => 'required|numeric|min:0|max:100',
+                ];
+            } elseif ($table === 'bookings') { //16
+                $validationRules = [
+                    'id_user'        => 'required|exists:users,id_user',
+                    'id_vehicle'     => 'required|exists:vehicles,id_vehicle',
+                    'date_booking'   => 'required|date',
+                ];
+            } elseif ($table === 'paysheets') { //17
+                $validationRules = [
+                    'id_employee'       => 'required|exists:employees,id_employee',
+                    'salaryBase'        => 'required|numeric',
+                    'contractedHours'   => 'required|integer',
+                    'salaryExtra'       => 'required|numeric',
+                    'extraHours'        => 'required|integer',
+                    'salaryTotal'       => 'required|numeric',
+                    'deductions'        => 'required|numeric',
+                    'salaryNet'         => 'required|numeric',
+                    'payDate'           => 'required|date',
+                    'state'             => 'required|string'
+                ];
             }
+
 
             $filteredArray = array_intersect_key($atributos, array_flip(array_keys($validationRules)));
 
