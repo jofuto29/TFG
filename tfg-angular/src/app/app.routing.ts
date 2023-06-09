@@ -28,6 +28,8 @@ import { SupplierUpdateComponent } from './components/supplier-update/supplier-u
 import { ReparationComponent } from './components/reparation/reparation.component';
 import { ReparationRegisterComponent } from './components/reparation-register/reparation-register.component';
 import { ReparationUpdateComponent } from './components/reparation-update/reparation-update.component';
+import { ReparationProductosAsociadosComponent } from './components/reparation-productos-asociados/reparation-productos-asociados.component';
+import { ReparationServiciosAsociadosComponent } from './components/reparation-servicios-asociados/reparation-servicios-asociados.component';
 
 
 // Definir las rutas
@@ -60,6 +62,8 @@ const appRoutes: Routes = [
   { path: 'reparations', component: ReparationComponent},
   { path: 'addReparation', component: ReparationRegisterComponent},
   { path: 'updateReparation', component: ReparationUpdateComponent},
+  { path: 'seeAssociatedProducts', component: ReparationProductosAsociadosComponent},
+  { path: 'seeAssociatedServices', component: ReparationServiciosAsociadosComponent},
 
   
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]

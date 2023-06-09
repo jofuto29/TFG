@@ -216,3 +216,15 @@ tbody tr td img{
   }
 
 }
+
+
+/*clases asociadas registros*/
+.selected-objects ul{
+  list-style: none;
+  padding: 0!important;
+}
+
+.selected-objects li{
+  display: flex;
+  justify-content: space-between;
+}

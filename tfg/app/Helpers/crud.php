@@ -187,7 +187,27 @@ class crud
         return response()->json($response, $response['code']);
     }
 
+    /*funcion para encontrar los registros que coincidan por el campo pasado*/
+    public function findByCamp($object, $model, $id)
+    {
+        //podriamos hacer tambien el load aqui para mostrar mas cosas asociada
+        if (!empty($object)) {
+            $response = array(
+                'status' => 'success',
+                'code'   => 200,
+                'message' => "El $model con id=$id ha sido consultado correctamente.",
+                '$model' => $object
+            );
+        } else {
+            $response = array(
+                'status' => 'error',
+                'code'   => 404,
+                'message' => "No se ha encontrado ningun $model asociado al identificador $id.",
+            );
+        }
 
+        return response()->json($response, $response['code']);
+    }
 
     /**
      * Funcion para eliminar un registro

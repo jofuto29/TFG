@@ -128,12 +128,14 @@ Route::resource('/service', 'App\Http\Controllers\ServiceController');
 
 // (12) Rutas del controlador de ReparationProduct
 Route::resource('/reparationProducts', 'App\Http\Controllers\reparationProductsController');
+Route::get('/reparationProducts/findByCamp/{camp}', 'App\Http\Controllers\reparationProductsController@findByCamp');
 
 // (13) Rutas del controlador de reparation
 Route::resource('/reparation', 'App\Http\Controllers\reparationController');
 
 // (14) Rutas del controlador de reparationService
 Route::resource('/reparationServices', 'App\Http\Controllers\reparationServicesController');
+Route::get('/reparationServices/findByCamp/{camp}', 'App\Http\Controllers\reparationServicesController@findByCamp');
 
 // (15) Rutas del controlador de reparation
 Route::resource('/invoiceDeductions', 'App\Http\Controllers\invoiceDeductionsController');

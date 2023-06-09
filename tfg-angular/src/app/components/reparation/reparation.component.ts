@@ -48,4 +48,17 @@ export class ReparationComponent implements OnInit{
     this.identity = this._crudService.getIdentity();
     this.token = this._crudService.getToken();
   }
+
+  getStateClass(state: string): string {
+    switch (state) {
+      case 'Standby':
+        return 'state-red'; // Clase CSS para estado Standby en rojo
+      case 'Progress':
+        return 'state-orange'; // Clase CSS para estado Progress en naranja
+      case 'Complete':
+        return 'state-green'; // Clase CSS para estado Complete en verde
+      default:
+        return ''; // Clase CSS predeterminada si el estado no coincide con ninguna opción
+    }
+  }
 }

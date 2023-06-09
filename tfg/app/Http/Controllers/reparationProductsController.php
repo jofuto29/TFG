@@ -17,7 +17,7 @@ class reparationProductsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['index', 'show']]);
+        $this->middleware('\App\Http\Middleware\ApiAuthMiddleware::class', ['except' => ['index', 'show', 'findByCamp']]);
     }
 
     /**
@@ -99,5 +99,12 @@ class reparationProductsController extends Controller
 
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "reparationProducts", reparationProducts::find($id), $id, "id_reparationProducts");
+    }
+
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(reparationProducts::where('id_reparation', $camp)->get(), "reparationProducts", $camp);
     }
 }

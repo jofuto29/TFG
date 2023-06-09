@@ -1,1 +1,58 @@
-<p>reparation-productos-asociados works!</p>
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de productos asociados a la reparacion con id: {{reparationId}}</h1>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Imagen producto</th>
+            <th>ID producto</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Marca</th>
+            <th>Fecha de Admisión</th>
+            <th>Fecha de Caducidad</th>
+            <th>Ubicación</th>
+            <th>ID Proveedor</th>
+            <th>ID Categoría</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of asociatedProducts">
+            <td><img [src]="sanitizedImageUrls[producto.img]" alt="Imagen"></td>
+            <td>{{ producto.id_product }}</td>
+            <td>{{ producto.productName }}</td>
+            <td>{{ producto.description }}</td>
+            <td>{{ producto.price }}</td>
+            <td>{{ producto.stock }}</td>
+            <td>{{ producto.marca }}</td>
+            <td>{{ producto.admisionDate }}</td>
+            <td>{{ producto.expiryDate }}</td>
+            <td>{{ producto.location }}</td>
+            <td>{{ producto.id_supplier }}</td>
+            <td>{{ producto.id_category }}</td>
+            <td [routerLink]="['/updateProduct']" [queryParams]="{ id: producto.id_product }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteProduct(producto.id_product)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    <div class="buttonAdmin form-group">
+        <span class="btn btn-success" [routerLink]="['/reparations']" > Volver atrás</span>
+    </div>
+</div>

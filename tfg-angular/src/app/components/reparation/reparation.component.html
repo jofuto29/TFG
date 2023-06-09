@@ -30,7 +30,7 @@
             <td>{{ reparation.endDate }}</td>
             <td>{{ reparation.problemDescription }}</td>
             <td>{{ reparation.solutionDescription }}</td>
-            <td>{{ reparation.state }}</td>
+            <td [ngClass]="getStateClass(reparation.state)">{{ reparation.state }}</td>
             <td>{{ reparation.id_vehicle }}</td>
             <td>{{ reparation.id_employee }}</td>
             <td [routerLink]="['/seeAssociatedProducts']" [queryParams]="{ id: reparation.id_reparation }">

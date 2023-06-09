@@ -32,7 +32,7 @@
           </select>
         </div>
         
-        <div class="form-group select-products">
+        <div class="form-group selected-objects">
           <label>Productos seleccionados:</label>
           <ul>
             <li *ngFor="let product of addedProducts; let i = index">
@@ -52,7 +52,7 @@
           </select>
         </div>
         
-        <div class="form-group select-products">
+        <div class="form-group selected-objects">
           <label>Servicios seleccionados:</label>
           <ul>
             <li *ngFor="let service of addedServices; let i = index">
@@ -65,7 +65,7 @@
           <label for="id_employee">Empleado:</label>
           <select name="id_employee" id="id_employee" class="form-control" 
             [(ngModel)]="reparationData.id_employee" required>
-            <option *ngFor="let employee of employees" [value]="employee.id_employee"></option>
+            <option *ngFor="let employee of employees; index as i" [value]="employee.id_employee">{{ employee.id_employee }} {{ users[i]?.userName }}</option>
           </select>
           <small *ngIf="!reparationData.id_employee" class="invalid-feedback d-block">
             Selecciona un empleado
@@ -112,11 +112,10 @@
 
         <div class="form-group">
           <label for="state">Estado:</label>
-          <input type="text" name="state" id="state" placeholder="Estado de la reparación" class="form-control"
-            #state="ngModel" [(ngModel)]="reparationData.state" required>
-          <small *ngIf="!state.valid && state.touched" class="invalid-feedback d-block">
-                Estado invalido
-          </small>
+          <select name="state" id="state" class="form-control" 
+            [(ngModel)]="reparationData.state" required>
+            <option *ngFor="let option of stateOptions" [value]="option.value">{{ option.label }}</option>
+          </select>
         </div>
 
         <div class="buttonAdmin form-group">

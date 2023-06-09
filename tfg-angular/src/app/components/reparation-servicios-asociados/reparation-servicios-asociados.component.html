@@ -1,1 +1,44 @@
-<p>reparation-servicios-asociados works!</p>
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de servicios registrados</h1>
+      <span class="button"><a [routerLink]="['/addService']"> Añadir servicio </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID servicio</th>
+            <th>Nombre del servicio</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Tipo de servicio</th>
+            <th>Duracion media</th>
+            <th>Actualizar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of asociatedServices">
+            <td>{{ service.id_service }}</td>
+            <td>{{ service.serviceName }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.price }}</td>
+            <td>{{ service.serviceType }}</td>
+            <td>{{ service.duration }}</td>
+            <td [routerLink]="['/updateService']" [queryParams]="{ id: service.id_service }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteService(service.id_service)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

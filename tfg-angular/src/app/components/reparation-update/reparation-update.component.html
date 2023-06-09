@@ -1,81 +1,130 @@
 <div class="adminComponent col-md-12 mt-3">
-    <h1>Registrata una nueva reparación</h1>
-  
-    <div class="alert alert-success" *ngIf="status == 'success' ">
-      El registro se ha completado correctamente
-    </div>
-    <div class="alert alert-danger" *ngIf="status == 'error' ">
-      El registro no se ha completado correctamente. Introduzca correctamente los datos.
-    </div>
-  
-    <!--formulario de registro-->
-    <form class="col-md-5 ml-0 pl-0" #registerReparationForm="ngForm" (ngSubmit)="onSubmit(registerReparationForm)">
-  
-        <div class="form-group">
-            <label for="id_vehicle">Vehículo:</label>
-            <select name="id_vehicle" id="id_vehicle" class="form-control" 
-              [(ngModel)]="reparationData.id_vehicle" required>
-              <option *ngFor="let vehicle of vehicles" [value]="vehicle.id_vehicle">Vehículo:{{ vehicle.id_vehicle }} ----- Matrícula:{{ vehicle.registration }}</option>
-            </select>
-            <small *ngIf="!reparationData.id_vehicle" class="invalid-feedback d-block">
-              Selecciona un vehículo
-            </small>
-        </div>
+  <h1>Registrata una nueva reparación</h1>
 
-        <div class="form-group">
-            <label for="startDate">Fecha de inicio:</label>
-            <input type="datetime-local" name="startDate" id="startDate" class="form-control"
-              #startDate="ngModel" [(ngModel)]="reparationData.startDate" required>
-            <small *ngIf="!startDate.valid && startDate.touched" class="invalid-feedback d-block">
-              Fecha no valida
-            </small>
-        </div>
-
-        <div class="form-group">
-            <label for="endDate">Fecha de inicio:</label>
-            <input type="datetime-local" name="endDate" id="endDate" class="form-control"
-              #endDate="ngModel" [(ngModel)]="reparationData.endDate" required>
-            <small *ngIf="!endDate.valid && endDate.touched" class="invalid-feedback d-block">
-              Fecha no valida
-            </small>
-        </div>
-
-        <div class="form-group">
-            <label for="problemDescription">Descripción del problema:</label>
-            <textarea name="problemDescription" id="problemDescription" placeholder="¿Descripción del problema?" class="form-control"
-              #problemDescription="ngModel" [(ngModel)]="reparationData.problemDescription" required
-              pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
-            <small *ngIf="!problemDescription.valid && problemDescription.touched" class="invalid-feedback d-block">
-              Descripción no es válida
-            </small>
-        </div>
-
-        <div class="form-group">
-            <label for="solutionDescription">Descripción de la solución:</label>
-            <textarea name="solutionDescription" id="solutionDescription" placeholder="¿Descripción de la solución?" class="form-control"
-              #solutionDescription="ngModel" [(ngModel)]="reparationData.solutionDescription" required
-              pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
-            <small *ngIf="!solutionDescription.valid && solutionDescription.touched" class="invalid-feedback d-block">
-              Descripción no es válida
-            </small>
-        </div>
-
-        <div class="form-group">
-          <label for="state">Estado:</label>
-          <input type="text" name="state" id="state" placeholder="Estado de la reparación" class="form-control"
-            #state="ngModel" [(ngModel)]="reparationData.state" required>
-          <small *ngIf="!state.valid && state.touched" class="invalid-feedback d-block">
-                Estado invalido
-          </small>
-        </div>
-
-        <div class="buttonAdmin form-group">
-            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerReparationForm.invalid">
-        </div>
-  
-        <div class="buttonAdmin form-group">
-            <span class="btn btn-success" [routerLink]="['/reparations']" > Volver atrás</span>
-        </div>
-  
-    </form>
+  <div class="alert alert-success" *ngIf="status == 'success' ">
+    El registro se ha completado correctamente
   </div>
+  <div class="alert alert-danger" *ngIf="status == 'error' ">
+    El registro no se ha completado correctamente. Introduzca correctamente los datos.
+  </div>
+
+  <!--formulario de registro-->
+  <form class="col-md-5 ml-0 pl-0" #registerReparationForm="ngForm" (ngSubmit)="onSubmit(registerReparationForm)">
+
+      <div class="form-group">
+          <label for="id_vehicle">Vehículo:</label>
+          <select name="id_vehicle" id="id_vehicle" class="form-control" 
+            [(ngModel)]="reparationData.id_vehicle" required>
+            <option *ngFor="let vehicle of vehicles" [value]="vehicle.id_vehicle">Vehículo:{{ vehicle.id_vehicle }} ----- Matrícula:{{ vehicle.registration }}</option>
+          </select>
+          <small *ngIf="!reparationData.id_vehicle" class="invalid-feedback d-block">
+            Selecciona un vehículo
+          </small>
+      </div>
+
+      <div class="form-group">
+        <label for="id_product">Productos Asociados:</label>
+        <select name="id_product" id="id_product" class="form-control" 
+          [(ngModel)]="selectedProducts" (change)="addProduct()" multiple>
+          <option *ngFor="let product of products" [value]="product.id_product">
+            Product: {{ product.productName }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="form-group selected-objects">
+        <label>Productos seleccionados:</label>
+        <ul>
+          <li *ngFor="let product of addedProducts; let i = index">
+            <label for="quantity">{{ product.productName }} - Cantidad:</label>
+            <input type="number" name="quantity" id="quantity" [(ngModel)]="productQuantities[i]" min="1" required>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <label for="id_service">Servicios Asociados:</label>
+        <select name="id_service" id="id_service" class="form-control" 
+          [(ngModel)]="selectedServices" (change)="addProductService()" multiple>
+          <option *ngFor="let service of services" [value]="service.id_service">
+            Servicio: {{ service.serviceName }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="form-group selected-objects">
+        <label>Servicios seleccionados:</label>
+        <ul>
+          <li *ngFor="let service of addedServices; let i = index">
+            <p>{{ service.serviceName }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <label for="id_employee">Empleado:</label>
+        <select name="id_employee" id="id_employee" class="form-control" 
+          [(ngModel)]="reparationData.id_employee" required>
+          <option *ngFor="let employee of employees; index as i" [value]="employee.id_employee">{{ employee.id_employee }} {{ users[i]?.userName }}</option>
+        </select>
+        <small *ngIf="!reparationData.id_employee" class="invalid-feedback d-block">
+          Selecciona un empleado
+        </small>
+      </div>
+
+      <div class="form-group">
+          <label for="startDate">Fecha de inicio:</label>
+          <input type="datetime-local" name="startDate" id="startDate" class="form-control"
+            #startDate="ngModel" [(ngModel)]="reparationData.startDate" required>
+          <small *ngIf="!startDate.valid && startDate.touched" class="invalid-feedback d-block">
+            Fecha no valida
+          </small>
+      </div>
+
+      <div class="form-group">
+          <label for="endDate">Fecha de inicio:</label>
+          <input type="datetime-local" name="endDate" id="endDate" class="form-control"
+            #endDate="ngModel" [(ngModel)]="reparationData.endDate" required>
+          <small *ngIf="!endDate.valid && endDate.touched" class="invalid-feedback d-block">
+            Fecha no valida
+          </small>
+      </div>
+
+      <div class="form-group">
+          <label for="problemDescription">Descripción del problema:</label>
+          <textarea name="problemDescription" id="problemDescription" placeholder="¿Descripción del problema?" class="form-control"
+            #problemDescription="ngModel" [(ngModel)]="reparationData.problemDescription" required
+            pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
+          <small *ngIf="!problemDescription.valid && problemDescription.touched" class="invalid-feedback d-block">
+            Descripción no es válida
+          </small>
+      </div>
+
+      <div class="form-group">
+          <label for="solutionDescription">Descripción de la solución:</label>
+          <textarea name="solutionDescription" id="solutionDescription" placeholder="¿Descripción de la solución?" class="form-control"
+            #solutionDescription="ngModel" [(ngModel)]="reparationData.solutionDescription" required
+            pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
+          <small *ngIf="!solutionDescription.valid && solutionDescription.touched" class="invalid-feedback d-block">
+            Descripción no es válida
+          </small>
+      </div>
+
+      <div class="form-group">
+        <label for="state">Estado:</label>
+        <select name="state" id="state" class="form-control" 
+          [(ngModel)]="reparationData.state" required>
+          <option *ngFor="let option of stateOptions" [value]="option.value">{{ option.label }}</option>
+        </select>
+      </div>
+
+      <div class="buttonAdmin form-group">
+          <input type="submit" value="Actualizar" class="btn btn-success" [disabled]="registerReparationForm.invalid">
+      </div>
+
+      <div class="buttonAdmin form-group">
+          <span class="btn btn-success" [routerLink]="['/reparations']" > Volver atrás</span>
+      </div>
+
+  </form>
+</div>

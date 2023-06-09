@@ -14,21 +14,31 @@ import { crudService } from 'src/app/services/crudService';
 export class ReparationRegisterComponent {
   public reparationData: reparation;
 
+  /*clases relacionadas*/
   public vehicles: any[] = []; // Array para almacenar los vehiculos
   public products: any[] = [];
   public services: any[] = [];
   public employees: any[] = [];
+  public users:any[] = [];
 
+  /*saber podructos relacionados*/
   public selectedProducts: number[] = [];
   public addedProducts: any[] = [];
   public productQuantities: number[] = [];
 
+  /**saber servicios */
   public selectedServices: number[] = [];
   public addedServices: any[] = [];
 
   public status: string;
   public identity: any;
   public token: any;
+
+  public stateOptions = [
+    { value: 'Stanby', label: 'Stanby' },
+    { value: 'Progress', label: 'Progress' },
+    { value: 'Complete', label: 'Complete' }
+  ];
 
   constructor(
     private _crudService: crudService,
@@ -82,6 +92,7 @@ export class ReparationRegisterComponent {
         }
 
         this.status = "success";
+        this._router.navigate(['reparations']);
       },
       (error) => {
         // Manejar el error aquí
@@ -93,6 +104,7 @@ export class ReparationRegisterComponent {
     
   }
 
+  /*listar informacion necesaria para el formulario de registro*/
   listVehicles() {
     this._crudService.listObjects(this.token, 'vehicle').subscribe(
       (response) => {
@@ -144,19 +156,28 @@ export class ReparationRegisterComponent {
   listEmployees(){
     this._crudService.listObjects(this.token, 'employee').subscribe(
       (response) => {
-        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
-        
-        this.employees = [...response.$model]; // Asignar la respuesta al array de productos
+        this.employees = [...response.$model];
         console.log("Empleados ");
         console.log(this.employees);
+        for(var i = 0; i < this.employees.length; i++){
+          this._crudService.getObject(this.token, 'user/detailsUser/', this.employees[i].id_employee).subscribe(
+            (response) => {
+              this.users.push(response.$model);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        }
+        console.log(this.users);
       },
       (error) => {
-        // Manejar el error aquí
         console.error(error);
       }
     );
   }
 
+  /*añadimos al array */
   addProduct() {
     const lastSelectedProductId = this.selectedProducts[this.selectedProducts.length - 1];
     const lastSelectedProductIndex = this.products.findIndex(product => product.id_product === lastSelectedProductId);//se obtiene la posicion del elemento en el array
@@ -177,4 +198,5 @@ export class ReparationRegisterComponent {
       this.addedServices.push(lastSelectedProduct);//lo añade a porducto selecionados
     }
   }
+
 }
