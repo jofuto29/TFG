@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { crudService } from 'src/app/services/crudService';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-reparation',
@@ -11,6 +12,8 @@ export class ReparationComponent implements OnInit{
   public token: any;
   public identity: any;
   public reparations: any[] = []; // Array para almacenar los productos
+  public reparationProducts: any[] = []; // Array para almacenar los id productos
+  public reparationServices: any[] = []; // Array para almacenar los id productos
 
   constructor(
     private _crudService: crudService
@@ -34,7 +37,64 @@ export class ReparationComponent implements OnInit{
   }
 
   deleteReparation(reparationId: number) {
-    this._crudService.deleteObject(this.token,'reparation/',reparationId).subscribe(
+    //primero borramos en la tabla relacion entre reparacion y servicio
+    this._crudService.getObject(this.token, "reparationServices/findByCamp/", reparationId).subscribe(
+      (response) => {
+        this.reparationServices = response.$model;
+
+        //si la longitud es mallor a 0 procedemos a borrar
+        if (this.reparationServices.length !== 0) {
+          const deleteServiceRequests = this.reparationServices.map(service => {//creamos un array utilizando el metodo map para iterar sobre todos los objetos dentro de reparation service
+            return this._crudService.deleteObject(this.token, "reparationServices/", service.id_reparationServices);//guardamos en deleteService las respuestas
+          });
+  
+          forkJoin(deleteServiceRequests).subscribe(//unimos todas las solicitudes en un mismo obserbable mediante forkjoin para que espere a que todas las solicitudes se haya completado
+            (deleteServiceResponses) => {
+              this.deleteReparationProducts(reparationId);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        } else {
+          this.deleteReparationProducts(reparationId);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  deleteReparationProducts(reparationId: number) {
+    this._crudService.getObject(this.token, "reparationProducts/findByCamp/", reparationId).subscribe(
+      (response) => {
+        this.reparationProducts = response.$model;
+        if (this.reparationProducts.length !== 0) {
+          const deleteProductRequests = this.reparationProducts.map(product => {
+            return this._crudService.deleteObject(this.token, "reparationProducts/", product.id_reparationProducts);
+          });
+
+          forkJoin(deleteProductRequests).subscribe(
+            (deleteProductResponses) => {
+              this.deleteReparationClass(reparationId);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        } else {
+          this.deleteReparationClass(reparationId);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  deleteReparationClass(reparationId: number) {
+    this._crudService.deleteObject(this.token, 'reparation/', reparationId).subscribe(
       (response) => {
         window.location.reload();
       },
@@ -61,4 +121,5 @@ export class ReparationComponent implements OnInit{
         return ''; // Clase CSS predeterminada si el estado no coincide con ninguna opción
     }
   }
+
 }

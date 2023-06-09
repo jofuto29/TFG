@@ -34,11 +34,7 @@ export class ReparationRegisterComponent {
   public identity: any;
   public token: any;
 
-  public stateOptions = [
-    { value: 'Stanby', label: 'Stanby' },
-    { value: 'Progress', label: 'Progress' },
-    { value: 'Complete', label: 'Complete' }
-  ];
+  public stateOptions = ["Standby","Progress","Complete"];
 
   constructor(
     private _crudService: crudService,

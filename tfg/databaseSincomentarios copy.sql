@@ -147,8 +147,8 @@ CREATE TABLE Reparations(
 
     id_reparation       int auto_increment NOT NULL,
     id_vehicle          int NOT NULL,
-    date_start          datetime NOT NULL,
-    date_end            datetime,
+    startDate           datetime NOT NULL,
+    endDate             datetime,
     problemDescription  varchar(255) NOT NULL,
     solutionDescription varchar(255),
     state               varchar(20) DEFAULT 'Standby' NOT NULL,
@@ -163,7 +163,7 @@ CREATE TABLE Reparations(
 )ENGINE=InnoDb;
 
 
-INSERT INTO `reparations` (`id_reparation`, `id_vehicle`, `date_start`, `date_end`, `problemDescription`, `solutionDescription`, `state`, `created_at`, `updated_at`) 
+INSERT INTO `reparations` (`id_reparation`, `id_vehicle`, `startDate`, `endDate`, `problemDescription`, `solutionDescription`, `state`, `created_at`, `updated_at`) 
                     VALUES (NULL, '1', '2023-05-05 14:04:35.000000', '2023-05-10 16:04:35', 'CAMBIO DE ACEITE', 'CAMBIO DE ACEITE', 'COMPLETADO', NULL, NULL);
 
 
@@ -280,6 +280,7 @@ CREATE TABLE Products(
     expiryDate          datetime DEFAULT NULL,
     location            varchar(255) NOT NULL,
     img                 varchar(255) NOT NULL,
+    marca               varchar(255) NOT NULL,
     
     created_at          datetime DEFAULT NULL,
     updated_at          datetime DEFAULT NULL,
@@ -291,8 +292,8 @@ CREATE TABLE Products(
 )ENGINE=InnoDb;
 
 
-INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `productName`, `description`, `price`, `Stock`, `admisionDate`, `expiryDate`, `location`, `img`, `created_at`, `updated_at`) 
-                    VALUES (NULL, '1', '1', 'PRODUCTO DE PRUEBA', 'PRODUCTO PARA USAR EN PRUEBAS', '150', '2', NULL, NULL, '', '', NULL, NULL);
+INSERT INTO `products` (`id_product`, `id_supplier`, `id_category`, `productName`, `description`, `price`, `Stock`, `admisionDate`, `expiryDate`, `location`, `img`, `created_at`, `updated_at`, `marca`) 
+                    VALUES (NULL, '1', '1', 'PRODUCTO DE PRUEBA', 'PRODUCTO PARA USAR EN PRUEBAS', '150', '2', NULL, NULL, '', '', NULL, NULL, 'branch');
 
 
 

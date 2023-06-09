@@ -114,7 +114,7 @@
         <label for="state">Estado:</label>
         <select name="state" id="state" class="form-control" 
           [(ngModel)]="reparationData.state" required>
-          <option *ngFor="let option of stateOptions" [value]="option.value">{{ option.label }}</option>
+          <option *ngFor="let option of stateOptions" [value]="option" >{{ option }}</option>
         </select>
       </div>
 

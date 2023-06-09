@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { reparation } from 'src/app/models/reparation';
 import { reparationProducts } from 'src/app/models/reparationProducts';
 import { reparationServices } from 'src/app/models/reparationServices';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { crudService } from 'src/app/services/crudService';
 
 @Component({
@@ -34,16 +34,14 @@ export class ReparationUpdateComponent implements OnInit{
   public status: string;
   public identity: any;
   public token: any;
+  public idReparation:number=0;
 
-  public stateOptions = [
-    { value: 'stanby', label: 'Stanby' },
-    { value: 'progress', label: 'Progress' },
-    { value: 'complete', label: 'Complete' }
-  ];
+  public stateOptions = ["Standby","Progress","Complete"];
 
   constructor(
     private _crudService: crudService,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ){
     this.status = "";
     this.reparationData = new reparation(1,1,1,new Date(),new Date(),"","","", "","");
@@ -60,10 +58,12 @@ export class ReparationUpdateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+    this.idReparation = this._route.snapshot.queryParams['id'];
+    this.getReparation();
   }
 
   onSubmit(form: any){
+    /*realizamos el update*/
     console.log(this.reparationData);
     console.log(this.addedProducts);
     console.log(this.productQuantities);
@@ -109,6 +109,20 @@ export class ReparationUpdateComponent implements OnInit{
 
     
   }
+
+  /*inicio cargamos datos de la reparacion*/
+  getReparation(){
+    this._crudService.getObject(this.token, "reparation/", this.idReparation).subscribe(
+      (response) => {
+        this.reparationData = response.$model as reparation;
+        console.log(this.reparationData);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
 
   /*listar informacion necesaria para el formulario de registro*/
   listVehicles() {
