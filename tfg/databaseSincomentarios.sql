@@ -348,6 +348,7 @@ CREATE TABLE Deductions(
     deductionName       varchar(255) NOT NULL,
     description         varchar(255) NOT NULL,
     percentage          INT CHECK (percentage >= 1 AND percentage <= 100) DEFAULT NULL,
+    isdeduction         BOOLEAN,
 
     created_at          datetime DEFAULT NULL,
     updated_at          datetime DEFAULT NULL,
@@ -356,8 +357,8 @@ CREATE TABLE Deductions(
 
 )ENGINE=InnoDb;
 
-INSERT INTO `Deductions` (`id_deduction`, `deductionName`, `description`, `percentage`, `created_at`, `updated_at`) 
-                    VALUES (NULL, 'Decuento de empleados', 'Decuento en reparaciones para empleados del taller', '20', NULL, NULL);
+INSERT INTO `Deductions` (`id_deduction`, `deductionName`, `description`, `percentage`, `isdeduction`,`created_at`, `updated_at`) 
+                    VALUES (NULL, 'Decuento de empleados', 'Decuento en reparaciones para empleados del taller', '20', TRUE , NULL, NULL);
 
 
 CREATE TABLE invoiceDeductions(

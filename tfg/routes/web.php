@@ -129,6 +129,7 @@ Route::resource('/service', 'App\Http\Controllers\ServiceController');
 // (12) Rutas del controlador de ReparationProduct
 Route::resource('/reparationProducts', 'App\Http\Controllers\reparationProductsController');
 Route::get('/reparationProducts/findByCamp/{camp}', 'App\Http\Controllers\reparationProductsController@findByCamp');
+Route::get('/reparationProducts/findByCampProduct/{camp}', 'App\Http\Controllers\reparationProductsController@findByCampProduct');
 
 // (13) Rutas del controlador de reparation
 Route::resource('/reparation', 'App\Http\Controllers\reparationController');
@@ -136,15 +137,21 @@ Route::resource('/reparation', 'App\Http\Controllers\reparationController');
 // (14) Rutas del controlador de reparationService
 Route::resource('/reparationServices', 'App\Http\Controllers\reparationServicesController');
 Route::get('/reparationServices/findByCamp/{camp}', 'App\Http\Controllers\reparationServicesController@findByCamp');
+Route::get('/reparationServices/findByCampService/{camp}', 'App\Http\Controllers\reparationServicesController@findByCampService');
 
-// (15) Rutas del controlador de reparation
+// (15) Rutas del controlador de invoiceDeduciton
 Route::resource('/invoiceDeductions', 'App\Http\Controllers\invoiceDeductionsController');
+Route::get('/invoiceDeductions/findByCampInvoice/{camp}', 'App\Http\Controllers\invoiceDeductionsController@findByCampInvoice');
+Route::get('/invoiceDeductions/findByCampDeduction/{camp}', 'App\Http\Controllers\invoiceDeductionsController@findByCampDeduction');
 
 // (16) Rutas del controlador de decutions
 Route::resource('/deduction', 'App\Http\Controllers\deductionController');
 
 // (17) Rutas del controlador de invoices
 Route::resource('/invoice', 'App\Http\Controllers\invoiceController');
+Route::get('/invoice/findByCamp/{camp}', 'App\Http\Controllers\invoiceController@findByCamp');
 
 // (18) Rutas del controlador de pagos
 Route::resource('/pay', 'App\Http\Controllers\payController');
+Route::resource('/pay/findBycampInvoice/{camp}', 'App\Http\Controllers\payController@findByCampInvoice');
+Route::resource('/pay/findBycampCard/{camp}', 'App\Http\Controllers\payController@findByCampCard');

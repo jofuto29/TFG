@@ -251,3 +251,15 @@ tbody tr td img{
 .titleWeight{
   font-weight: 700;
 }
+
+.state-red {
+  color: red;
+}
+
+.state-orange {
+  color: orange;
+}
+
+.state-green {
+  color: green;
+}

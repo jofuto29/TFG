@@ -105,8 +105,8 @@
           <li (click)="disapear()"><a href="#">Pagos</a></li>
           <li (click)="disapear()"><a href="#">Nóminas</a></li>
           <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
-          <li (click)="disapear()"><a href="#">Descuentos</a></li>
-          <li (click)="disapear()"><a href="#">Facturas</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/deductions']">Descuentos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/invoices']">Facturas</a></li>
         </ul>
       </li>
       <li (click)="disapear()" *ngIf="identity"><a [routerLink]="['/logout/1']">Salir</a></li>

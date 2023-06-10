@@ -1,1 +1,42 @@
-<p>deductions works!</p>
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de descuentos/impuestos creados</h1>
+      <span class="button"><a [routerLink]="['/addDeduction']"> Añadir descuento/impuesto </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id deduction</th>
+            <th>Nombre</th>
+            <th>descripcion</th>
+            <th>Porcentaje</th>
+            <th>Es un descuento</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let deduction of deductions">
+            <td>{{ deduction.id_deduction }}</td>
+            <td>{{ deduction.deductionName }}</td>
+            <td>{{ deduction.description }}</td>
+            <td>{{ deduction.percentage }}</td>
+            <td [ngClass]="getStateClass(deduction.isdeduction)">{{ deduction.isdeduction }}</td>
+            <td [routerLink]="['/updateDeduction']" [queryParams]="{ id: deduction.id_deduction }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteInvoice(deduction.id_deduction)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

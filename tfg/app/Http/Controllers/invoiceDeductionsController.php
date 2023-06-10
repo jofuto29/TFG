@@ -95,4 +95,17 @@ class invoiceDeductionsController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "invoiceDeductions", invoiceDeductions::find($id), $id, "id_invoiceDeduction");
     }
+
+
+    public function findByCampInvoice($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(invoiceDeductions::where('id_invoice', $camp)->get(), "invoicesDeductions invoice", $camp);
+    }
+
+    public function findByCampDeduction($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(invoiceDeductions::where('id_deduction', $camp)->get(), "invoicesDeductions decution", $camp);
+    }
 }

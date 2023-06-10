@@ -115,6 +115,7 @@ class crud
             'deductionName'  => 'required|string',
             'description'    => 'nullable|string',
             'percentage'     => 'required|numeric|min:0|max:100',
+            'isdeduction'    => 'required|boolean',
         ],
         "bookings" => [ //16
             'id_user'        => 'required|exists:users,id_user',
@@ -419,6 +420,7 @@ class crud
                     'deductionName'  => 'required|string',
                     'description'    => 'nullable|string',
                     'percentage'     => 'required|numeric|min:0|max:100',
+                    'isdeduction'    => 'required|boolean',
                 ];
             } elseif ($table === 'bookings') { //16
                 $validationRules = [

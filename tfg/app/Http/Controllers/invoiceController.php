@@ -95,4 +95,10 @@ class invoiceController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "invoices", invoice::find($id), $id, "id_invoice");
     }
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(invoice::where('id_reparation', $camp)->get(), "invoices", $camp);
+    }
 }

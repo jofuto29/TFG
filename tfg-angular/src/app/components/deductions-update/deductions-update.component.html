@@ -1,1 +1,59 @@
-<p>deductions-update works!</p>
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Registrata un nuevo Descuento/impuesto</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerDeductionForm="ngForm" (ngSubmit)="onSubmit(registerDeductionForm)">
+  
+        <div class="form-group">
+            <label class="titleWeight" for="deductionName">Nombre del impuesto/descuento:</label>
+            <input type="text" name="deductionName" id="deductionName" placeholder="¿Nombre del servicio?" class="form-control"
+            #deductionName="ngModel" [(ngModel)]="deductionData.deductionName" required pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+            <small *ngIf="!deductionName.valid && deductionName.touched" class="invalid-feedback d-block">
+                Nombre no valido
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="description">Descripción:</label>
+            <textarea name="description" id="description" placeholder="¿Descripción?" class="form-control"
+              #description="ngModel" [(ngModel)]="deductionData.description" required
+              pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
+            <small *ngIf="!description.valid && description.touched" class="invalid-feedback d-block">
+              Descripción no es válida
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="percentage">Porcentaje:</label>
+            <input type="number" name="percentage" id="percentage" placeholder="¿Precio?" class="form-control"
+              #percentage="ngModel" [(ngModel)]="deductionData.percentage" required>
+            <small *ngIf="!percentage.valid && percentage.touched" class="invalid-feedback d-block">
+              Porcentaje no valido
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="isdeduction">Es un descuento:</label>
+            <select name="isdeduction" id="isdeduction" class="form-control" [(ngModel)]="deductionData.isdeduction" required>
+              <option [value]=1>Sí</option>
+              <option [value]=0>No</option>
+            </select>
+          </div>
+  
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerDeductionForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/deductions']" > Volver atrás</span>
+        </div>
+  
+    </form>
+  </div>

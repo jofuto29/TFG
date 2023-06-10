@@ -3,6 +3,7 @@ import { crudService } from 'src/app/services/crudService';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class ProductComponent implements OnInit {
   public identity: any;
 
   public productos: any[] = []; // Array para almacenar los productos
+  public reparationProducts: any[] = []; // Array para almacenar los productos
 
   public sanitizedImageUrls: { [key: string]: any } = {};
 
@@ -45,6 +47,36 @@ export class ProductComponent implements OnInit {
   }
 
   deleteProduct(productId: number) {
+
+    this._crudService.getObject(this.token, "reparationProducts/findByCampProduct/", productId).subscribe(
+      (response) => {
+        this.reparationProducts = response.$model;
+
+        //si la longitud es mallor a 0 procedemos a borrar
+        if (this.reparationProducts.length !== 0) {
+          const deleteProductRequests = this.reparationProducts.map(product => {//creamos un array utilizando el metodo map para iterar sobre todos los objetos dentro de reparation service
+            return this._crudService.deleteObject(this.token, "reparationProducts/", product.id_reparationProducts);//guardamos en deleteService las respuestas
+          });
+  
+          forkJoin(deleteProductRequests).subscribe(//unimos todas las solicitudes en un mismo obserbable mediante forkjoin para que espere a que todas las solicitudes se haya completado
+            (deleteServiceResponses) => {
+              this.deleteProductClass(productId);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        } else {
+          this.deleteProductClass(productId);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  deleteProductClass(productId:number){
     this._crudService.deleteObject(this.token,'product/',productId).subscribe(
       (response) => {
         window.location.reload();

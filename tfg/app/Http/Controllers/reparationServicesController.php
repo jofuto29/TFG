@@ -117,4 +117,16 @@ class reparationServicesController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->findByCamp(reparationServices::where('id_reparation', $camp)->get(), "reparationServices", $camp);
     }
+
+    public function findByCampReparation($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(reparationServices::where('id_reparation', $camp)->get(), "reparationProducts reparation", $camp);
+    }
+
+    public function findByCampService($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(reparationServices::where('id_service', $camp)->get(), "reparationService Service", $camp);
+    }
 }

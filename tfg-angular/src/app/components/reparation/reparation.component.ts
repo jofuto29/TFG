@@ -14,6 +14,7 @@ export class ReparationComponent implements OnInit{
   public reparations: any[] = []; // Array para almacenar los productos
   public reparationProducts: any[] = []; // Array para almacenar los id productos
   public reparationServices: any[] = []; // Array para almacenar los id productos
+  public invoices: any[] = []; // Array para almacenar los id productos
 
   constructor(
     private _crudService: crudService
@@ -76,6 +77,35 @@ export class ReparationComponent implements OnInit{
           });
 
           forkJoin(deleteProductRequests).subscribe(
+            (deleteProductResponses) => {
+              this.deleteInvoice(reparationId);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        } else {
+          this.deleteInvoice(reparationId);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  /*delete en pays y en invoice*/
+
+  deleteInvoice(reparationId: number){
+    this._crudService.getObject(this.token, "invoice/findByCamp/", reparationId).subscribe(
+      (response) => {
+        this.invoices = response.$model;
+        if (this.invoices.length !== 0) {
+          const deleteInoviceRequests = this.invoices.map(invoice => {
+            return this._crudService.deleteObject(this.token, "invoice/", invoice.id_reparation);
+          });
+
+          forkJoin(deleteInoviceRequests).subscribe(
             (deleteProductResponses) => {
               this.deleteReparationClass(reparationId);
             },
