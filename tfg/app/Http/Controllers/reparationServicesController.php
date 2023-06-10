@@ -109,7 +109,7 @@ class reparationServicesController extends Controller
         $atributos = json_decode($json, true);
 
         $crud = new \App\Helpers\CRUD();
-        return $crud->update($atributos, "reparationServices", reparationServices::find($id), $id, "id_reparationService");
+        return $crud->update($atributos, "reparationServices", reparationServices::find($id), $id, "id_reparationServices");
     }
 
     public function findByCamp($camp)

@@ -30,6 +30,13 @@ import { ReparationRegisterComponent } from './components/reparation-register/re
 import { ReparationUpdateComponent } from './components/reparation-update/reparation-update.component';
 import { ReparationProductosAsociadosComponent } from './components/reparation-productos-asociados/reparation-productos-asociados.component';
 import { ReparationServiciosAsociadosComponent } from './components/reparation-servicios-asociados/reparation-servicios-asociados.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import { InvoiceRegisterComponent } from './components/invoice-register/invoice-register.component';
+import { InvoiceUpdateComponent } from './components/invoice-update/invoice-update.component';
+import { InvoiceSeeComponent } from './components/invoice-see/invoice-see.component';
+import { DeductionsComponent } from './components/deductions/deductions.component';
+import { DeductionsRegisterComponent } from './components/deductions-register/deductions-register.component';
+import { DeductionsUpdateComponent } from './components/deductions-update/deductions-update.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +65,14 @@ import { ReparationServiciosAsociadosComponent } from './components/reparation-s
     ReparationRegisterComponent,
     ReparationUpdateComponent,
     ReparationProductosAsociadosComponent,
-    ReparationServiciosAsociadosComponent
+    ReparationServiciosAsociadosComponent,
+    InvoiceComponent,
+    InvoiceRegisterComponent,
+    InvoiceUpdateComponent,
+    InvoiceSeeComponent,
+    DeductionsComponent,
+    DeductionsRegisterComponent,
+    DeductionsUpdateComponent
   ],
   imports: [
     BrowserModule,

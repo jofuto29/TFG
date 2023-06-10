@@ -105,10 +105,7 @@ export class ReparationRegisterComponent {
     this._crudService.listObjects(this.token, 'vehicle').subscribe(
       (response) => {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
-        
         this.vehicles = [...response.$model]; // Asignar la respuesta al array de productos
-        console.log("informacion vehiculos: ");
-        console.log(this.vehicles);
       },
       (error) => {
         // Manejar el error aquí
@@ -123,8 +120,6 @@ export class ReparationRegisterComponent {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
         
         this.products = [...response.$model]; // Asignar la respuesta al array de productos
-        console.log("informacion productos ");
-        console.log(this.products);
       },
       (error) => {
         // Manejar el error aquí
@@ -137,9 +132,7 @@ export class ReparationRegisterComponent {
     this._crudService.listObjects(this.token, 'service').subscribe(
       (response) => {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
-        
         this.services = [...response.$model]; // Asignar la respuesta al array de productos
-        console.log("servicios ");
         console.log(this.services);
       },
       (error) => {
@@ -153,8 +146,6 @@ export class ReparationRegisterComponent {
     this._crudService.listObjects(this.token, 'employee').subscribe(
       (response) => {
         this.employees = [...response.$model];
-        console.log("Empleados ");
-        console.log(this.employees);
         for(var i = 0; i < this.employees.length; i++){
           this._crudService.getObject(this.token, 'user/detailsUser/', this.employees[i].id_employee).subscribe(
             (response) => {
@@ -165,7 +156,6 @@ export class ReparationRegisterComponent {
             }
           );
         }
-        console.log(this.users);
       },
       (error) => {
         console.error(error);
@@ -185,6 +175,13 @@ export class ReparationRegisterComponent {
     }
   }
 
+  removeProduct(i:number){
+    this.selectedProducts.splice(i,1);
+    this.productQuantities.splice(i,1);
+    const removedProduct = this.addedProducts.splice(i, 1);
+    this.products.push(removedProduct[0]);
+  }
+
   addProductService() {
     const lastSelectedProductId = this.selectedServices[this.selectedServices.length - 1];
     const lastSelectedProductIndex = this.services.findIndex(service => service.id_service === lastSelectedProductId);//se obtiene la posicion del elemento en el array
@@ -193,6 +190,12 @@ export class ReparationRegisterComponent {
       const lastSelectedProduct = this.services.splice(lastSelectedProductIndex, 1)[0];//elimina el elemnto en esa posicion y lo guarda en lastSelectproduct
       this.addedServices.push(lastSelectedProduct);//lo añade a porducto selecionados
     }
+  }
+
+  removeService(i:number){
+    this.selectedServices.splice(i,1);
+    const removedService = this.addedServices.splice(i, 1);
+    this.services.push(removedService[0]);
   }
 
 }

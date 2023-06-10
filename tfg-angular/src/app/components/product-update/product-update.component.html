@@ -21,7 +21,7 @@
         </div>-->
 
         <div class="form-group">
-          <label for="supplier">Proveedor:</label>
+          <label class="titleWeight" for="supplier">Proveedor:</label>
           <select name="supplier" id="supplier" class="form-control" 
             [(ngModel)]="productData.id_supplier" required>
             <option *ngFor="let supplier of suppliers" [value]="supplier.id_supplier">{{ supplier.supplierName }}</option>
@@ -41,7 +41,7 @@
         </div>-->
 
         <div class="form-group">
-          <label for="category">Categoría:</label>
+          <label class="titleWeight" for="category">Categoría:</label>
           <select name="category" id="category" class="form-control" 
             [(ngModel)]="productData.id_category" required>
             <option *ngFor="let category of categories" [value]="category.id_category">{{ category.categoryName }}</option>
@@ -52,7 +52,7 @@
         </div>
       
         <div class="form-group">
-          <label for="productName">Nombre del producto:</label>
+          <label class="titleWeight" for="productName">Nombre del producto:</label>
           <input type="text" name="productName" id="productName" placeholder="¿Nombre del producto?" class="form-control"
             #productName="ngModel" [(ngModel)]="productData.productName" required
             pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
@@ -62,7 +62,7 @@
         </div>
       
         <div class="form-group">
-          <label for="description">Descripción:</label>
+          <label class="titleWeight" for="description">Descripción:</label>
           <textarea name="description" id="description" placeholder="¿Descripción?" class="form-control"
             #description="ngModel" [(ngModel)]="productData.description" required
             pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
@@ -81,7 +81,7 @@
         </div>
       
         <div class="form-group">
-          <label for="stock">Stock:</label>
+          <label class="titleWeight" for="stock">Stock:</label>
           <input type="number" name="stock" id="stock" placeholder="¿Stock?" class="form-control"
             #stock="ngModel" [(ngModel)]="productData.stock" required min="0">
           <small *ngIf="!stock.valid && stock.touched" class="invalid-feedback d-block">
@@ -90,7 +90,7 @@
         </div>
 
         <div class="form-group">
-          <label for="marca">Marca:</label>
+          <label class="titleWeight" for="marca">Marca:</label>
           <input type="text" name="marca" id="marca" placeholder="¿Nombre de la marca?" class="form-control"
             #productName="ngModel" [(ngModel)]="productData.marca"
             pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
@@ -100,7 +100,7 @@
         </div>
 
         <div class="form-group">
-          <label for="admisionDate">Fecha de admisión:</label>
+          <label class="titleWeight" for="admisionDate">Fecha de admisión:</label>
           <input type="datetime-local" name="admisionDate" id="admisionDate" class="form-control"
             #admisionDate="ngModel" [(ngModel)]="productData.admisionDate" required>
           <small *ngIf="!admisionDate.valid && admisionDate.touched" class="invalid-feedback d-block">
@@ -109,7 +109,7 @@
         </div>
         
         <div class="form-group">
-          <label for="expiryDate">Fecha de vencimiento:</label>
+          <label class="titleWeight" for="expiryDate">Fecha de vencimiento:</label>
           <input type="datetime-local" name="expiryDate" id="expiryDate" class="form-control"
             #expiryDate="ngModel" [(ngModel)]="productData.expiryDate" required [min]="productData.admisionDate">
           <small *ngIf="!expiryDate.valid && expiryDate.touched" class="invalid-feedback d-block">
@@ -118,7 +118,7 @@
         </div>
         
           <div class="form-group">
-            <label for="location">Ubicación:</label>
+            <label class="titleWeight" for="location">Ubicación:</label>
             <input type="text" name="location" id="location" placeholder="¿Ubicación?" class="form-control"
               #location="ngModel" [(ngModel)]="productData.location" required>
             <small *ngIf="!location.valid && location.touched" class="invalid-feedback d-block">
@@ -127,7 +127,7 @@
           </div>
         
           <div class="form-group">
-            <label for="imgProduct">Subir imagen</label>
+            <label class="titleWeight" for="imgProduct">Subir imagen</label>
             <input type="file" name="imageProduct" id="imgProduct" placeholder="¿Ubicación?" class="form-control" (change)="subirFile($event)">
           </div>
 

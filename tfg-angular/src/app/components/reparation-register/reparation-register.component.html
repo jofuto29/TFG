@@ -12,7 +12,7 @@
     <form class="col-md-5 ml-0 pl-0" #registerReparationForm="ngForm" (ngSubmit)="onSubmit(registerReparationForm)">
   
         <div class="form-group">
-            <label for="id_vehicle">Vehículo:</label>
+            <label class="titleWeight" for="id_vehicle">Vehículo:</label>
             <select name="id_vehicle" id="id_vehicle" class="form-control" 
               [(ngModel)]="reparationData.id_vehicle" required>
               <option *ngFor="let vehicle of vehicles" [value]="vehicle.id_vehicle">Vehículo:{{ vehicle.id_vehicle }} ----- Matrícula:{{ vehicle.registration }}</option>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-          <label for="id_product">Productos Asociados:</label>
+          <label class="titleWeight" for="id_product">Productos Asociados:</label>
           <select name="id_product" id="id_product" class="form-control" 
             [(ngModel)]="selectedProducts" (change)="addProduct()" multiple>
             <option *ngFor="let product of products" [value]="product.id_product">
@@ -33,17 +33,20 @@
         </div>
         
         <div class="form-group selected-objects">
-          <label>Productos seleccionados:</label>
+          <label class="titleWeight">Productos seleccionados:</label>
           <ul>
             <li *ngFor="let product of addedProducts; let i = index">
-              <label for="quantity">{{ product.productName }} - Cantidad:</label>
-              <input type="number" name="quantity" id="quantity" [(ngModel)]="productQuantities[i]" min="1" required>
+              <label for="quantity">{{ product.productName }}</label>
+              <div class="inputIcono">
+                <input type="number" name="quantity" id="quantity" [(ngModel)]="productQuantities[i]" min="1" required>
+                <i class="fas fa-times-circle" (click)="removeProduct(i)"></i>
+              </div>
             </li>
           </ul>
         </div>
 
         <div class="form-group">
-          <label for="id_service">Servicios Asociados:</label>
+          <label class="titleWeight" for="id_service">Servicios Asociados:</label>
           <select name="id_service" id="id_service" class="form-control" 
             [(ngModel)]="selectedServices" (change)="addProductService()" multiple>
             <option *ngFor="let service of services" [value]="service.id_service">
@@ -53,16 +56,16 @@
         </div>
         
         <div class="form-group selected-objects">
-          <label>Servicios seleccionados:</label>
+          <label class="titleWeight" >Servicios seleccionados:</label>
           <ul>
             <li *ngFor="let service of addedServices; let i = index">
-              <p>{{ service.serviceName }}</p>
+              <p>{{ service.serviceName }} </p> <i class="fas fa-times-circle" (click)="removeService(i)"></i>
             </li>
           </ul>
         </div>
 
         <div class="form-group">
-          <label for="id_employee">Empleado:</label>
+          <label class="titleWeight" for="id_employee">Empleado:</label>
           <select name="id_employee" id="id_employee" class="form-control" 
             [(ngModel)]="reparationData.id_employee" required>
             <option *ngFor="let employee of employees; index as i" [value]="employee.id_employee">{{ employee.id_employee }} {{ users[i]?.userName }}</option>
@@ -73,7 +76,7 @@
         </div>
 
         <div class="form-group">
-            <label for="startDate">Fecha de inicio:</label>
+            <label class="titleWeight" for="startDate">Fecha de inicio:</label>
             <input type="datetime-local" name="startDate" id="startDate" class="form-control"
               #startDate="ngModel" [(ngModel)]="reparationData.startDate" required>
             <small *ngIf="!startDate.valid && startDate.touched" class="invalid-feedback d-block">
@@ -82,7 +85,7 @@
         </div>
 
         <div class="form-group">
-            <label for="endDate">Fecha de inicio:</label>
+            <label class="titleWeight" for="endDate">Fecha de inicio:</label>
             <input type="datetime-local" name="endDate" id="endDate" class="form-control"
               #endDate="ngModel" [(ngModel)]="reparationData.endDate" required>
             <small *ngIf="!endDate.valid && endDate.touched" class="invalid-feedback d-block">
@@ -91,7 +94,7 @@
         </div>
 
         <div class="form-group">
-            <label for="problemDescription">Descripción del problema:</label>
+            <label class="titleWeight" for="problemDescription">Descripción del problema:</label>
             <textarea name="problemDescription" id="problemDescription" placeholder="¿Descripción del problema?" class="form-control"
               #problemDescription="ngModel" [(ngModel)]="reparationData.problemDescription" required
               pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
@@ -101,7 +104,7 @@
         </div>
 
         <div class="form-group">
-            <label for="solutionDescription">Descripción de la solución:</label>
+            <label class="titleWeight" for="solutionDescription">Descripción de la solución:</label>
             <textarea name="solutionDescription" id="solutionDescription" placeholder="¿Descripción de la solución?" class="form-control"
               #solutionDescription="ngModel" [(ngModel)]="reparationData.solutionDescription" required
               pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
@@ -111,7 +114,7 @@
         </div>
 
         <div class="form-group">
-          <label for="state">Estado:</label>
+          <label class="titleWeight" for="state">Estado:</label>
           <select name="state" id="state" class="form-control" 
             [(ngModel)]="reparationData.state" required>
             <option *ngFor="let option of stateOptions" [value]="option" >{{ option }}</option>

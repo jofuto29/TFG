@@ -227,4 +227,27 @@ tbody tr td img{
 .selected-objects li{
   display: flex;
   justify-content: space-between;
+  gap: 2%;
+  align-items: center;
+}
+
+.selected-objects li input{
+  text-align: center;
+  width: 60%;
+}
+
+.selected-objects li i{
+    margin-right: 2%;
+    color: red;
+    cursor: pointer;
+}
+
+.selected-objects li .inputIcono{
+    display: flex;
+    align-items: center;
+    justify-content: inherit;
+}
+
+.titleWeight{
+  font-weight: 700;
 }
