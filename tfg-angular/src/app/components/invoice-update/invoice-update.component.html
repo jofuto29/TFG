@@ -1,1 +1,73 @@
-<p>invoice-update works!</p>
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Genera una nueva factura</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerDeductionForm="ngForm" (ngSubmit)="onSubmit(registerDeductionForm)">
+  
+
+        <div class="form-group">
+            <label class="titleWeight" for="reparation">reparacion:</label>
+            <select name="reparation" id="reparation" class="form-control" 
+              [(ngModel)]="invoiceData.id_reparation" required>
+              <option *ngFor="let reparation of reparations" [value]="reparation.id_reparation">Reparación: {{reparation.id_reparation }} -- Vehículo: {{reparation.id_vehicle}}</option>
+            </select>
+            <small *ngIf="!invoiceData.id_reparation" class="invalid-feedback d-block">
+              Selecciona una reparación
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label class="titleWeight" for="id_deduction">Descuentos/impuestos disponibles:</label>
+            <select name="id_deduction" id="id_deduction" class="form-control" 
+              [(ngModel)]="selectedDeductions" (change)="addDeduction()" multiple>
+              <option *ngFor="let deduction of deductions" [value]="deduction.id_deduction">
+                Deduction: {{ deduction.deductionName }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="form-group selected-objects">
+            <label class="titleWeight">Descuentos/impuestos seleccionados:</label>
+            <ul>
+              <li *ngFor="let deduction of addedDeductions; let i = index">
+                <label for="quantity">{{ deduction.deductionName }}</label>
+                <i class="fas fa-times-circle" (click)="removeDeduction(i)"></i>
+              </li>
+            </ul>
+          </div>
+
+
+          <div class="form-group">
+            <label class="titleWeight" for="invoiceDate">Fecha de generación:</label>
+            <input type="datetime-local" name="invoiceDate" id="invoiceDate" class="form-control"
+              #invoiceDate="ngModel" [(ngModel)]="invoiceData.invoiceDate" required>
+            <small *ngIf="!invoiceDate.valid && invoiceDate.touched" class="invalid-feedback d-block">
+              Fecha no valida
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label class="titleWeight" for="state">Estado:</label>
+            <select name="state" id="state" class="form-control" 
+              [(ngModel)]="invoiceData.state" required>
+              <option *ngFor="let option of stateOptions" [value]="option" >{{ option }}</option>
+            </select>
+          </div>
+
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Actualizar" class="btn btn-success" [disabled]="registerDeductionForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/invoices']" > Volver atrás</span>
+        </div>
+  
+    </form>
+  </div>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { invoiceDeductions } from 'src/app/models/invoiceDeductions';
 import { crudService } from 'src/app/services/crudService';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-invoice',
@@ -11,7 +13,7 @@ export class InvoiceComponent {
   public token: any;
   public identity: any;
   public invoices: any[] = []; // Array para almacenar los productos
-
+  public invoicesDeductions: any[] = []; // Array para almacenar los productos
   constructor(
     private _crudService: crudService
   ) {
@@ -35,10 +37,40 @@ export class InvoiceComponent {
     );
   }
 
-  deleteInvoice(id_supplier: number) {
-    this._crudService.deleteObject(this.token,'invoice/',id_supplier).subscribe(
+
+  deleteInvoiceRegister(id_invoice: number){
+    this._crudService.deleteObject(this.token,'invoice/',id_invoice).subscribe(
       (response) => {
         window.location.reload();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+
+  deleteInvoice(id_invoice: number) {
+    /*hay que borrar en invoceDecution primero*/
+    this._crudService.getObject(this.token, "invoiceDeductions/findByCampInvoice/", id_invoice).subscribe(
+      (response) => {
+        this.invoicesDeductions = response.$model;
+        if (this.invoices.length !== 0) {
+          const deleteInoviceRequests = this.invoicesDeductions.map(invoiceDeduction => {
+            return this._crudService.deleteObject(this.token, "invoiceDeductions/", invoiceDeduction.id_invoiceDeductions);
+          });
+
+          forkJoin(deleteInoviceRequests).subscribe(
+            (deleteProductResponses) => {
+              this.deleteInvoiceRegister(id_invoice);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        } else {
+          this.deleteInvoiceRegister(id_invoice);
+        }
       },
       (error) => {
         console.error(error);

@@ -102,7 +102,7 @@ export class ReparationComponent implements OnInit{
         this.invoices = response.$model;
         if (this.invoices.length !== 0) {
           const deleteInoviceRequests = this.invoices.map(invoice => {
-            return this._crudService.deleteObject(this.token, "invoice/", invoice.id_reparation);
+            return this._crudService.deleteObject(this.token, "invoice/", invoice.id_invoice);
           });
 
           forkJoin(deleteInoviceRequests).subscribe(

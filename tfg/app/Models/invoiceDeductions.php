@@ -9,8 +9,8 @@ class invoiceDeductions extends Model
 {
     use HasFactory;
 
-    protected $table = "invoiceDeductions";
-    protected $primaryKey = 'id_invoiceDeduction';
+    protected $table = "invoicedeductions";
+    protected $primaryKey = 'id_invoiceDeductions';
 
     public function deduction()
     {
