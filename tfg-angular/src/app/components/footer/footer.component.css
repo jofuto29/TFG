@@ -58,3 +58,9 @@
         font-size: 17px;
     }
 }
+
+@media print {
+    .no-imprimir {
+      display: none;
+    }
+}

@@ -146,3 +146,12 @@
   }
 }
 
+@media print {
+  .no-imprimir {
+    display: none;
+  }
+
+  .contentMain {
+    padding: 4%;
+  }
+}

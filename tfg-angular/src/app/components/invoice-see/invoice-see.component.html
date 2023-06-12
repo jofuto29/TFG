@@ -1,1 +1,132 @@
-<p>invoice-see works!</p>
+<div class ="logo seePrint" >
+    <a [routerLink]="['/inicio']">
+      Automoviles Rodal
+      <img src="./assets/img/rodal.png" class="d-inline-block align-top" alt="">
+    </a>
+</div>
+
+<div class ="container">
+
+    <div class="headerAdmin"> 
+        <h1>Factura generada</h1>
+        <span class="button no-imprimir" (click)="imprimir()"><a>Imprimir factura</a></span>
+    </div>
+
+    <h4>Datos del vehículo</h4>
+    <table class="factura">
+    <thead>
+        <tr>
+        <th>Vehículo</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Matrícula</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>{{ vehicleData.id_vehicle }}</td>
+        <td>{{ vehicleData.trademark }}</td>
+        <td>{{ vehicleData.model }}</td>
+        <td>{{ vehicleData.registration }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <h4>Datos de la Reparación</h4>
+    <table class="factura">
+    <thead>
+        <tr>
+        <th>Reparación</th>
+        <th>Descripción del problema</th>
+        <th>Descripción de la solución</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>{{ reparationData.id_reparation }}</td>
+        <td>{{ reparationData.problemDescription }}</td>
+        <td>{{ reparationData.solutionDescription }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <h4>Impuestos aplicados</h4>
+    <table class="factura">
+    <thead>
+        <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Porcentaje</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let deduction of deductions">
+        <td>{{ deduction.deductionName }}</td>
+        <td>{{ deduction.description }}</td>
+        <td>{{ deduction.percentage }}%</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <h4>Productos aplicados</h4>
+    <table class="factura">
+    <thead>
+        <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio unitario</th>
+        <th>Cantidad aplicada</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let producto of products; let i = index">
+        <td><img [src]="productImage[producto.img]" alt="Imagen"></td>
+        <td>{{ producto.productName }}</td>
+        <td>{{ producto.description }}</td>
+        <td>{{ producto.price }}</td>
+        <td>{{ reparationProductsQuantities[i] }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <h4>Servicios aplicados</h4>
+    <table class="factura">
+    <thead>
+        <tr>
+        <th>Nombre del servicio</th>
+        <th>Descripción</th>
+        <th>Precio unitario</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let service of services">
+        <td>{{ service.serviceName }}</td>
+        <td>{{ service.description }}</td>
+        <td>{{ service.price }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+
+    <table class="factura">
+        <thead>
+            <tr>
+            <th>Fecha</th>
+            <th>Precio Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>{{ invoiceData.invoiceDate }}</td>
+            <td>{{ invoiceData.totalPrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <div class="buttonAdmin form-group">
+        <span class="no-imprimir btn btn-success" [routerLink]="['/invoices']" > Volver atrás</span>
+    </div>
+</div>
+

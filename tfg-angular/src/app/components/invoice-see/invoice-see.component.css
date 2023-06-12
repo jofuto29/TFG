@@ -1,0 +1,71 @@
+@media print {
+    .no-imprimir {
+      display: none;
+    }
+
+    .container{
+      font-size: 10px;
+    }
+
+    .headerAdmin{
+      padding: 0;
+    }
+
+    .seePrint{
+      display: block!important;
+    }
+}
+
+.factura {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.factura th,
+.factura td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.factura th {
+  background-color: darkgrey;
+  text-align: left;
+}
+
+.factura img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.factura h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 27px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.logo img {
+  border-radius: 10px;
+  width: 55px;
+  margin-left: 10px;
+}
+
+.seePrint{
+  display: none;
+}
