@@ -1,0 +1,71 @@
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Registrata una nuevo proveedor para el taller</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerVehicleForm="ngForm" (ngSubmit)="onSubmit(registerVehicleForm)">
+  
+
+        <div class="form-group">
+            <label class="titleWeight" for="user">Usuario propietario:</label>
+            <select name="user" id="user" class="form-control" 
+              [(ngModel)]="vehicleData.id_user" required>
+              <option *ngFor="let user of users" [value]="user.id_user">{{ user.id_user }} {{user.userName}}</option>
+            </select>
+            <small *ngIf="!vehicleData.id_user" class="invalid-feedback d-block">
+              Selecciona un usuario
+            </small>
+        </div>
+ 
+        <div class="form-group">
+            <label class="titleWeight" for="tradeMark">Marca:</label>
+            <input type="text" name="tradeMark" id="tradeMark" placeholder="Marca del vehículo" class="form-control"
+              #trademark="ngModel" [(ngModel)]="vehicleData.trademark" required>
+            <small *ngIf="!trademark.valid && trademark.touched" class="invalid-feedback d-block">
+              Agrega la marca del vehículo que está registrado.
+            </small>
+          </div>
+          
+          <div class="form-group">
+            <label class="titleWeight" for="model">Modelo:</label>
+            <input type="text" name="model" id="model" placeholder="Modelo del vehículo" class="form-control"
+              #model="ngModel" [(ngModel)]="vehicleData.model" required>
+            <small *ngIf="!model.valid && model.touched" class="invalid-feedback d-block">
+              Agrega el modelo del vehículo que está registrado.
+            </small>
+          </div>
+          
+          <div class="form-group">
+            <label class="titleWeight" for="registration">Matrícula:</label>
+            <input type="text" name="registration" id="registration" placeholder="Matrícula del vehículo" class="form-control"
+              #registration="ngModel" [(ngModel)]="vehicleData.registration" required>
+            <small *ngIf="!registration.valid && registration.touched" class="invalid-feedback d-block">
+              Agrega la matrícula del vehículo que está registrado.
+            </small>
+          </div>
+          
+          <div class="form-group">
+            <label class="titleWeight" for="mileage">Distancia recorrida:</label>
+            <input type="text" name="mileage" id="mileage" placeholder="Distancia recorrida en Km" class="form-control"
+              #mileage="ngModel" [(ngModel)]="vehicleData.mileage" required>
+            <small *ngIf="!mileage.valid && mileage.touched" class="invalid-feedback d-block">
+              Agrega la distancia recorrida del vehículo.
+            </small>
+          </div>
+
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerVehicleForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/vehicles']" > Volver atrás</span>
+        </div>
+  
+    </form>
+  </div>

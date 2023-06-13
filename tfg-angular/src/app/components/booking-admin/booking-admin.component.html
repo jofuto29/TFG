@@ -1,0 +1,40 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de reservas realizadas</h1>
+      <span class="button"><a [routerLink]="['/addBooking']"> Añadir reserva </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id reserva</th>
+            <th>Fecha de la reserva</th>
+            <th>Vehículo asociado</th>
+            <th>Usuario asociado</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>{{ booking.id_booking }}</td>
+            <td>{{ booking.date_booking }}</td>
+            <td>{{ booking.id_vehicle }}</td>
+            <td>{{ booking.id_user }}</td>
+            <td [routerLink]="['/updateBooking']" [queryParams]="{ id: booking.id_booking }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteBooking(booking.id_booking)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

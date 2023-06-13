@@ -360,7 +360,7 @@ class crud
                     'id_user'           => 'required|exists:users,id_user',
                     'trademark'         => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'model'             => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
-                    'registration'      => 'required|regex:/^[0-9]{4} [A-Z]{3}$/|unique:vehicles',
+                    'registration'      => "required|regex:/^[0-9]{4} [A-Z]{3}$/|unique:vehicles,registration,$id,id_vehicle",
                     'mileage'           => 'required|numeric'
                 ];
             } elseif ($table === 'usedVehicles') { //8

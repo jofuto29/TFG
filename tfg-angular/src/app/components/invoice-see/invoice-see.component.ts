@@ -115,7 +115,7 @@ export class InvoiceSeeComponent implements OnInit{
                                 this.products = productResponses.map((response) => response.$model);
                                 this.deductions = deductionResponses.map((response) => response.$model);
 
-                                console.log("datos factura");
+                                /*console.log("datos factura");
                                 console.log(this.invoiceData);
                                 console.log("datos reparacion");
                                 console.log(this.reparationData);
@@ -128,10 +128,10 @@ export class InvoiceSeeComponent implements OnInit{
                                 console.log("datos cantidad de esos porductos");
                                 console.log(this.reparationProductsQuantities);
                                 console.log("descuentos");
-                                console.log(this.deductions);
+                                console.log(this.deductions);*/
                                 /*teniendo ya los porductos obtendremos la imagenes asociadas*/
                                 this.getUrlsImage();
-                                console.log(this.productImage);
+                                /*console.log(this.productImage);*/
 
                               },
                               (error) => {

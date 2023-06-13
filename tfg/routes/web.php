@@ -100,6 +100,7 @@ Route::resource('/paymentMethod', 'App\Http\Controllers\paymentMethodController'
 
 // (5) Rutas del controlador de vehicles
 Route::resource('/vehicle', 'App\Http\Controllers\vehicleController');
+Route::get('/vehicle/findByCamp/{camp}', 'App\Http\Controllers\vehicleController@findByCamp');
 
 // (6) Rutas controlador de vehiculo usados
 Route::resource('/usedVechile', 'App\Http\Controllers\usedVehicleController');

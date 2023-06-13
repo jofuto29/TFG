@@ -1,0 +1,53 @@
+.middle-row{
+    background-color: gray;
+    color: white;
+}
+
+.reservado{
+    background-color: red;
+    color: aliceblue;
+}
+
+.libre{
+    background-color: chartreuse;
+    color:aliceblue;
+}
+
+.libre .text, .reservado .text{
+    font-weight:800;
+}
+
+
+.table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th:first-child,
+  td:first-child {
+    text-align: left;
+  }
+  
+  @media (max-width: 600px) {
+    th, td {
+      font-size: 12px;
+      padding: 4px;
+    }
+  }
+
+  .message {
+    font-size: 14px;
+    margin: 5%;
+    color: #777;
+    text-align: center;
+  }

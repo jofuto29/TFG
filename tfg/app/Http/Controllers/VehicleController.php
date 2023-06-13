@@ -110,4 +110,10 @@ class VehicleController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "vehicles", vehicle::find($id), $id, "id_vehicle");
     }
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(vehicle::where('id_user', $camp)->get(), "vehicles", $camp);
+    }
 }

@@ -76,17 +76,17 @@
       <li class="submenu3" *ngIf="identity">
         <a href="#">Usuarios</a>
         <ul>
-          <li (click)="disapear()"><a href="#">Clientes</a></li>
-          <li (click)="disapear()"><a href="#">Empleados</a></li>
-          <li (click)="disapear()"><a href="#">Todos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/clients']">Clientes</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/employees']">Empleados</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/users']">Todos</a></li>
         </ul>
       </li>
       <li class="submenu3" *ngIf="identity">
         <a href="#">Operaciones</a>
         <ul>
-          <li (click)="disapear()"><a href="#">Reservas</a></li>
-          <li (click)="disapear()"><a href="#">Vehículos</a></li>
-          <li (click)="disapear()"><a href="#">Promociones</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/bookings']">Reservas</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/vehicles']">Vehículos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/usedVehicles']">Promociones</a></li>
         </ul>
       </li>
       <li class="submenu5" *ngIf="identity">

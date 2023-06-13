@@ -37,6 +37,13 @@ import { InvoiceSeeComponent } from './components/invoice-see/invoice-see.compon
 import { DeductionsComponent } from './components/deductions/deductions.component';
 import { DeductionsRegisterComponent } from './components/deductions-register/deductions-register.component';
 import { DeductionsUpdateComponent } from './components/deductions-update/deductions-update.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { VehicleRegisterComponent } from './components/vehicle-register/vehicle-register.component';
+import { VehicleUpdateComponent } from './components/vehicle-update/vehicle-update.component';
+import { BookingComponent } from './components/booking/booking.component';
+import { BookingRegisterComponent } from './components/booking-register/booking-register.component';
+import { BookingUpdateComponent } from './components/booking-update/booking-update.component';
+import { BookingAdminComponent } from './components/booking-admin/booking-admin.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +79,14 @@ import { DeductionsUpdateComponent } from './components/deductions-update/deduct
     InvoiceSeeComponent,
     DeductionsComponent,
     DeductionsRegisterComponent,
-    DeductionsUpdateComponent
+    DeductionsUpdateComponent,
+    VehicleComponent,
+    VehicleRegisterComponent,
+    VehicleUpdateComponent,
+    BookingComponent,
+    BookingRegisterComponent,
+    BookingUpdateComponent,
+    BookingAdminComponent
   ],
   imports: [
     BrowserModule,

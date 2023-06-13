@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="headerAdmin">
+      <h1>Reservas</h1>
+      <span *ngIf="identity && identity.rol == 'admin'" class="button"><a [routerLink]="['/bookingAdmin']">Modo admin</a></span>
+    </div>
+  
+
+    <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Horario</th>
+              <th *ngFor="let day of days">{{ daysEs[day.date.getDay()] }}  {{ day.date | date: 'dd/MM/yyyy' }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let timeSlot of timeSlots; let i = index">
+            <ng-container *ngIf="i === 11">
+              <ng-container *ngFor="let index of [0, 1, 2, 3, 4, 5, 6, 7]">
+                  <td class="middle-row">Cerrado</td>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="i !== 11">
+              <td>{{ timeSlot }}</td>
+              <td *ngFor="let day of days" (click)="getBookingDate(day.date, timeSlot)" [ngClass]="{'libre': !isBooked(day.date, timeSlot), 'reservado': isBooked(day.date, timeSlot)}">
+                <ng-container *ngIf="isBooked(day.date, timeSlot); let id_booking">
+                  <span class="text" (click)="updateBookingDate(id_booking)">Reservado: {{identity.user}}</span>
+                </ng-container>
+                <ng-container *ngIf="!isBooked(day.date, timeSlot)">
+                  <span class="text">Libre</span>
+                </ng-container>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="message">
+      Agradecemos que realices una reserva, de esta manera garantizamos que usted tenga disponibilidad cuando traiga su vehículo.
+    </div>
+</div>
