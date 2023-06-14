@@ -90,9 +90,11 @@ export class ProductComponent implements OnInit {
   /*no funcionaba porque se ejecutan asincronamente, subscribe hace que el valor espera a que tenga la resupeusa*/
   getUrlsImage(){
     for (const producto of this.productos) {
-      this.getImage(producto.img).subscribe((result: SafeUrl) => {
-        this.sanitizedImageUrls[producto.img] = result;
-      });
+      if(producto.img != null){
+        this.getImage(producto.img).subscribe((result: SafeUrl) => {
+          this.sanitizedImageUrls[producto.img] = result;
+        });
+      }
     }
   }
 

@@ -44,6 +44,10 @@ import { BookingComponent } from './components/booking/booking.component';
 import { BookingRegisterComponent } from './components/booking-register/booking-register.component';
 import { BookingUpdateComponent } from './components/booking-update/booking-update.component';
 import { BookingAdminComponent } from './components/booking-admin/booking-admin.component';
+import { VehiculeUsedComponent } from './components/vehicule-used/vehicule-used.component';
+import { VehicleUsedAdminComponent } from './components/vehicle-used-admin/vehicle-used-admin.component';
+import { VehicleUsedRegisterComponent } from './components/vehicle-used-register/vehicle-used-register.component';
+import { VehicleUsedUpdateComponent } from './components/vehicle-used-update/vehicle-used-update.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +90,11 @@ import { BookingAdminComponent } from './components/booking-admin/booking-admin.
     BookingComponent,
     BookingRegisterComponent,
     BookingUpdateComponent,
-    BookingAdminComponent
+    BookingAdminComponent,
+    VehiculeUsedComponent,
+    VehicleUsedAdminComponent,
+    VehicleUsedRegisterComponent,
+    VehicleUsedUpdateComponent
   ],
   imports: [
     BrowserModule,

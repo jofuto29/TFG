@@ -46,6 +46,10 @@ import { BookingComponent } from './components/booking/booking.component';
 import { BookingUpdateComponent } from './components/booking-update/booking-update.component';
 import { BookingRegisterComponent } from './components/booking-register/booking-register.component';
 import { BookingAdminComponent } from './components/booking-admin/booking-admin.component';
+import { VehiculeUsedComponent } from './components/vehicule-used/vehicule-used.component';
+import { VehicleUsedRegisterComponent } from './components/vehicle-used-register/vehicle-used-register.component';
+import { VehicleUsedUpdateComponent } from './components/vehicle-used-update/vehicle-used-update.component';
+import { VehicleUsedAdminComponent } from './components/vehicle-used-admin/vehicle-used-admin.component';
 
 
 // Definir las rutas
@@ -98,6 +102,11 @@ const appRoutes: Routes = [
   { path: 'addBooking', component: BookingRegisterComponent},
   { path: 'updateBooking', component: BookingUpdateComponent},
   { path: 'bookingAdmin', component: BookingAdminComponent},
+
+  { path: 'usedVehicles', component: VehiculeUsedComponent},
+  { path: 'addUsedVehicle', component: VehicleUsedRegisterComponent},
+  { path: 'updateUsedVehicle', component: VehicleUsedUpdateComponent},
+  { path: 'usedVehiclesAdmin', component: VehicleUsedAdminComponent},
 
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];
