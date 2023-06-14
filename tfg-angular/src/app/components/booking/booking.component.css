@@ -8,15 +8,9 @@
     color: aliceblue;
 }
 
-.libre{
-    background-color: chartreuse;
-    color:aliceblue;
-}
-
 .libre .text, .reservado .text{
     font-weight:800;
 }
-
 
 .table {
     width: 100%;

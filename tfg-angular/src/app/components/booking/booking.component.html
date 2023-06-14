@@ -15,16 +15,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let timeSlot of timeSlots; let i = index">
-            <ng-container *ngIf="i === 11">
+            <ng-container *ngIf="i === 5">
               <ng-container *ngFor="let index of [0, 1, 2, 3, 4, 5, 6, 7]">
                   <td class="middle-row">Cerrado</td>
                 </ng-container>
             </ng-container>
-            <ng-container *ngIf="i !== 11">
+            <ng-container *ngIf="i !== 5">
               <td>{{ timeSlot }}</td>
               <td *ngFor="let day of days" (click)="getBookingDate(day.date, timeSlot)" [ngClass]="{'libre': !isBooked(day.date, timeSlot), 'reservado': isBooked(day.date, timeSlot)}">
-                <ng-container *ngIf="isBooked(day.date, timeSlot); let id_booking">
-                  <span class="text" (click)="updateBookingDate(id_booking)">Reservado: {{identity.user}}</span>
+                <ng-container *ngIf="isBooked(day.date, timeSlot); let booking">
+                  <span class="text" (click)="updateBookingDate(booking[0])">Reservado usuario: {{booking[1]}}</span>
                 </ng-container>
                 <ng-container *ngIf="!isBooked(day.date, timeSlot)">
                   <span class="text">Libre</span>

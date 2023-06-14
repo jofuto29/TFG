@@ -39,7 +39,6 @@ export class ReparationServiciosAsociadosComponent {
     this._crudService.getObject(this.token, "reparationServices/findByCamp/", this.reparationId).subscribe(
       (response) => {
         this.reparationServices = response.$model;
-        console.log(this.reparationServices);
         for (var i = 0; i < this.reparationServices.length; i++) {
           this._crudService.getObject(this.token, "service/", this.reparationServices[i].id_service).subscribe(
             (response) => {
