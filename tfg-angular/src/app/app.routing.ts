@@ -50,6 +50,7 @@ import { VehiculeUsedComponent } from './components/vehicule-used/vehicule-used.
 import { VehicleUsedRegisterComponent } from './components/vehicle-used-register/vehicle-used-register.component';
 import { VehicleUsedUpdateComponent } from './components/vehicle-used-update/vehicle-used-update.component';
 import { VehicleUsedAdminComponent } from './components/vehicle-used-admin/vehicle-used-admin.component';
+import { UsedVehicleSeeMoreComponent } from './components/used-vehicle-see-more/used-vehicle-see-more.component';
 
 
 // Definir las rutas
@@ -107,6 +108,7 @@ const appRoutes: Routes = [
   { path: 'addUsedVehicle', component: VehicleUsedRegisterComponent},
   { path: 'updateUsedVehicle', component: VehicleUsedUpdateComponent},
   { path: 'usedVehiclesAdmin', component: VehicleUsedAdminComponent},
+  { path: 'usedVehicleSeeMore', component: UsedVehicleSeeMoreComponent},
 
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];

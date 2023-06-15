@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { vehicle } from 'src/app/models/vehicle';
+import { concatMap, mergeMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-vehicule-used',
@@ -31,7 +33,7 @@ export class VehiculeUsedComponent {
   }
 
   listUsedVehicles() {
-    this._crudService.listObjects(this.token, 'usedVechile').subscribe(
+    this._crudService.listObjects("", 'usedVehicle').subscribe(
       (response) => {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
         console.log(response)
@@ -50,38 +52,58 @@ export class VehiculeUsedComponent {
     this.token = this._crudService.getToken();
   }
 
-  getUrlsImage(){
+  /*getUrlsImage(){
     for (const vehicle of this.usedVehicles) {
         this._crudService.getObject(this.token, 'vehicle/', vehicle.id_vehicle ).subscribe(
           (response) => {
-            // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
             console.log(response)
             this.vehicles.push(response.$model as vehicle); 
-
-            this._crudService.getObject(this.token, 'user/detailsUser/', response.$model.id_user ).subscribe(
-              (response) => {
-                // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
-                console.log(response)
-                this.users.push(response.$model); // Asignar la respuesta al array de productos
-              },
-              (error) => {
-                // Manejar el error aquí
-                console.error(error);
-              }
-            );
           },
           (error) => {
-            // Manejar el error aquí
             console.error(error);
           }
         );
         if(vehicle.img != null){
-          this.getImage(vehicle.img).subscribe((result: SafeUrl) => {
+          const imageNames = vehicle.img.split(";");
+
+          this.getImage(imageNames[0]).subscribe((result: SafeUrl) => {
             this.sanitizedImageUrls[vehicle.img] = result;
           });
         }
     }
+  }*/
+  getUrlsImage() {
+    this.usedVehicles
+      .map((vehicle) =>
+        this._crudService.getObject(this.token, 'vehicle/', vehicle.id_vehicle).pipe(
+          mergeMap((response) => {
+            console.log(response);
+            this.vehicles.push(response.$model as vehicle);
+            
+            if (vehicle.img != null) {
+              const imageNames = vehicle.img.split(";");
+              return this.getImage(imageNames[0]).pipe(
+                mergeMap((result: SafeUrl) => {
+                  this.sanitizedImageUrls[vehicle.img] = result;
+                  return of(null);
+                })
+              );
+            } else {
+              return of(null);
+            }
+          }),
+          catchError((error) => {
+            console.error(error);
+            return of(null);
+          })
+        )
+      )
+      .reduce((previous, current) => previous.pipe(concatMap(() => current)), of(null))
+      .subscribe(() => {
+        // Todas las solicitudes se han completado correctamente
+      });
   }
+
 
   getImage(name:string): Observable<any>{
     return this._crudService.getImage(this.token, 'usedVehicle/getImage/', name).pipe(//tranformamos el observable que es lo que devolemos, el src de la imagen cargada

@@ -1,0 +1,112 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1 *ngIf="vehicle">{{ vehicle.trademark | capitalize }} {{ vehicle.model }}</h1>
+      <span class="button"><a [href]="'https://wa.me/+64' + user.phoneNumber" target="_blank">
+        Contactar
+      </a></span>
+    </div>
+
+    <hr>
+    <div class="slider disapear">
+        <img alt="Imagen 1" *ngFor="let imagen of imagenes; let i = index" [src]="imagen" [alt]="imagen" [class.active]="i === currentImage">
+    </div>
+
+
+    <div class="relevantInfo">
+        <div class="contentCircle">
+            <div class="circle">
+                <div class="progress"></div>
+                <div class="content">
+                    <div class="value">{{data.velocidad}} Km/h</div>
+                </div>
+            </div>
+            <div class="text">Velocidad Máxima</div>
+        </div>
+
+        <div class="contentCircle">
+            <div class="circle">
+                <div class="progress"></div>
+                <div class="content">
+                    <div class="value">{{data.aceleracion}} s</div>
+                </div>
+            </div>
+            <div class="text">De 0 a 100 Km</div>
+        </div>
+
+        <div class="contentCircle">
+            <div class="circle">
+                <div class="progress"></div>
+                <div class="content">
+                    <div class="value">{{data.consumo}} L/100</div>
+                </div>
+            </div>
+            <div class="text">Consumo</div>
+        </div>
+        
+        <div class="contentCircle">
+            <div class="circle">
+                <div class="progress"></div>
+                <div class="content">
+                    <div class="value">{{data.emisiones}} CO2</div>
+                </div>
+            </div>
+            <div class="text">Emisiones</div>
+        </div>
+    </div>
+
+
+    <div class="details">
+        <div class="accordion">
+            <div class="accordion-item">
+            <div class="accordion-header" (click)="toggleAccordion($event)">Características generales</div>
+            <div class="accordion-content" *ngIf="isAccordionOpen">
+                <p><i class="fas fa-car"></i> Marca: {{ vehicle.trademark | capitalize }}</p>
+                <p><i class="fas fa-cogs"></i> Modelo: {{ vehicle.model }}</p>
+                <p><i class="fas fa-paint-brush"></i> Color: {{ data.color }}</p>
+                <p><i class="fas fa-dollar-sign"></i> Precio: {{ data.price }}</p>
+                <p><i class="far fa-calendar-alt"></i> Año: {{ data.year }}</p>
+                <p><i class="fas fa-road"></i> Distancia: {{ data.mileage }}</p>
+                <p><i class="far fa-calendar"></i> Fecha matriculación: {{ data.fecha_matriculacion }}</p>
+                <p><i class="fas fa-tools"></i> Proxima revisión: {{ data.proxima_revision }}</p>
+                <p><i class="fas fa-gas-pump"></i> Tipo de combustible: {{ data.tipo_combustible }}</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-item">
+            <div class="accordion-header" (click)="toggleAccordion2($event)">Dimensiones</div>
+            <div class="accordion-content" *ngIf="isAccordionOpenDimension">
+                <p><i class="fas fa-arrows-alt-v"></i> Alto: {{ data.alto }}</p>
+                <p><i class="fas fa-arrows-alt-h"></i> Ancho: {{ data.ancho }}</p>
+                <p><i class="fas fa-arrows-alt-h"></i> Largo: {{ data.largo }}</p>
+                <p><i class="fas fa-weight"></i> Peso: {{ data.peso }}</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-item">
+            <div class="accordion-header" (click)="toggleAccordion2($event)">Otros datos</div>
+            <div class="accordion-content" *ngIf="isAccordionOpenDimension">
+                <p><i class="fas fa-cogs"></i> Tracción: {{ data.traccion }}</p>
+                <p><i class="fas fa-cogs"></i> Distribución: {{ data.distribucion }}</p>
+                <p><i class="fas fa-gas-pump"></i> Deposito: {{ data.deposito }}</p>
+                <p><i class="fas fa-suitcase"></i> Maletero: {{ data.maletero }}</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-item">
+            <div class="accordion-header" (click)="toggleAccordion3($event)">Opiniones</div>
+            <div class="accordion-content" *ngIf="isAccordionOpenOther">
+                <p><i class="fas fa-info-circle"></i> Datos adicionales: {{ data.datos_adicionales }}</p>
+                <p><i class="fas fa-comment"></i> Opinión: {{ data.opinion }}</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>

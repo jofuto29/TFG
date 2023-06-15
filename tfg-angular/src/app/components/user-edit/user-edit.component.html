@@ -1,8 +1,16 @@
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Edita tu cuenta</h1>
+      
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+        El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+        El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
 
-<div class="col-md-12 mt-3">
-    <h1>{{page_title}}</h1>
-    <p>Modifica los mensajes de ussuario</p>
     <hr>
+      
+        <!--formulario de registro-->
 <!--
     <div class="alert alert-success" *ngIf="status == 'success' ">
         El registro se ha completado correctamente, <a [routerLink]="['/login']">Logueate aquí</a>
@@ -13,8 +21,6 @@
 -->
 
     <!--formulario de registro-->
-
-    <img [src]="sanitizedImageUrl" alt="Imagen">
 
     <form class="col-md-5" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)"><!--variable ngform que llama a onsumir y le pasa los parametros del formulario-->
 
@@ -78,21 +84,12 @@
             <textarea  name="descripcion" id="descripcion" placeholder="¿Cual es tu dni?" class="form-control"></textarea>
         </div>
 
-     <!--Descripcion
-        #descriprion="ngModel" [(ngModel)]="userData.descripcion"> 
-        <div class="form-group">
-            <label for="image">Imagen </label>
-            <input type="file" name="image" class="form-control" placeholder="¿Cual es tu dni?">
-        </div>
-        -->
-
-        <div class="form-group">
-            <label for="img">Subir imagen </label>
-            <input  type="file" name="img" id="img" (change)="subirFile($event)">
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Guardar cambios" class="btn btn-success" [disabled]="userEditForm.invalid">
         </div>
 
-        <div class="form-group">
-            <input type="submit" value="Guardar cambios" class="btn btn-success" [disabled]="userEditForm.invalid"><!--no dejamos enviar-->
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/']" > Volver atrás</span>
         </div>
 
     </form>

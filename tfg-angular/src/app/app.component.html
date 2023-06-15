@@ -24,7 +24,6 @@
 
     <ul *ngIf="!identity || identity.rol == ''" class="menu " [ngClass]="{ 'unseen': !isMenuVisible, 'seen': isMenuVisible }">
       <li (click)="disapear()"><a [routerLink]="['/inicio']">Inicio</a></li>
-      <li (click)="disapear()"><a href="#">Vehículos de ocasión</a></li>
       <li (click)="disapear()"><a [routerLink]="['/conocenos']">Conócenos</a></li>
       <li (click)="disapear()" *ngIf="!identity"><a [routerLink]="['/login']">Iniciar Sesión</a></li>
       <li (click)="disapear()" *ngIf="!identity"><a [routerLink]="['/register']">Registrarse</a></li>
@@ -39,7 +38,7 @@
         <a href="#">Operaciones</a>
         <ul>
           <li (click)="disapear()"><a href="#">Vehículos</a></li>
-          <li (click)="disapear()"><a href="#">Promociones</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/usedVehicles']">Promociones</a></li>
           <li (click)="disapear()"><a [routerLink]="['/bookings']">Reservas</a></li>
           <li (click)="disapear()"><a href="#">Reparaciones</a></li>
         </ul>

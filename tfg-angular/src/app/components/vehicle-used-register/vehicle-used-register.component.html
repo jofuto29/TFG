@@ -1,1 +1,185 @@
-<p>vehicle-used-register works!</p>
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Registrata una nuevo proveedor para el taller</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerVehicleForm="ngForm" (ngSubmit)="onSubmit(registerVehicleForm)">
+  
+
+        <div class="form-group">
+            <label class="titleWeight" for="vehicle">Vehiculo registrado:</label>
+            <select name="vehicle" id="vehicle" class="form-control" 
+              [(ngModel)]="vehicleData.id_vehicle" required>
+              <option *ngFor="let vehicle of vehicles" [value]="vehicle.id_vehicle">{{ vehicle.id_vehicle }} -- {{vehicle.registration}}</option>
+            </select>
+            <small *ngIf="!vehicleData.id_vehicle" class="invalid-feedback d-block">
+              Selecciona un vehiculo
+            </small>
+        </div>
+ 
+        <div class="form-group">
+            <label class="titleWeight" for="color">Color:</label>
+            <input type="text" name="color" id="color" class="form-control"
+                [(ngModel)]="vehicleData.color" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="opinion">Opinión:</label>
+            <input type="text" name="opinion" id="opinion" class="form-control"
+                [(ngModel)]="vehicleData.opinion" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="price">Precio:</label>
+            <input type="number" name="price" id="price" class="form-control"
+                [(ngModel)]="vehicleData.price" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="year">Año:</label>
+            <input type="number" name="year" id="year" class="form-control"
+                [(ngModel)]="vehicleData.year" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="mileage">Distancia recorrida:</label>
+            <input type="number" name="mileage" id="mileage" class="form-control"
+                [(ngModel)]="vehicleData.mileage" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="numero_plazas">Número de plazas:</label>
+            <input type="number" name="numero_plazas" id="numero_plazas" class="form-control"
+                [(ngModel)]="vehicleData.numero_plazas" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="fecha_matriculacion">Fecha de matriculación:</label>
+            <input type="datetime-local" name="fecha_matriculacion" id="fecha_matriculacion" class="form-control"
+                [(ngModel)]="vehicleData.fecha_matriculacion" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="proxima_revision">Próxima revisión:</label>
+            <input type="datetime-local" name="proxima_revision" id="proxima_revision" class="form-control"
+                [(ngModel)]="vehicleData.proxima_revision" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="traccion">Tracción:</label>
+            <input type="text" name="traccion" id="traccion" class="form-control"
+                [(ngModel)]="vehicleData.traccion" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="distribucion">Distribución:</label>
+            <input type="text" name="distribucion" id="distribucion" class="form-control"
+                [(ngModel)]="vehicleData.distribucion" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="largo">Largo:</label>
+            <input type="number" name="largo" id="largo" class="form-control"
+                [(ngModel)]="vehicleData.largo" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="alto">Alto:</label>
+            <input type="number" name="alto" id="alto" class="form-control"
+                [(ngModel)]="vehicleData.alto" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="ancho">Ancho:</label>
+            <input type="number" name="ancho" id="ancho" class="form-control"
+                [(ngModel)]="vehicleData.ancho" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="peso">Peso:</label>
+            <input type="number" name="peso" id="peso" class="form-control"
+                [(ngModel)]="vehicleData.peso" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="deposito">Depósito:</label>
+            <input type="number" name="deposito" id="deposito" class="form-control"
+                [(ngModel)]="vehicleData.deposito" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="maletero">Maletero:</label>
+            <input type="number" name="maletero" id="maletero" class="form-control"
+                [(ngModel)]="vehicleData.maletero" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="datos_adicionales">Datos adicionales:</label>
+            <textarea name="datos_adicionales" id="datos_adicionales" placeholder="¿Añadir mas datos?" class="form-control"
+              #description="ngModel" [(ngModel)]="vehicleData.datos_adicionales" required
+              pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label class="titleWeight" for="tipo_combustible">Tipo de combustible:</label>
+            <input type="text" name="tipo_combustible" id="tipo_combustible" class="form-control"
+                [(ngModel)]="vehicleData.tipo_combustible" required>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="consumo">Consumo:</label>
+            <input type="number" name="consumo" id="consumo" class="form-control"
+                [(ngModel)]="vehicleData.consumo" required>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="emisiones">Emisiones:</label>
+            <input type="number" name="emisiones" id="emisiones" class="form-control"
+                [(ngModel)]="vehicleData.emisiones" required>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="aceleracion">Aceleracion:</label>
+            <input type="number" name="aceleracion" id="aceleracion" class="form-control"
+                [(ngModel)]="vehicleData.aceleracion" required>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="velocidad">Velocidad:</label>
+            <input type="number" name="velocidad" id="velocidad" class="form-control"
+                [(ngModel)]="vehicleData.velocidad" required>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="imgProduct">Subir imagen</label>
+            <input type="file" name="imageProduct" id="imgProduct" placeholder="¿Ubicación?" class="form-control" (change)="subirFile($event)">
+        </div>
+
+        <div class="form-group selected-objects">
+            <label class="titleWeight">Imagenes seleccionados:</label>
+            <ul>
+              <li *ngFor="let image of selectedImages; let i = index">
+                <label for="imagenName">{{ image }}</label>
+                <div class="inputIcono">
+                  <i class="fas fa-times-circle" (click)="removeImage(i)"></i>
+                </div>
+              </li>
+            </ul>
+        </div>
+
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerVehicleForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/usedVehicles']" > Volver atrás</span>
+        </div>
+  
+    </form>
+  </div>

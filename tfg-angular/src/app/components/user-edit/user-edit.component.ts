@@ -10,7 +10,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./user-edit.component.css'],
   providers:[UserService]
 })
-export class UserEditComponent implements OnInit{
+export class UserEditComponent{
 
   public page_title: string;
   public userData: user;
@@ -20,7 +20,6 @@ export class UserEditComponent implements OnInit{
   public archivos: any = [];
   public imageURL: any;
   public sanitizedImageUrl: any;
-
 
   constructor(
     private _userService: UserService,
@@ -36,7 +35,6 @@ export class UserEditComponent implements OnInit{
     //this.userData.id_user = this.identity.sub;
 
   }
-
 
   onSubmit(form: any){
     console.log(this.userData);
@@ -63,43 +61,9 @@ export class UserEditComponent implements OnInit{
     );
   }
 
-  ngOnInit(): void {
-    this.getImage();
-  }
-
   loadUser(){
     this.identity = this._userService.getIdentity();
     this.token  = this._userService.getToken();
-  }
-
-  subirFile(event:any){
-    const imagen = event.target.files[0];
-    console.log(imagen);
-    console.log(this.token);
-    
-    this._userService.uploadImage(this.token, imagen, 'usedVehicle/uploadImage').subscribe(
-      (response) => {
-        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
-        console.log(response);
-        console.log("nombre de la imagen " + response.image)
-        //ademas is es subida deberiamos guardar el nombre junto al identificador que corresponda
-        //this.userData.img = response.image;//y actualizamos el objeto
-      },
-      (error) => {
-        // Manejar el error aquí
-        console.error(error);
-      }
-    );
-  }
-
-  getImage(){
-    console.log(this.token);
-    this._userService.getImage(this.token,'usedVehicle/getImage/',"1685217999Cliente-Servidor.png").subscribe((response: Blob) => {
-      const objectUrl = URL.createObjectURL(response);
-      this.sanitizedImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-      }
-    );
-    
   }
 
 }

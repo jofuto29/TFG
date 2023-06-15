@@ -103,9 +103,9 @@ Route::resource('/vehicle', 'App\Http\Controllers\vehicleController');
 Route::get('/vehicle/findByCamp/{camp}', 'App\Http\Controllers\vehicleController@findByCamp');
 
 // (6) Rutas controlador de vehiculo usados
-Route::resource('/usedVechile', 'App\Http\Controllers\usedVehicleController');
-Route::post('/usedVehicle/uploadImage', 'App\Http\Controllers\usedVehicleController@uploadImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class);
-Route::get('/usedVehicle/getImage/{filename}', 'App\Http\Controllers\usedVehicleController@getImage')->middleware(\App\Http\Middleware\ApiAuthMiddleware::class); //filename sera una paremtro obligatorio en esta ruta
+Route::resource('/usedVehicle', 'App\Http\Controllers\usedVehicleController');
+Route::post('/usedVehicle/uploadImage', 'App\Http\Controllers\usedVehicleController@uploadImage'); //->middleware(\App\Http\Middleware\ApiAuthMiddleware::class);
+Route::get('/usedVehicle/getImage/{filename}', 'App\Http\Controllers\usedVehicleController@getImage'); //->middleware(\App\Http\Middleware\ApiAuthMiddleware::class); //filename sera una paremtro obligatorio en esta ruta
 
 // (7) Rutas del controlador de bookings
 Route::resource('/booking', 'App\Http\Controllers\bookingController');
@@ -154,5 +154,5 @@ Route::get('/invoice/findByCamp/{camp}', 'App\Http\Controllers\invoiceController
 
 // (18) Rutas del controlador de pagos
 Route::resource('/pay', 'App\Http\Controllers\payController');
-Route::resource('/pay/findBycampInvoice/{camp}', 'App\Http\Controllers\payController@findByCampInvoice');
-Route::resource('/pay/findBycampCard/{camp}', 'App\Http\Controllers\payController@findByCampCard');
+//Route::resource('/pay/findBycampInvoice/{camp}', 'App\Http\Controllers\payController@findByCampInvoice');
+//Route::resource('/pay/findBycampCard/{camp}', 'App\Http\Controllers\payController@findByCampCard');
