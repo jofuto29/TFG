@@ -1,6 +1,6 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { usedVechile } from 'src/app/models/usedVehicle';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { crudService } from 'src/app/services/crudService';
 
 @Component({
@@ -9,23 +9,35 @@ import { crudService } from 'src/app/services/crudService';
   styleUrls: ['./vehicle-used-update.component.css'],
   providers: [crudService]
 })
-export class VehicleUsedUpdateComponent {
+export class VehicleUsedUpdateComponent implements OnInit{
   public vehicleData: usedVechile;
   public status: string;
   public identity: any;
   public token: any;
+  public vehicleUsedId:number = 0;
 
   public vehicles: any[] = [];
   public selectedImages: string[] = [];
 
   constructor(
     private _crudService: crudService,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ){
     this.status = "";
     this.vehicleData = new usedVechile(1,1,"","","",1,1,1,1,new Date(),new Date(),"","",1,1,1,1,1,1,1,1,1,1,"","","","");
     this.loadUser();
-    this.listVehicles();
+
+    if(this.identity.rol = "admin"){
+      this.listVehiclesAdmin();
+    }else{
+      this.listVehicles();
+    }
+  }
+
+  ngOnInit(): void {
+    this.vehicleUsedId = this._route.snapshot.queryParams['id'];
+    this.getVehicle();
   }
 
   loadUser() {
@@ -35,18 +47,33 @@ export class VehicleUsedUpdateComponent {
 
   onSubmit(form: any){
     
-    this.vehicleData.img = this.selectedImages.map(image => image).join(";");
+   this.vehicleData.img = this.selectedImages.map(image => image).join(";");
     
-   this._crudService.registerObject(this.token, "usedVehicle", this.vehicleData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
+   this._crudService.updateObject(this.token, "usedVehicle/", this.vehicleData, this.vehicleUsedId).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
       (response) => {
-        console.log(response);
         this.status = "success";
-        this._router.navigate(['usedVehicles']);
+        if(this.identity.rol == "admin"){
+          this._router.navigate(['usedVehiclesAdmin']);
+        }else{
+          this._router.navigate(['usedVehicles']);
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.status = "error";
+      }
+    );
+  }
+
+  listVehiclesAdmin(){
+    this._crudService.listObjects(this.token, 'vehicle').subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.vehicles = [...response.$model]; // Asignar la respuesta al array de productos
       },
       (error) => {
         // Manejar el error aquí
         console.error(error);
-        this.status = "error";
       }
     );
   }
@@ -64,6 +91,25 @@ export class VehicleUsedUpdateComponent {
     );
   }
 
+  getVehicle(){
+    this._crudService.getObject(this.token, "usedVehicle/", this.vehicleUsedId).subscribe(
+      (response) => {
+        this.vehicleData = response.$model;
+        this.loadImg();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  loadImg(){
+    const imageNames = this.vehicleData.img.split(";");
+    for(let i = 0; i < imageNames.length; i++){
+      this.selectedImages.push(imageNames[i]);
+    }
+  }
+
   subirFile(event:any){
     const imagen = event.target.files[0];
 
@@ -79,8 +125,6 @@ export class VehicleUsedUpdateComponent {
   }
 
   removeImage(i:number){
-    console.log(i);
     this.selectedImages.splice(i, 1);
-    console.log(this.selectedImages);
   }
 }

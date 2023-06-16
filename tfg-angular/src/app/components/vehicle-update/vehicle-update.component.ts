@@ -49,7 +49,6 @@ export class VehicleUpdateComponent implements OnInit{
   onSubmit(form: any){
    this._crudService.updateObject(this.token, "vehicle/", this.vehicleData, this.vehicleId).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
       (response) => {
-        console.log(response);
         this.status = "success";
 
         if(this.identity.rol == "admin"){
@@ -98,4 +97,5 @@ export class VehicleUpdateComponent implements OnInit{
       this._router.navigate(['vehicleClient']);
     }
   }
+
 }

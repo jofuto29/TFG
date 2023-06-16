@@ -29,20 +29,17 @@ export class VehicleUsedAdminComponent {
     this._crudService.listObjects(this.token, 'usedVehicle' ).subscribe(
       (response) => {
         this.usedVehicle = [...response.$model]; 
-        console.log(this.usedVehicle);
 
         for(const object of this.usedVehicle){
           this._crudService.getObject(this.token, 'vehicle/', object.id_vehicle).subscribe(
             (response) => {
               this.vehicles.push(response.$model); 
-              console.log(response.$model)
             },
             (error) => {
               console.error(error);
             }
           );
         }
-        console.log(this.vehicles);
       },
       (error) => {
         console.error(error);
@@ -51,7 +48,7 @@ export class VehicleUsedAdminComponent {
   }
 
   deleteVehicle(id_vehicle: number) {
-    this._crudService.deleteObject(this.token,'vehicle/',id_vehicle).subscribe(
+    this._crudService.deleteObject(this.token,'usedVehicle/',id_vehicle).subscribe(
       (response) => {
         window.location.reload();
       },

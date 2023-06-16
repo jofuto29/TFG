@@ -41,8 +41,6 @@ export class ListUsedVehicleComponent {
             }
           );
         }
-        
-        console.log(this.usedVehicle);
       },
       (error) => {
         console.error(error);

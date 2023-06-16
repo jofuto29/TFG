@@ -39,9 +39,13 @@ export class VehicleUsedRegisterComponent {
     
    this._crudService.registerObject(this.token, "usedVehicle", this.vehicleData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
       (response) => {
-        console.log(response);
         this.status = "success";
-        this._router.navigate(['usedVehicles']);
+
+        if(this.identity.rol == "admin"){
+          this._router.navigate(['usedVehiclesAdmin']);
+        }else{
+          this._router.navigate(['usedVehicles']);
+        }
       },
       (error) => {
         // Manejar el error aquí
@@ -70,7 +74,6 @@ export class VehicleUsedRegisterComponent {
     this._crudService.uploadImage(this.token, imagen, 'usedVehicle/uploadImage').subscribe(
       (response) => {
         this.selectedImages.push(response.image);
-        console.log(this.selectedImages);
       },
       (error) => {
         console.error(error);
@@ -79,8 +82,6 @@ export class VehicleUsedRegisterComponent {
   }
 
   removeImage(i:number){
-    console.log(i);
     this.selectedImages.splice(i, 1);
-    console.log(this.selectedImages);
   }
 }

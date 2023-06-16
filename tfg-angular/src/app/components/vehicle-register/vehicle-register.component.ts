@@ -43,7 +43,6 @@ export class VehicleRegisterComponent {
   onSubmit(form: any){
    this._crudService.registerObject(this.token, "vehicle", this.vehicleData).subscribe(  //el metodo subscribe viene por el tipo observable que hemos declarado en el servicio
       (response) => {
-        console.log(response);
         this.status = "success";
         if(this.identity.rol == "admin"){
           this._router.navigate(['vehicles']);
@@ -64,7 +63,6 @@ export class VehicleRegisterComponent {
       (response) => {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
         this.users = [...response.$model]; // Asignar la respuesta al array de productos
-        console.log(this.users);
       },
       (error) => {
         // Manejar el error aquí

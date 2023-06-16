@@ -36,7 +36,6 @@ export class VehiculeUsedComponent {
     this._crudService.listObjects("", 'usedVehicle').subscribe(
       (response) => {
         // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
-        console.log(response)
         this.usedVehicles = [...response.$model]; // Asignar la respuesta al array de productos
         this.getUrlsImage();
       },
