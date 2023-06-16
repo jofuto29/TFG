@@ -9,7 +9,6 @@
       <table>
         <thead>
           <tr>
-            <th>ID vehículo ocasión</th>
             <th>ID vehículo</th>
             <th>Marca</th>
             <th>Modelo</th>
@@ -22,27 +21,30 @@
             <th>Distancia</th>
             <th>Consumo</th>
             <th>Velocidad Punta</th>
+            <th>Aceleracion</th>
+            <th>Emisiones</th>
             <th>Editar</th>
             <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let vehicle of usedVehicle; let i = index">
+          <tr *ngFor="let vehicle of vehicles; let i = index">
             <ng-container *ngIf="vehicles[i]">
-              <td>{{ vehicle.id_usedVehicle }}</td>
               <td>{{ vehicle.id_vehicle }}</td>
-              <td>{{ vehicles[i].trademark }}</td>
-              <td>{{ vehicles[i].model }}</td>
-              <td>{{ vehicles[i].registration }}</td>
-              <td>{{ vehicles[i].mileage }}</td>
-              <td>{{ vehicles[i].id_user }}</td>
-              <td>{{ vehicle.color }}</td>
-              <td>{{ vehicle.price }}</td>
-              <td>{{ vehicle.year }}</td>
+              <td>{{ vehicle.trademark }}</td>
+              <td>{{ vehicle.model }}</td>
+              <td>{{ vehicle.registration }}</td>
               <td>{{ vehicle.mileage }}</td>
-              <td>{{ vehicle.aceleracion }}</td>
-              <td>{{ vehicle.emisiones }}</td>
-              <td [routerLink]="['/updateUsedVehicle']" [queryParams]="{ id: vehicle.id_usedVehicle }">
+              <td>{{ vehicle.id_user }}</td>
+              <td>{{ usedVehicle[i].color }}</td>
+              <td>{{ usedVehicle[i].price }}</td>
+              <td>{{ usedVehicle[i].year }}</td>
+              <td>{{ usedVehicle[i].mileage }}</td>
+              <td>{{ usedVehicle[i].consumo }}</td>
+              <td>{{ usedVehicle[i].velocidad }}</td>
+              <td>{{ usedVehicle[i].aceleracion }}</td>
+              <td>{{ usedVehicle[i].emisiones }}</td>
+              <td [routerLink]="['/updateUsedVehicle']" [queryParams]="{ id: usedVehicle[i].id_usedVehicle }">
                 <span class="icon">
                   <i class="fas fa-pencil-alt"></i>
                 </span>
@@ -58,3 +60,4 @@
       </table>
     </div>
   </div>
+

@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
-import { usedVechile } from 'src/app/models/usedVehicle';
 import { crudService } from 'src/app/services/crudService';
 
 @Component({
-  selector: 'app-vehicle-used-admin',
-  templateUrl: './vehicle-used-admin.component.html',
-  styleUrls: ['./vehicle-used-admin.component.css'],
+  selector: 'app-vehicle-client',
+  templateUrl: './vehicle-client.component.html',
+  styleUrls: ['./vehicle-client.component.css'],
   providers:[crudService]
 })
-export class VehicleUsedAdminComponent {
+export class VehicleClientComponent {
 
   public token: any;
   public identity: any;
   public vehicles: any[] = []; // Array para almacenar los productos
-  public usedVehicle: any[] = []; // Array para almacenar los productos
 
   constructor(
     private _crudService: crudService
@@ -26,25 +24,13 @@ export class VehicleUsedAdminComponent {
   }
 
   listVehiclesUsers() {
-    this._crudService.listObjects(this.token, 'usedVehicle' ).subscribe(
+    this._crudService.getObject(this.token, 'vehicle/findByCamp/', this.identity.sub).subscribe(
       (response) => {
-        this.usedVehicle = [...response.$model]; 
-        console.log(this.usedVehicle);
-
-        for(const object of this.usedVehicle){
-          this._crudService.getObject(this.token, 'vehicle/', object.id_vehicle).subscribe(
-            (response) => {
-              this.vehicles.push(response.$model); 
-              console.log(response.$model)
-            },
-            (error) => {
-              console.error(error);
-            }
-          );
-        }
-        console.log(this.vehicles);
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.vehicles = [...response.$model]; // Asignar la respuesta al array de productos
       },
       (error) => {
+        // Manejar el error aquí
         console.error(error);
       }
     );

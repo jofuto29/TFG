@@ -132,3 +132,19 @@
   margin-right: 10px;
   /* Estilos adicionales para los iconos */
 }
+
+.btn-success{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E96348;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    border: 1px solid white;
+}
+
+.btn-success:hover{
+  background-color: #E96348;
+}

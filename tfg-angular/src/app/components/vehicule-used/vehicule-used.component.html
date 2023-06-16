@@ -1,6 +1,8 @@
 <div class="container">
     <div class="headerAdmin">
       <h1>Vehículos de ocasión</h1>
+      <span *ngIf="identity && identity.rol != 'admin'" class="button"><a [routerLink]="['/listUsedVehicle']"> Listar</a></span>
+      <span *ngIf="identity && identity.rol == 'admin'" class="button"><a [routerLink]="['/usedVehiclesAdmin']"> Listar</a></span>
       <span class="button"><a [routerLink]="['/addUsedVehicle']"> Añadir nuevo</a></span>
     </div>
   

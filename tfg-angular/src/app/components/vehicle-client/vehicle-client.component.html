@@ -1,0 +1,45 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de vehículos registrados</h1>
+      <span class="button"><a [routerLink]="['/addVehicle']"> Añadir vehículo </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID vehículo</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Matricula</th>
+            <th>Distancia recorrida</th>
+            <th>Id usuario propietario</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehicle of vehicles">
+            <td>{{ vehicle.id_vehicle }}</td>
+            <td>{{ vehicle.trademark }}</td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.registration }}</td>
+            <td>{{ vehicle.mileage }}</td>
+            <td>{{ vehicle.id_user }}</td>
+            <td [routerLink]="['/updateVehicle']" [queryParams]="{ id: vehicle.id_vehicle }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteVehicle(vehicle.id_vehicle)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

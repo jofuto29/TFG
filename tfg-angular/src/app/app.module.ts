@@ -49,6 +49,8 @@ import { VehicleUsedAdminComponent } from './components/vehicle-used-admin/vehic
 import { VehicleUsedRegisterComponent } from './components/vehicle-used-register/vehicle-used-register.component';
 import { VehicleUsedUpdateComponent } from './components/vehicle-used-update/vehicle-used-update.component';
 import { UsedVehicleSeeMoreComponent } from './components/used-vehicle-see-more/used-vehicle-see-more.component';
+import { VehicleClientComponent } from './components/vehicle-client/vehicle-client.component';
+import { ListUsedVehicleComponent } from './components/list-used-vehicle/list-used-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { UsedVehicleSeeMoreComponent } from './components/used-vehicle-see-more/
     VehicleUsedAdminComponent,
     VehicleUsedRegisterComponent,
     VehicleUsedUpdateComponent,
-    UsedVehicleSeeMoreComponent
+    UsedVehicleSeeMoreComponent,
+    VehicleClientComponent,
+    ListUsedVehicleComponent
   ],
   imports: [
     BrowserModule,

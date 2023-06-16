@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { vehicle } from 'src/app/models/vehicle';
+import { user } from 'src/app/models/user';
 import { Router, ActivatedRoute} from '@angular/router';
 import { crudService } from 'src/app/services/crudService';
 
@@ -26,7 +27,13 @@ export class VehicleUpdateComponent implements OnInit{
     this.status = "";
     this.vehicleData = new vehicle(1,1," "," ","", 0, "", "");
     this.loadUser();
-    this.listUsers();
+    
+    if(this.identity.rol == "admin"){
+      this.listUsers();
+    }else{
+      let userProp = new user(this.identity.sub,this.identity.user,this.identity.user,"","","",1,"",1,"","","");
+      this.users.push(userProp);
+    }
   }
 
   ngOnInit(): void {
@@ -44,7 +51,13 @@ export class VehicleUpdateComponent implements OnInit{
       (response) => {
         console.log(response);
         this.status = "success";
-        this._router.navigate(['vehicles']);
+
+        if(this.identity.rol == "admin"){
+          this._router.navigate(['vehicles']);
+        }else{
+          this._router.navigate(['vehicleClient']);
+        }
+        
       },
       (error) => {
         // Manejar el error aquí
@@ -76,5 +89,13 @@ export class VehicleUpdateComponent implements OnInit{
         console.error(error);
       }
     );
+  }
+
+  volver(){
+    if(this.identity.rol == "admin"){
+      this._router.navigate(['vehicles']);
+    }else{
+      this._router.navigate(['vehicleClient']);
+    }
   }
 }

@@ -51,6 +51,8 @@ import { VehicleUsedRegisterComponent } from './components/vehicle-used-register
 import { VehicleUsedUpdateComponent } from './components/vehicle-used-update/vehicle-used-update.component';
 import { VehicleUsedAdminComponent } from './components/vehicle-used-admin/vehicle-used-admin.component';
 import { UsedVehicleSeeMoreComponent } from './components/used-vehicle-see-more/used-vehicle-see-more.component';
+import { VehicleClientComponent } from './components/vehicle-client/vehicle-client.component';
+import { ListUsedVehicleComponent } from './components/list-used-vehicle/list-used-vehicle.component';
 
 
 // Definir las rutas
@@ -98,6 +100,7 @@ const appRoutes: Routes = [
   { path: 'vehicles', component: VehicleComponent},
   { path: 'addVehicle', component: VehicleRegisterComponent},
   { path: 'updateVehicle', component: VehicleUpdateComponent},
+  { path: 'vehicleClient', component: VehicleClientComponent},
 
   { path: 'bookings', component: BookingComponent},
   { path: 'addBooking', component: BookingRegisterComponent},
@@ -109,6 +112,7 @@ const appRoutes: Routes = [
   { path: 'updateUsedVehicle', component: VehicleUsedUpdateComponent},
   { path: 'usedVehiclesAdmin', component: VehicleUsedAdminComponent},
   { path: 'usedVehicleSeeMore', component: UsedVehicleSeeMoreComponent},
+  { path: 'listUsedVehicle', component: ListUsedVehicleComponent},
 
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];

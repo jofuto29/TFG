@@ -3,12 +3,12 @@ import { usedVechile } from 'src/app/models/usedVehicle';
 import { crudService } from 'src/app/services/crudService';
 
 @Component({
-  selector: 'app-vehicle-used-admin',
-  templateUrl: './vehicle-used-admin.component.html',
-  styleUrls: ['./vehicle-used-admin.component.css'],
+  selector: 'app-list-used-vehicle',
+  templateUrl: './list-used-vehicle.component.html',
+  styleUrls: ['./list-used-vehicle.component.css'],
   providers:[crudService]
 })
-export class VehicleUsedAdminComponent {
+export class ListUsedVehicleComponent {
 
   public token: any;
   public identity: any;
@@ -26,23 +26,23 @@ export class VehicleUsedAdminComponent {
   }
 
   listVehiclesUsers() {
-    this._crudService.listObjects(this.token, 'usedVehicle' ).subscribe(
+    this._crudService.getObject(this.token, 'vehicle/findByCamp/', this.identity.sub).subscribe(
       (response) => {
-        this.usedVehicle = [...response.$model]; 
-        console.log(this.usedVehicle);
+        this.vehicles = [...response.$model]; 
 
-        for(const object of this.usedVehicle){
-          this._crudService.getObject(this.token, 'vehicle/', object.id_vehicle).subscribe(
+        for(const object of this.vehicles){
+          this._crudService.getObject(this.token, 'usedVehicle/', object.id_vehicle).subscribe(
             (response) => {
-              this.vehicles.push(response.$model); 
-              console.log(response.$model)
+              this.usedVehicle.push(response.$model as usedVechile); 
+              
             },
             (error) => {
               console.error(error);
             }
           );
         }
-        console.log(this.vehicles);
+        
+        console.log(this.usedVehicle);
       },
       (error) => {
         console.error(error);
