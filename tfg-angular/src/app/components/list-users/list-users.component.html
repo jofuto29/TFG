@@ -1,0 +1,49 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Listado de usuarios registrados</h1>
+      <span class="button"><a [routerLink]="['/register']"> Añadir usuario </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id usuario</th>
+            <th>Nombre de usuario</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Número de telefono</th>
+            <th>Dni</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id_user }}</td>
+            <td>{{ user.user }}</td>
+            <td>{{ user.userName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.rol }}</td>
+            <td>{{ user.phoneNumber }}</td>
+            <td>{{ user.dni }}</td>
+            <td [routerLink]="['/ajustes']" [queryParams]="{ id: user.id_user }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deleteUser(user.id_user)">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

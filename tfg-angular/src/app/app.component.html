@@ -36,33 +36,33 @@
       <li (click)="disapear()" ><a [routerLink]="['/inicio']">Inicio</a></li>
       <li (click)="disapear()"><a [routerLink]="['/conocenos']">Conócenos</a></li>
       <li class="submenu4" *ngIf="identity">
-        <a href="#">Operaciones</a>
+        <a>Operaciones</a>
         <ul>
           <li (click)="disapear()"><a [routerLink]="['/vehicleClient']">Vehículos</a></li>
           <li (click)="disapear()"><a [routerLink]="['/usedVehicles']">Promociones</a></li>
           <li (click)="disapear()"><a [routerLink]="['/bookings']">Reservas</a></li>
-          <li (click)="disapear()"><a [routerLink]="['/reparationClient']">Reparaciones</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/reparations']">Reparaciones</a></li>
         </ul>
       </li>
       <li *ngIf="identity && identity.rol == 'employee'" class="submenu4">
-        <a href="#">Gestión</a>
+        <a>Gestión</a>
         <ul>
           <li (click)="disapear()"><a href="#">Pagos</a></li>
           <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
-          <li (click)="disapear()"><a [routerLink]="['/invoiceClient']">Facturas</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/invoices']">Facturas</a></li>
           <li (click)="disapear()"><a [routerLink]="">Nóminas</a></li>
         </ul>
       </li>
       <li *ngIf="identity && identity.rol == 'client'" class="submenu3">
-        <a href="#">Gestión</a>
+        <a>Gestión</a>
         <ul>
           <li (click)="disapear()"><a href="#">Pagos</a></li>
           <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
-          <li (click)="disapear()"><a href="#">Facturas</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/invoices']">Facturas</a></li>
         </ul>
       </li>
       <li class="submenu1" *ngIf="identity">
-        <a href="#">{{ identity.user | capitalize }}</a>
+        <a>{{ identity.user | capitalize }}</a>
         <ul>
           <li (click)="disapear()"><a [routerLink]="['/ajustes']">Ajustes</a></li>
         </ul>
@@ -74,15 +74,15 @@
     <ul *ngIf="identity && identity.rol == 'admin'" class="menu" [ngClass]="{ 'unseen': !isMenuVisible, 'seen': isMenuVisible }">
       <li (click)="disapear()" ><a [routerLink]="['/inicio']">Inicio</a></li>
       <li class="submenu3" *ngIf="identity">
-        <a href="#">Usuarios</a>
+        <a>Usuarios</a>
         <ul>
-          <li (click)="disapear()"><a [routerLink]="['/clients']">Clientes</a></li>
-          <li (click)="disapear()"><a [routerLink]="['/employees']">Empleados</a></li>
-          <li (click)="disapear()"><a [routerLink]="['/users']">Todos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/listClients']">Clientes</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/employeer']">Empleados</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/listUsers']">Todos</a></li>
         </ul>
       </li>
       <li class="submenu3" *ngIf="identity">
-        <a href="#">Operaciones</a>
+        <a>Operaciones</a>
         <ul>
           <li (click)="disapear()"><a [routerLink]="['/bookings']">Reservas</a></li>
           <li (click)="disapear()"><a [routerLink]="['/vehicles']">Vehículos</a></li>
@@ -90,7 +90,7 @@
         </ul>
       </li>
       <li class="submenu5" *ngIf="identity">
-        <a href="#">Gestión</a>
+        <a>Gestión</a>
         <ul>
           <li (click)="disapear()"><a [routerLink]="['/reparations']">Reparaciones</a></li>
           <li (click)="disapear()"><a [routerLink]="['/services']">Servicios</a></li>
@@ -100,7 +100,7 @@
         </ul>
       </li>
       <li class="submenu5" *ngIf="identity">
-        <a href="#">Finanzas</a>
+        <a>Finanzas</a>
         <ul>
           <li (click)="disapear()"><a href="#">Pagos</a></li>
           <li (click)="disapear()"><a href="#">Nóminas</a></li>

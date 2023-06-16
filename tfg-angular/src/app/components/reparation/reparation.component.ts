@@ -15,6 +15,7 @@ export class ReparationComponent implements OnInit{
   public reparationProducts: any[] = []; // Array para almacenar los id productos
   public reparationServices: any[] = []; // Array para almacenar los id productos
   public invoices: any[] = []; // Array para almacenar los id productos
+  public vehicles: any[] = []; // Array para almacenar los id productos
 
   constructor(
     private _crudService: crudService
@@ -23,7 +24,39 @@ export class ReparationComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.listReparations();
+    if(this.identity.rol == "admin"){
+      this.listReparations();
+    }else{
+      this.listVehiclesUsers()
+    }
+  }
+
+  listVehiclesUsers() {
+    this._crudService.getObject(this.token, 'vehicle/findByCamp/', this.identity.sub).subscribe(
+      (response) => {
+        // Manejar la respuesta exitosa aquí --> la imagen ha sido subida
+        this.vehicles = [...response.$model]; // Asignar la respuesta al array de productos
+        this.listReparationClient();
+      },
+      (error) => {
+        // Manejar el error aquí
+        console.error(error);
+      }
+    );
+  }
+
+  listReparationClient(){
+    for(let i = 0; i < this.vehicles.length; i++){
+      this._crudService.getObject(this.token, 'reparation/findByCamp/',this.vehicles[i].id_vehicle).subscribe(
+        (response) => {
+          this.reparations = [...response.$model];
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+    
   }
 
   listReparations() {
@@ -93,8 +126,6 @@ export class ReparationComponent implements OnInit{
       }
     );
   }
-
-  /*delete en pays y en invoice*/
 
   deleteInvoice(reparationId: number){
     this._crudService.getObject(this.token, "invoice/findByCamp/", reparationId).subscribe(

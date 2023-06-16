@@ -2,7 +2,7 @@
 
     <div class="headerAdmin"> 
       <h1>Listado de reparaciones creadas</h1>
-      <span class="button"><a [routerLink]="['/addReparation']"> Crear reparación </a></span>
+      <span  *ngIf="identity && identity.rol == 'admin'" class="button"><a [routerLink]="['/addReparation']"> Crear reparación </a></span>
     </div>
   
     <div class="table">
@@ -19,8 +19,8 @@
             <th>Id empleado</th>
             <th>Ver productos asociados</th>
             <th>Ver servicios asociados</th>
-            <th>Actualizar</th>
-            <th>Eliminar</th>
+            <th *ngIf="identity && identity.rol == 'admin'">Actualizar</th>
+            <th *ngIf="identity && identity.rol == 'admin'">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -43,12 +43,12 @@
                 <i class="far fa-eye"></i>
               </span>
             </td>
-            <td [routerLink]="['/updateReparation']" [queryParams]="{ id: reparation.id_reparation }">
+            <td *ngIf="identity && identity.rol == 'admin'" [routerLink]="['/updateReparation']" [queryParams]="{ id: reparation.id_reparation }">
               <span class="icon">
                 <i class="fas fa-pencil-alt"></i>
               </span>
             </td>
-            <td (click)="deleteReparation(reparation.id_reparation)">
+            <td *ngIf="identity && identity.rol == 'admin'" (click)="deleteReparation(reparation.id_reparation)">
               <span class="icon">
                 <i class="fas fa-trash-alt"></i>
               </span>

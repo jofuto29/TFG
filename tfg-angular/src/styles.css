@@ -263,3 +263,28 @@ tbody tr td img{
 .state-green {
   color: green;
 }
+
+.container {
+  overflow-x: auto;
+}
+
+@media (max-width: 767px) {
+  table {
+    font-size: 12px;
+  }
+
+  .button {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    font-size: 12px;
+  }
+}

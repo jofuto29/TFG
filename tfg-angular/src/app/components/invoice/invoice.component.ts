@@ -13,7 +13,11 @@ export class InvoiceComponent {
   public token: any;
   public identity: any;
   public invoices: any[] = []; // Array para almacenar los productos
+  public vehicles: any[] = []; // Array para almacenar los productos
   public invoicesDeductions: any[] = []; // Array para almacenar los productos
+  public reparations: any[] = []; // Array para almacenar los productos
+
+  
   constructor(
     private _crudService: crudService
   ) {
@@ -21,8 +25,48 @@ export class InvoiceComponent {
   }
 
   ngOnInit(): void {
-    this.listInvoices();
+    if(this.identity.rol == "admin"){
+      this.listInvoices();
+    }else{
+      this.listInvoicesUser();
+    }
+    
   }
+
+  listInvoicesUser(){
+    this._crudService.getObject(this.token, 'vehicle/findByCamp/', this.identity.sub).subscribe(
+      (response) => {
+        this.vehicles = [...response.$model]; 
+
+        for(let i = 0; i < this.vehicles.length; i++){
+          this._crudService.getObject(this.token, 'reparation/findByCamp/',this.vehicles[i].id_vehicle).subscribe(
+            (response) => {
+              this.reparations = [...response.$model];
+
+              for(let i = 0; i < this.vehicles.length; i++){
+                this._crudService.getObject(this.token, 'invoice/findByCamp/',this.reparations[i].id_reparation).subscribe(
+                  (response) => {
+                    this.invoices = [...response.$model];
+                  },
+                  (error) => {
+                    console.error(error);
+                  }
+                );
+              }
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        }
+      },
+      (error) => {
+        // Manejar el error aquí
+        console.error(error);
+      }
+    );
+  }
+
 
   listInvoices() {
     this._crudService.listObjects(this.token, 'invoice').subscribe(

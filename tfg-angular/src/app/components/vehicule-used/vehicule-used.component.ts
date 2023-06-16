@@ -76,7 +76,6 @@ export class VehiculeUsedComponent {
       .map((vehicle) =>
         this._crudService.getObject(this.token, 'vehicle/', vehicle.id_vehicle).pipe(
           mergeMap((response) => {
-            console.log(response);
             this.vehicles.push(response.$model as vehicle);
             
             if (vehicle.img != null) {

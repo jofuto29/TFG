@@ -1,39 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { user } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router, ActivatedRoute} from '@angular/router';
+import { crudService } from 'src/app/services/crudService';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css'],
-  providers:[UserService]
+  providers:[UserService, crudService]
 })
-export class UserEditComponent{
+export class UserEditComponent implements OnInit{
 
   public page_title: string;
   public userData: user;
   public token: any;
   public identity: any;
   public status:any;
-  public archivos: any = [];
-  public imageURL: any;
-  public sanitizedImageUrl: any;
 
   constructor(
     private _userService: UserService,
-    private _http: HttpClient,
-    private sanitizer: DomSanitizer
+    private _crudService: crudService,
   ){
     this.page_title = 'Ajustes de usuario';
     this.status ='';
     this.userData = new user(1,'','','','','user',2,'',2,'','','');//e rellaran lso datos con forme lo enviamos desde el formulario
     this.loadUser();
-    //obtenemos los datos del usuario asi rellenamos los campos del formulario con sus datos
-    //this.userData = this.identity;
-    //this.userData.id_user = this.identity.sub;
+  }
 
+  ngOnInit(): void {
+    this.getUser();
   }
 
   onSubmit(form: any){
@@ -43,7 +39,6 @@ export class UserEditComponent{
           if(response.status == "success"){
             this.status = 'success';
 
-            //actualizamos los datos guardados en indenitity
             this.identity = response.userToken;
             this.identity.sub = this.identity.id_user;
 
@@ -64,6 +59,18 @@ export class UserEditComponent{
   loadUser(){
     this.identity = this._userService.getIdentity();
     this.token  = this._userService.getToken();
+  }
+
+  getUser(){
+    this._crudService.getObject(this.token,"user/detailsUser/", this.identity.sub).subscribe(
+      response =>{
+        this.userData = response.$model;
+        console.log(this.userData);
+      },
+      error=>{
+        console.log(<any>error);
+      }
+    );
   }
 
 }

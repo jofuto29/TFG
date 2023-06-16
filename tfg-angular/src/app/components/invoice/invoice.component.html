@@ -2,7 +2,7 @@
 
     <div class="headerAdmin"> 
       <h1>Listado de facturas registradas</h1>
-      <span class="button"><a [routerLink]="['/addInvoice']"> Generar factura </a></span>
+      <span *ngIf="identity && identity.rol == 'admin'" class="button"><a [routerLink]="['/addInvoice']"> Generar factura </a></span>
     </div>
   
     <div class="table">
@@ -15,8 +15,9 @@
             <th>Estado</th>
             <th>Reparación asociada</th>
             <th>Ver factura</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th *ngIf="identity && identity.rol == 'admin'">Editar</th>
+            <th *ngIf="identity && identity.rol == 'admin'">Eliminar</th>
+            <th *ngIf="identity && identity.rol != 'admin'">Pagar</th>
           </tr>
         </thead>
         <tbody>
@@ -26,20 +27,30 @@
             <td>{{ invoice.totalPrice }}</td>
             <td [ngClass]="getStateClass(invoice.state)">{{ invoice.state }}</td>
             <td>{{ invoice.id_reparation }}</td>
+
             <td [routerLink]="['/seeInvoice']" [queryParams]="{ id: invoice.id_invoice }">
                 <span class="icon">
                   <i class="far fa-eye"></i>
                 </span>
               </td>
-            <td [routerLink]="['/updateInvoice']" [queryParams]="{ id: invoice.id_invoice }">
+
+            <td *ngIf="identity && identity.rol == 'admin'" [routerLink]="['/updateInvoice']" [queryParams]="{ id: invoice.id_invoice }">
               <span class="icon">
                 <i class="fas fa-pencil-alt"></i>
               </span>
             </td>
-            <td (click)="deleteInvoice(invoice.id_invoice)">
+
+            <td *ngIf="identity && identity.rol == 'admin'" (click)="deleteInvoice(invoice.id_invoice)">
               <span class="icon">
                 <i class="fas fa-trash-alt"></i>
               </span>
+            </td>
+
+            <td *ngIf="identity && identity.rol != 'admin'">
+              <span class="icon">
+                <i class="fas fa-money-bill"></i>
+              </span>
+              <span *ngIf="invoice.state === 'paid'" class="warning-text">Ya está pagado</span>
             </td>
           </tr>
         </tbody>

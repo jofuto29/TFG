@@ -51,6 +51,11 @@ import { VehicleUsedUpdateComponent } from './components/vehicle-used-update/veh
 import { UsedVehicleSeeMoreComponent } from './components/used-vehicle-see-more/used-vehicle-see-more.component';
 import { VehicleClientComponent } from './components/vehicle-client/vehicle-client.component';
 import { ListUsedVehicleComponent } from './components/list-used-vehicle/list-used-vehicle.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
+import { ListClientsComponent } from './components/list-clients/list-clients.component';
+import { EmployeesComponent } from './components/employees/employees.component';
+import { EmployeesRegisterComponent } from './components/employees-register/employees-register.component';
+import { EmployeesUpdateComponent } from './components/employees-update/employees-update.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +105,12 @@ import { ListUsedVehicleComponent } from './components/list-used-vehicle/list-us
     VehicleUsedUpdateComponent,
     UsedVehicleSeeMoreComponent,
     VehicleClientComponent,
-    ListUsedVehicleComponent
+    ListUsedVehicleComponent,
+    ListUsersComponent,
+    ListClientsComponent,
+    EmployeesComponent,
+    EmployeesRegisterComponent,
+    EmployeesUpdateComponent,
   ],
   imports: [
     BrowserModule,

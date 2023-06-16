@@ -53,6 +53,11 @@ import { VehicleUsedAdminComponent } from './components/vehicle-used-admin/vehic
 import { UsedVehicleSeeMoreComponent } from './components/used-vehicle-see-more/used-vehicle-see-more.component';
 import { VehicleClientComponent } from './components/vehicle-client/vehicle-client.component';
 import { ListUsedVehicleComponent } from './components/list-used-vehicle/list-used-vehicle.component';
+import { ListClientsComponent } from './components/list-clients/list-clients.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
+import { EmployeesComponent } from './components/employees/employees.component';
+import { EmployeesRegisterComponent } from './components/employees-register/employees-register.component';
+import { EmployeesUpdateComponent } from './components/employees-update/employees-update.component';
 
 
 // Definir las rutas
@@ -62,6 +67,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout/:sure', component: LoginComponent}, //lo que haremos para no definir un nuevo componenete es en la ruta de login añadir un parametro para cerrar la sesion
   { path: 'register', component: RegisterComponent },
+  { path: 'listUsers', component: ListUsersComponent },
+  { path: 'listClients', component: ListClientsComponent },
 
   { path: 'ajustes', component: UserEditComponent},
   { path: 'conocenos', component: ConocenosComponent},
@@ -113,6 +120,10 @@ const appRoutes: Routes = [
   { path: 'usedVehiclesAdmin', component: VehicleUsedAdminComponent},
   { path: 'usedVehicleSeeMore', component: UsedVehicleSeeMoreComponent},
   { path: 'listUsedVehicle', component: ListUsedVehicleComponent},
+
+  { path: 'employeer', component: EmployeesComponent},
+  { path: 'addEmployeer', component: EmployeesRegisterComponent},
+  { path: 'updateEmployeer', component: EmployeesUpdateComponent},
 
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];

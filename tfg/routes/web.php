@@ -88,6 +88,7 @@ Route::put('/user/update', 'App\Http\Controllers\UserController@update'); //put 
 Route::get('/user/detailsUser/{id}', 'App\Http\Controllers\UserController@detailsUser');
 Route::delete('/user/deleteUser/{id}', 'App\Http\Controllers\UserController@deleteUser');
 Route::get('/user/listUsers', 'App\Http\Controllers\UserController@listUsers');
+Route::get('/user/findByCamp/{camp}', 'App\Http\Controllers\UserController@findByCamp');
 
 // (2) Rutas del controlador de employee
 Route::resource('/employee', 'App\Http\Controllers\employeeController');
@@ -134,6 +135,7 @@ Route::get('/reparationProducts/findByCampProduct/{camp}', 'App\Http\Controllers
 
 // (13) Rutas del controlador de reparation
 Route::resource('/reparation', 'App\Http\Controllers\reparationController');
+Route::get('/reparation/findByCamp/{camp}', 'App\Http\Controllers\reparationController@findByCamp');
 
 // (14) Rutas del controlador de reparationService
 Route::resource('/reparationServices', 'App\Http\Controllers\reparationServicesController');

@@ -100,4 +100,10 @@ class ReparationController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "reparations", reparation::find($id), $id, "id_reparation");
     }
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(reparation::where('id_vehicle', $camp)->get(), "reparations", $camp);
+    }
 }

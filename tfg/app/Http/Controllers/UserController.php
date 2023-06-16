@@ -182,7 +182,7 @@ class UserController extends Controller
 
                 //VALIDAMOS LOS DATOS ENVIADOS
                 $validate = validator::make($atributos, [
-                    'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users,userName,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
+                    'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users,user,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
                     'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
                     'email'         => 'required|email',
@@ -347,5 +347,11 @@ class UserController extends Controller
         } catch (Exception $e) {
             return response()->json(['message' => 'Correo electrónico no se pudo enviar correctamente', 'error e' => $e], 500);
         }
+    }
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(user::where('rol', $camp)->get(), "user", $camp);
     }
 }
