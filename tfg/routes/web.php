@@ -92,6 +92,7 @@ Route::get('/user/findByCamp/{camp}', 'App\Http\Controllers\UserController@findB
 
 // (2) Rutas del controlador de employee
 Route::resource('/employee', 'App\Http\Controllers\employeeController');
+Route::get('/employee/findByCamp/{camp}', 'App\Http\Controllers\employeeController@findByCamp');
 
 // (3) Rutas del controlador de Paysheet
 Route::resource('/paysheet', 'App\Http\Controllers\paysheetController');

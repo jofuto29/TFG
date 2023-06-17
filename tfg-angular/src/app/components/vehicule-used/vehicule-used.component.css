@@ -33,18 +33,6 @@
   align-items: center;
 }
 
-@media (max-width: 850px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .grid-container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
 .buttonAdmin a{
   width: 150px;
   background-color: #E96348;
@@ -60,3 +48,28 @@
 .headerAdmin{
   padding-top: 6%;
 }
+
+.containerButtons{
+    display: flex;
+    gap: 10px;
+    width: 50%;
+    justify-content: flex-end;
+}
+
+
+@media (max-width: 850px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .containerButtons{
+    display: inline;
+  }
+}
+

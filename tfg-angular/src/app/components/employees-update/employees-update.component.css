@@ -1,0 +1,17 @@
+.registerComponent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4% 0;
+}
+
+.butonRegister{
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox{
+    display: flex;
+    gap: 2%;
+    padding: 5% 0;
+}

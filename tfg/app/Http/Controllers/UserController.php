@@ -181,14 +181,26 @@ class UserController extends Controller
                 $userToken = $jwtAuth->checkToken($token, true);
 
                 //VALIDAMOS LOS DATOS ENVIADOS
-                $validate = validator::make($atributos, [
-                    'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users,user,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
-                    'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
-                    'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
-                    'email'         => 'required|email',
-                    'phoneNumber'   => 'required|numeric',
-                    'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users,dni,' . $userToken->sub . ',id_user'
-                ]);
+
+                if ($userToken->rol != "admin") {
+                    $validate = validator::make($atributos, [
+                        'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/|unique:users,user,' . $userToken->sub . ',id_user', //unique:table,column,except,idColumn
+                        'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                        'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                        'email'         => 'required|email',
+                        'phoneNumber'   => 'required|numeric',
+                        'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/|unique:users,dni,' . $userToken->sub . ',id_user'
+                    ]);
+                } else {
+                    $validate = validator::make($atributos, [
+                        'user'          => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                        'userName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                        'lastName'      => 'required|regex:/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$/',
+                        'email'         => 'required|email',
+                        'phoneNumber'   => 'required|numeric',
+                        'dni'           => 'required|regex:/^[0-9]{8}[A-Za-z]$/'
+                    ]);
+                }
 
                 if ($validate->fails()) {
                     $response = array(
@@ -199,15 +211,20 @@ class UserController extends Controller
                     );
                 } else {
                     //datos correstos, actualizamos en la base de datos quitando por si acaso parametros que pusiesen ir en la peticion:
-                    unset($atributos['id_user']);
-                    unset($atributos['rol']);
                     unset($atributos['pass']);
                     unset($atributos['created_at']);
                     unset($atributos['updated_at']);
                     unset($atributos['remember_token']);
                     unset($atributos['getToken']);
 
-                    $user_update = User::where('id_user', $userToken->sub)->update($atributos);
+
+                    if ($userToken->rol != "admin") {
+                        unset($atributos['id_user']);
+                        unset($atributos['rol']);
+                        $user_update = User::where('id_user', $userToken->sub)->update($atributos);
+                    } else {
+                        $user_update = User::where('id_user', $atributos['id_user'])->update($atributos);
+                    }
 
                     $response = array(
                         'status' => 'success',

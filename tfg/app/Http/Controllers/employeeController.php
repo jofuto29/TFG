@@ -95,4 +95,10 @@ class employeeController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "employees", employee::find($id), $id, "id_employee");
     }
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(employee::where('id_user', $camp)->get(), "employee", $camp);
+    }
 }

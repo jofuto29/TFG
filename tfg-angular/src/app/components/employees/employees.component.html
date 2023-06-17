@@ -1,8 +1,8 @@
 <div class ="container">
 
     <div class="headerAdmin"> 
-      <h1>Listado de usuarios registrados</h1>
-      <span class="button"><a [routerLink]="['/register']"> Añadir usuario </a></span>
+      <h1>Listado de empleados registrados</h1>
+      <span class="button"><a [routerLink]="['/addEmployeer']"> Añadir usuario </a></span>
     </div>
   
     <div class="table">
@@ -31,7 +31,7 @@
             <td>{{ user.rol }}</td>
             <td>{{ user.phoneNumber }}</td>
             <td>{{ user.dni }}</td>
-            <td [routerLink]="['/ajustes']" [queryParams]="{ id: user.id_user }">
+            <td [routerLink]="['/updateEmployeer']" [queryParams]="{ id: user.id_user }">
               <span class="icon">
                 <i class="fas fa-pencil-alt"></i>
               </span>

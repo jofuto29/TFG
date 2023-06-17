@@ -78,6 +78,15 @@
                 </small>
         </div>
 
+        <div *ngIf="identity && identity.rol == 'admin'" class="form-group">
+            <label class="titleWeight" for="rol">Rol: </label>
+            <input type="text" name="rol" id="rol" placeholder="rol ¿?" class="form-control"
+                    #rol="ngModel" [(ngModel)]="userData.rol" required> 
+                    <small *ngIf="!rol.valid && rol.touched" class="invalid-feedback d-block">
+                        Introduzca rol
+                    </small>
+        </div>
+
         <!--<div class="form-group">
             <label for="descripcion">Biografia </label>
             <textarea  name="descripcion" id="descripcion" placeholder="¿Cual es tu dni?" class="form-control"></textarea>
@@ -87,7 +96,11 @@
             <input type="submit" value="Guardar cambios" class="btn btn-success" [disabled]="userEditForm.invalid">
         </div>
 
-        <div class="buttonAdmin form-group">
+        <div *ngIf="identity && identity.rol == 'admin'" class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/listUsers']" > Volver atrás</span>
+        </div>
+
+        <div *ngIf="identity && identity.rol != 'admin'" class="buttonAdmin form-group">
             <span class="btn btn-success" [routerLink]="['/']" > Volver atrás</span>
         </div>
 

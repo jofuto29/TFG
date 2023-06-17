@@ -127,7 +127,7 @@ class crud
         "employees" => [ //14
             'id_user'        => 'required|exists:users,id_user',
             'nss'            => 'required|numeric',
-            'tipo_empleado'  => 'required|string',
+            'employeeType'  => 'required|string',
         ],
         "deductions" => [ //15
             'deductionName'  => 'required|string',

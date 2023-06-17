@@ -17,10 +17,12 @@ export class UserEditComponent implements OnInit{
   public token: any;
   public identity: any;
   public status:any;
+  public idUser: number = 0;
 
   constructor(
     private _userService: UserService,
     private _crudService: crudService,
+    private _route: ActivatedRoute
   ){
     this.page_title = 'Ajustes de usuario';
     this.status ='';
@@ -29,6 +31,13 @@ export class UserEditComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    
+    if(this.identity.rol == "admin"){
+      this.idUser = this._route.snapshot.queryParams['id'];
+    }else{
+      this.idUser = this.identity.sub;
+    }
+
     this.getUser();
   }
 
@@ -62,7 +71,7 @@ export class UserEditComponent implements OnInit{
   }
 
   getUser(){
-    this._crudService.getObject(this.token,"user/detailsUser/", this.identity.sub).subscribe(
+    this._crudService.getObject(this.token,"user/detailsUser/", this.idUser).subscribe(
       response =>{
         this.userData = response.$model;
         console.log(this.userData);

@@ -38,6 +38,7 @@
   width: 73%;
   text-align: center;
   z-index: 32;
+  justify-content: flex-end;
 }
 
 .menu li{

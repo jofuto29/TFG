@@ -1,1 +1,43 @@
-<p>employees-update works!</p>
+
+<div class="registerComponent col-md-12 mt-3">
+    <h1>{{page_title}}</h1>
+    <p>Nuevo empleado</p>
+
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+        El registro se ha completado correctamente, <a [routerLink]="['/login']">Logueate aquí</a>
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+        El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+
+    <!--formulario de registro-->
+    <form class="col-md-5" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)"><!--variable ngform que llama a onsumir y le pasa los parametros del formulario-->
+
+        <div class="form-group">
+            <label class="titleWeight" for="nss">Número seguridad social: </label>
+            <input type="text" name="nss" id="nss" placeholder="¿numero seguridad social?" class="form-control"
+                #nss="ngModel" [(ngModel)]="employeeData.nss" required>
+                <small *ngIf="!nss.valid && nss.touched" class="invalid-feedback d-block">
+                    Numero de seguridad sociual obligatorio
+                </small>
+        </div>
+
+        <div class="form-group">
+            <label class="titleWeight" for="employeeType">Tipo de empleado: </label>
+            <input type="text" name="employeeType" id="employeeType" placeholder="tipo de empleado" class="form-control"
+                #employeeType="ngModel" [(ngModel)]="employeeData.employeeType" required>
+                <small *ngIf="!employeeType.valid && employeeType.touched" class="invalid-feedback d-block">
+                    Tipo de empleado obligatorio
+                </small>
+        </div>
+
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Actualizar" class="btn btn-success" [disabled]="registerForm.invalid"><!--no dejamos enviar-->
+        </div>
+
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/employeer']" > Volver atrás</span>
+        </div>
+
+    </form>
+</div>
