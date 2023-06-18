@@ -1,0 +1,44 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Métodos de pago registrados</h1>
+      <span class="button"><a [routerLink]="['/addPaymentMethod']"> Añadir </a></span>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id tarjeta</th>
+            <th>Número de tarjeta</th>
+            <th>Titular de la tarjeta</th>
+            <th>Numero de seguridad</th>
+            <th>Fecha de caducidad</th>
+            <th>Id usuario propietario</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of paymentMethods">
+            <td>{{ payment.id_card }}</td>
+            <td>{{ payment.cardNumber }}</td>
+            <td>{{ payment.cardName }}</td>
+            <td>{{ payment.cardSecurity}}</td>
+            <td>{{ payment.cardExpiryDate}}</td>
+            <td>{{ payment.id_user }}</td>
+            <td [routerLink]="['/updatePaymentMethod']" [queryParams]="{ id: payment.id_card }">
+              <span class="icon">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </td>
+            <td (click)="deletePaymentMethod(payment.id_card )">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

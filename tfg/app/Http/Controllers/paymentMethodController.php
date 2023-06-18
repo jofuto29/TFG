@@ -95,4 +95,10 @@ class paymentMethodController extends Controller
         $crud = new \App\Helpers\CRUD();
         return $crud->update($atributos, "paymentMethods", paymentMethod::find($id), $id, "id_card");
     }
+
+    public function findByCamp($camp)
+    {
+        $crud = new \App\Helpers\CRUD();
+        return $crud->findByCamp(paymentMethod::where('id_user', $camp)->get(), "paymentMethodsUser", $camp);
+    }
 }

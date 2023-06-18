@@ -1,0 +1,31 @@
+<div class ="container">
+
+    <div class="headerAdmin"> 
+      <h1>Pagos realizados</h1>
+    </div>
+  
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>Id pago</th>
+            <th>Id Factura</th>
+            <th>Id tarjeta</th>
+            <th>Eliminar registro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pay of pays">
+            <td>{{ pay.id_pay }}</td>
+            <td>{{ pay.id_card }}</td>
+            <td>{{ pay.id_invoice }}</td>
+            <td (click)="deletePay(pay.id_pay )">
+              <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

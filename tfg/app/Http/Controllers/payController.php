@@ -96,13 +96,7 @@ class payController extends Controller
         return $crud->update($atributos, "pays", pay::find($id), $id, "id_pay");
     }
 
-    public function findByCampInvoice($camp)
-    {
-        $crud = new \App\Helpers\CRUD();
-        return $crud->findByCamp(pay::where('id_invoice', $camp)->get(), "invoicesPay invoice", $camp);
-    }
-
-    public function findByCampCard($camp)
+    public function findByCamp($camp)
     {
         $crud = new \App\Helpers\CRUD();
         return $crud->findByCamp(pay::where('id_card', $camp)->get(), "invoicespay card", $camp);

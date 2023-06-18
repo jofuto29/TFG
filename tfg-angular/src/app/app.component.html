@@ -47,8 +47,8 @@
       <li *ngIf="identity && identity.rol == 'employee'" class="submenu4">
         <a>Gestión</a>
         <ul>
-          <li (click)="disapear()"><a href="#">Pagos</a></li>
-          <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/pay']">Pagos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/paymentMethod']">Métodos de pago</a></li>
           <li (click)="disapear()"><a [routerLink]="['/invoices']">Facturas</a></li>
           <li (click)="disapear()"><a [routerLink]="">Nóminas</a></li>
         </ul>
@@ -56,8 +56,8 @@
       <li *ngIf="identity && identity.rol == 'client'" class="submenu3">
         <a>Gestión</a>
         <ul>
-          <li (click)="disapear()"><a href="#">Pagos</a></li>
-          <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/pay']">Pagos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/paymentMethod']">Métodos de pago</a></li>
           <li (click)="disapear()"><a [routerLink]="['/invoices']">Facturas</a></li>
         </ul>
       </li>
@@ -102,9 +102,9 @@
       <li class="submenu5" *ngIf="identity">
         <a>Finanzas</a>
         <ul>
-          <li (click)="disapear()"><a href="#">Pagos</a></li>
-          <li (click)="disapear()"><a href="#">Nóminas</a></li>
-          <li (click)="disapear()"><a href="#">Métodos de pago</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/pay']">Pagos</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/paymentMethod']">Nóminas</a></li>
+          <li (click)="disapear()"><a [routerLink]="['/paymentMethod']">Métodos de pago</a></li>
           <li (click)="disapear()"><a [routerLink]="['/deductions']">Descuentos</a></li>
           <li (click)="disapear()"><a [routerLink]="['/invoices']">Facturas</a></li>
         </ul>

@@ -56,6 +56,11 @@ import { ListClientsComponent } from './components/list-clients/list-clients.com
 import { EmployeesComponent } from './components/employees/employees.component';
 import { EmployeesRegisterComponent } from './components/employees-register/employees-register.component';
 import { EmployeesUpdateComponent } from './components/employees-update/employees-update.component';
+import { PaymentMethodsComponent } from './components/payment-methods/payment-methods.component';
+import { PaymentMethodsRegisterComponent } from './components/payment-methods-register/payment-methods-register.component';
+import { PaymentMethodsUpdateComponent } from './components/payment-methods-update/payment-methods-update.component';
+import { PayComponent } from './components/pay/pay.component';
+import { DopayComponent } from './components/dopay/dopay.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +116,11 @@ import { EmployeesUpdateComponent } from './components/employees-update/employee
     EmployeesComponent,
     EmployeesRegisterComponent,
     EmployeesUpdateComponent,
+    PaymentMethodsComponent,
+    PaymentMethodsRegisterComponent,
+    PaymentMethodsUpdateComponent,
+    PayComponent,
+    DopayComponent,
   ],
   imports: [
     BrowserModule,

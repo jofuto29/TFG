@@ -99,6 +99,7 @@ Route::resource('/paysheet', 'App\Http\Controllers\paysheetController');
 
 // (4) Rutas del controlador de paymentMethods
 Route::resource('/paymentMethod', 'App\Http\Controllers\paymentMethodController');
+Route::get('/paymentMethod/findByCamp/{camp}', 'App\Http\Controllers\paymentMethodController@findByCamp');
 
 // (5) Rutas del controlador de vehicles
 Route::resource('/vehicle', 'App\Http\Controllers\vehicleController');
@@ -157,5 +158,4 @@ Route::get('/invoice/findByCamp/{camp}', 'App\Http\Controllers\invoiceController
 
 // (18) Rutas del controlador de pagos
 Route::resource('/pay', 'App\Http\Controllers\payController');
-//Route::resource('/pay/findBycampInvoice/{camp}', 'App\Http\Controllers\payController@findByCampInvoice');
-//Route::resource('/pay/findBycampCard/{camp}', 'App\Http\Controllers\payController@findByCampCard');
+Route::get('/pay/findByCamp/{camp}', 'App\Http\Controllers\payController@findByCamp');

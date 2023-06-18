@@ -58,6 +58,11 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 import { EmployeesComponent } from './components/employees/employees.component';
 import { EmployeesRegisterComponent } from './components/employees-register/employees-register.component';
 import { EmployeesUpdateComponent } from './components/employees-update/employees-update.component';
+import { PaymentMethodsComponent } from './components/payment-methods/payment-methods.component';
+import { PaymentMethodsRegisterComponent } from './components/payment-methods-register/payment-methods-register.component';
+import { PaymentMethodsUpdateComponent } from './components/payment-methods-update/payment-methods-update.component';
+import { PayComponent } from './components/pay/pay.component';
+import { DopayComponent } from './components/dopay/dopay.component';
 
 
 // Definir las rutas
@@ -124,6 +129,13 @@ const appRoutes: Routes = [
   { path: 'employeer', component: EmployeesComponent},
   { path: 'addEmployeer', component: EmployeesRegisterComponent},
   { path: 'updateEmployeer', component: EmployeesUpdateComponent},
+
+  { path: 'paymentMethod', component: PaymentMethodsComponent},
+  { path: 'addPaymentMethod', component: PaymentMethodsRegisterComponent},
+  { path: 'updatePaymentMethod', component: PaymentMethodsUpdateComponent},
+
+  { path: 'pay', component: PayComponent},
+  { path: 'dopay', component: DopayComponent},
 
   { path: '**', component: ErrorComponent }//esta siempre la colamos la ultima ruta de todas si no las posteriores no funcionaran [ERROR]
 ];

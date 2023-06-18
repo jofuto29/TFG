@@ -1,0 +1,73 @@
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Registrata un nuevo metodo de pago</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerMethodForm="ngForm" (ngSubmit)="onSubmit(registerMethodForm)">
+
+      <div class="form-group">
+        <label class="titleWeight" for="user">Usuario propietario:</label>
+        <select name="user" id="user" class="form-control" 
+          [(ngModel)]="methodData.id_user" required>
+          <option *ngFor="let user of users" [value]="user.id_user">{{ user.user }}</option>
+        </select>
+        <small *ngIf="!methodData.id_user" class="invalid-feedback d-block">
+          Selecciona un usuario
+        </small>
+      </div>
+        
+      <div class="form-group">
+        <label class="titleWeight" for="cardNumber">Número de tarjeta:</label>
+        <input type="text" name="cardNumber" id="cardNumber" placeholder="¿Número de tarjeta?" class="form-control"
+          #cardNumber="ngModel" [(ngModel)]="methodData.cardNumber" required
+          pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+        <small *ngIf="!cardNumber.valid && cardNumber.touched" class="invalid-feedback d-block">
+          Numero de tajeta invalido
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label class="titleWeight" for="cardName">Nombre del titular:</label>
+        <input type="text" name="cardName" id="cardName" placeholder="¿Nombre del titular?" class="form-control"
+          #cardName="ngModel" [(ngModel)]="methodData.cardName" required
+          pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+        <small *ngIf="!cardName.valid && cardName.touched" class="invalid-feedback d-block">
+          Nombre de tarjeta invalido
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label class="titleWeight" for="cardSecurity">Número de seguridad:</label>
+        <input type="text" name="cardSecurity" id="cardSecurity" placeholder="¿Número de tarjeta seguridad?" class="form-control"
+          #cardSecurity="ngModel" [(ngModel)]="methodData.cardSecurity" required
+          pattern="^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ,.:;-]+$">
+        <small *ngIf="!cardSecurity.valid && cardSecurity.touched" class="invalid-feedback d-block">
+          Numero de tajeta invalido
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label class="titleWeight" for="cardExpiryDate">Fecha de caducidad:(MM/YYYY)</label>
+        <input type="text" name="cardExpiryDate" id="cardExpiryDate" class="form-control"
+          #cardExpiryDate="ngModel" [(ngModel)]="methodData.cardExpiryDate" required>
+        <small *ngIf="!cardExpiryDate.valid && cardExpiryDate.touched" class="invalid-feedback d-block">
+          Fecha de admisión no es válida
+        </small>
+      </div>
+        
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerMethodForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/paymentMethod']" > Volver atrás</span>
+        </div>
+  
+      </form>
+  </div>

@@ -1,0 +1,35 @@
+<div class="adminComponent col-md-12 mt-3">
+    <h1>Pagar factura</h1>
+  
+    <div class="alert alert-success" *ngIf="status == 'success' ">
+      El registro se ha completado correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error' ">
+      El registro no se ha completado correctamente. Introduzca correctamente los datos.
+    </div>
+  
+    <!--formulario de registro-->
+    <form class="col-md-5 ml-0 pl-0" #registerPayForm="ngForm" (ngSubmit)="onSubmit(registerPayForm)">
+
+      <div class="form-group">
+        <label class="titleWeight" for="method">Metodo de pago:</label>
+        <select name="method" id="method" class="form-control" 
+          [(ngModel)]="payData.id_card" required>
+          <option *ngFor="let method of paymentMethods" [value]="method.id_card">{{ method.id_card }} -- {{method.cardNumber}}</option>
+        </select>
+        <small *ngIf="!payData.id_card" class="invalid-feedback d-block">
+          Selecciona un metodo de pago
+        </small>
+      </div>
+             
+        <div class="buttonAdmin form-group">
+            <input type="submit" value="Pagar" class="btn btn-success" [disabled]="registerPayForm.invalid">
+        </div>
+  
+        <div class="buttonAdmin form-group">
+            <span class="btn btn-success" [routerLink]="['/invoices']" > Volver atrás</span>
+        </div>
+  
+      </form>
+  </div>
+  

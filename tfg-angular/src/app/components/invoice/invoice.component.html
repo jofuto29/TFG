@@ -46,7 +46,7 @@
               </span>
             </td>
 
-            <td *ngIf="identity && identity.rol != 'admin'">
+            <td *ngIf="identity && identity.rol != 'admin'" [routerLink]="['/dopay']" [queryParams]="{ id: invoice.id_invoice }">
               <span class="icon">
                 <i class="fas fa-money-bill"></i>
               </span>
